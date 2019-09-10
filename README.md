@@ -1,7 +1,5 @@
 # fruclimadapt
 
-fruclimadapt
-
 Evaluation tools for assessing climate adaptation of fruit tree species
 
 The fruit trees annualy cycle through biological events in response to climate cues.
