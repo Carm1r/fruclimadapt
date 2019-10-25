@@ -4,7 +4,7 @@
 \alias{GDD_linear}
 \title{Calculates growing degree days using linear method}
 \usage{
-GDD_linear(Temp_Day, Tb, Topt)
+GDD_linear(Temp_Day, Tb, Topt, Tcrit)
 }
 \arguments{
 \item{Temp_Day}{a dataframe of daily temperatures. This data frame must
@@ -14,6 +14,8 @@ maximum ("Tmax") temperatures}
 \item{Tb}{the base temperature to calculate GDD}
 
 \item{Topt}{the optimal temperature to calculate GDD}
+
+\item{Tcrit}{the critical temperature to calculate GDD}
 }
 \value{
 data frame consisting of the columns Year, Month, Day, Tmax, Tmin,

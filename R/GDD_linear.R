@@ -15,6 +15,7 @@
 #' maximum ("Tmax") temperatures
 #' @param Tb the base temperature to calculate GDD
 #' @param Topt the optimal temperature to calculate GDD
+#' @param Tcrit the critical temperature to calculate GDD
 #' @return data frame consisting of the columns Year, Month, Day, Tmax, Tmin,
 #' Tmean and GDD.
 #' @author Carlos Miranda
@@ -34,11 +35,12 @@
 #' @export GDD_linear
 #' @import data.table tidyverse zoo lubridate
 
-GDD_linear <- function(Temp_Day,Tb,Topt)
+GDD_linear <- function(Temp_Day,Tb,Topt,Tcrit)
 {
   Temp_Day <- Temp_Day %>%
     mutate(Tmean=(Tmax+Tmin)/2,
            GDD = ifelse(Tmean-Tb<0 |Tmean>=Tcrit,0,
-                        ifelse(Tmean<Topt,Tmean-Tb,Topt-Tb)))
+                        ifelse(Tmean<Topt,Tmean-Tb,Topt-Tb))) %>%
+    select(Date, Year, Month, Day, DOY, GDD)
 return(Temp_Day)
 }

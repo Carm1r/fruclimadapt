@@ -44,6 +44,7 @@
 
 GDH_asymcur <- function(Hourdata,Tb,Topt,Tcrit)
   {
+  options(scipen=999)
   Hourdata <- Hourdata %>%
     mutate(Date = make_date(Year,Month,Day),
       GDH = ifelse(Temp-Tb<0,0,
