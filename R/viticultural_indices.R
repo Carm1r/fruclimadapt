@@ -43,7 +43,7 @@
 #'}
 #' @export viticultural_indices
 #' @import data.table tidyverse zoo lubridate
-
+#' 
 viticultural_indices <- function(climdata, lat)
 {
   if (abs(lat)>50){stop("latitude too high for grapevine")}
@@ -83,23 +83,24 @@ viticultural_indices <- function(climdata, lat)
     } else {
       climdata_fil <- climdata %>% filter(
         (climdata$Year == Anno & 
-           climdata$Month>= start_m))
+           climdata$Month>= start_m &
+           climdata$Month<= end_w))
     }
-    Huglin <- climdata_fil %>%
-      ifelse(end_h==9,
-             filter(Month<=end_h),
-             filter(Month!=end_w)) %>%
-      mutate(Huglin_I=cumsum(H_day)) %>%
+    Huglin <- climdata_fil %>% 
+      filter (if (end_h==4) 
+        {climdata_fil$Month!=4} else
+          {climdata_fil$Month<=9} )%>%
+      summarise(Huglin_I=sum(H_day)) %>%
       select("Huglin_I") %>%
       unlist(use.names=FALSE) 
     
     Winkler <- climdata_fil %>%
-      mutate(Winkler_I=cumsum(W_day)) %>%
+      summarise(Winkler_I=sum(W_day)) %>%
       select("Winkler_I") %>%
       unlist(use.names=FALSE)
     
     Coolnight <- climdata_fil %>%
-      filter(climdata_fil$month==end_h) %>% 
+      filter(climdata_fil$Month==end_h) %>% 
       summarise(Cool_n=mean(Tmin)) %>%
       select(Cool_n) %>%
       unlist(use.names=FALSE)
