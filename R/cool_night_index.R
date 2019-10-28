@@ -43,8 +43,8 @@ coolness_index <- function(climdata, harvest)
   
   seasons <- unique(climdata$Year)
 
-  indices_cn <- c("Year","Coolness")
-  indices.df <-data.frame(matrix(ncol=2, nrow=0, byrow=FALSE))
+  indices_cn <- c("Year","Harvest","Coolness")
+  indices.df <-data.frame(matrix(ncol=3, nrow=0, byrow=FALSE))
   colnames(indices.df) <- indices_cn
 
   for (sea in 1:length(seasons)){
@@ -59,7 +59,7 @@ coolness_index <- function(climdata, harvest)
           select(Cool_n) %>%
           unlist(use.names=FALSE)
       
-    new.row.df <- data.frame(Anno) %>%
+    new.row.df <- data.frame(Anno,Day_h) %>%
         cbind(coolnight)
     
     indices.df <-rbind(indices.df,new.row.df)
