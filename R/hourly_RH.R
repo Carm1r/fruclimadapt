@@ -4,9 +4,7 @@
 #' using daily temperature and humidity data. Hourly humidity is
 #' estimated with the formula used by Waichler and Wigmosta (2003)
 #' which require maximum and minimum values of daily temperature
-#' and relative humidity. Hourly temperatures are calculated using
-#' the function stack_hourly_temps from chillR package (Luedeling
-#' et al, 2013).
+#' and relative humidity. 
 #'
 #' @param climdata a dataframe with daily temperatures and RH for
 #' each day in a series. Must contain the columns Year, Month, Day,
