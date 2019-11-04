@@ -16,10 +16,6 @@
 #' @author Carlos Miranda
 #' @references
 #'
-#' Luedeling E, Kunz A and Blanke M, 2013. Identification of chilling and heat
-#' requirements of cherrytrees - a statistical approach.
-#' International Journal of Biometeorology 57,679-689.
-#'
 #' Waichler SR and Wigmosta MS, 2003. Development of hourly meteorological
 #' values from daily data and significance to hydrological modeling at H.J.
 #' Andrews experimental forest. Journal of Hydrometeorology 4, 251-263.
