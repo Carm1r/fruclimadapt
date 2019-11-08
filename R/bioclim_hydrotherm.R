@@ -31,7 +31,7 @@
 #' @references
 #'
 #' Riou C, Carbonneau A, Becker N, Cal√≥ A, Costacurta A, Castro R, Pinto PA, 
-#' Carneiro LC, Lopes C, Cl√maco P, Panagiotou MM, Sotes V,Beaumond HC, Burril A, 
+#' Carneiro LC, Lopes C, Climaco P, Panagiotou MM, Sotes V,Beaumond HC, Burril A, 
 #' Maes J, Vossen P. 1994.Le determinisme climatique de la maturation du raisin: 
 #' application au zonage de la teneur em sucre dans la communaute europenne. 
 #' Office des Publications Officielles des Communautes Europennes: Luxembourg, 322pp.
@@ -57,6 +57,7 @@
 #'}
 #' @export bioclim_hydrotherm
 #' @import data.table tidyverse zoo lubridate
+#' 
 #' 
 bioclim_hydrotherm <- function(climdata, lat, elev)
 {

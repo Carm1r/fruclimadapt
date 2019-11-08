@@ -23,9 +23,7 @@ This function estimates the hourly relative humidity (RH),
 using daily temperature and humidity data. Hourly humidity is
 estimated with the formula used by Waichler and Wigmosta (2003)
 which require maximum and minimum values of daily temperature
-and relative humidity. Hourly temperatures are calculated using
-the function stack_hourly_temps from chillR package (Luedeling
-et al, 2013).
+and relative humidity.
 }
 \examples{
 
@@ -43,10 +41,6 @@ RH_h <- hourly_RH_temp(Weather, 41.5)
 }
 }
 \references{
-Luedeling E, Kunz A and Blanke M, 2013. Identification of chilling and heat
-requirements of cherrytrees - a statistical approach.
-International Journal of Biometeorology 57,679-689.
-
 Waichler SR and Wigmosta MS, 2003. Development of hourly meteorological
 values from daily data and significance to hydrological modeling at H.J.
 Andrews experimental forest. Journal of Hydrometeorology 4, 251-263.
