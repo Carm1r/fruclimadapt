@@ -1,6 +1,7 @@
-#' Calculation of thermal viticultural indices (Huglin, Winkler and Cool Nights)
+#' Calculation of thermal viticultural indices (GDD, GST, Huglin, Winkler and Cool Nights)
 #'
-#' This function calculates the Heliothermal Index of Huglin (1978),
+#' This function calculates the Growing Season Average Temperature (GST), the
+#' Growing Degree Days (GDD), the Heliothermal Index of Huglin (1978),
 #' the Winkler index (Amerine and Winkler, 1974) and the Cool Night 
 #' index (Tonietto, 1999).
 #'
@@ -60,18 +61,26 @@ bioclim_thermal <- function(climdata, lat)
                 ifelse(abs(lat)<=44,d<-1.03,
                        ifelse(abs(lat)<=46,d<-1.04,
                               ifelse(abs(lat)<=48,d<-1.05,1.06)))))
+  k <- 1.1135*d-0.1352
 
   climdata <- select(climdata,"Year","Month","Day","Tmax","Tmin") %>%
     mutate(Date = make_date(Year, Month, Day),
            DOY = yday(Date),
-           Tmean=(Tmax+Tmin)/2,
-           H_day=0.5*d*((Tmean-10)+(Tmax-10)),
-           W_day = ifelse(Tmean<10,0,Tmean-10))
+           Tmean = (Tmax+Tmin)/2,
+           DTR = Tmax-Tmin,
+           H_day = 0.5*d*((Tmean-10)+(Tmax-10)),
+           W_day = ifelse(Tmean<10,0,Tmean-10),
+           GDD_day = ifelse(Tmean-10<0,0,Tmean-10),
+           DTR_adj = ifelse(DTR>13,0.25*(DTR-13), 
+                            ifelse(DTR<10,0.25*(DTR-10),0)),
+           m_lat = 1-tan(lat)*tan(0.409*cos(pi*DOY/182.625)),
+           Day_L = acos(1-m_lat)*24/pi,
+           BEDD_day=ifelse(GDD_day*k+DTR_adj<9,GDD_day*k+DTR_adj))
   
   seasons <- unique(climdata$Year)
 
-  indices_cn <- c("Year","Cool_n","Huglin","Winkler")
-  indices.df <-data.frame(matrix(ncol=4, nrow=0, byrow=FALSE))
+  indices_cn <- c("Year","Cool_n","GST","GDD","Huglin","Winkler")
+  indices.df <-data.frame(matrix(ncol=6, nrow=0, byrow=FALSE))
   colnames(indices.df) <- indices_cn
 
   for (sea in 1:length(seasons)){
@@ -99,14 +108,32 @@ bioclim_thermal <- function(climdata, lat)
       select("Winkler_I") %>%
       unlist(use.names=FALSE)
     
+    GST <- climdata_fil %>%
+      summarise(GST_I=mean(Tmean)) %>%
+      select("GST_I") %>%
+      unlist(use.names=FALSE)
+    
+    GDD <- climdata_fil %>%
+      summarise(GDD_I=sum(GDD_day)) %>%
+      select("GDD_I") %>%
+      unlist(use.names=FALSE)
+    
     Coolnight <- climdata_fil %>%
       filter(climdata_fil$Month==end_h) %>% 
       summarise(Cool_n=mean(Tmin)) %>%
       select(Cool_n) %>%
       unlist(use.names=FALSE)
+    
+    BEDD <- climdata_fil %>% 
+      filter (if (end_h==4) 
+      {climdata_fil$Month!=4} else
+      {climdata_fil$Month<=9} )%>%
+      summarise(BEDD_I=sum(BEDD_day)) %>%
+      select("BEDD_I") %>%
+      unlist(use.names=FALSE) 
       
     new.row.df <- data.frame(Anno) %>%
-        cbind(Coolnight,Huglin,Winkler)
+        cbind(Coolnight,GST,GDD,Huglin,Winkler)
     
     indices.df <-rbind(indices.df,new.row.df)
     }
