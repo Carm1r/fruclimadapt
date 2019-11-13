@@ -126,9 +126,6 @@ bioclim_thermal <- function(climdata, lat)
       unlist(use.names=FALSE)
     
     BEDD <- climdata_fil %>% 
-      filter (if (end_h==4) 
-      {climdata_fil$Month!=4} else
-      {climdata_fil$Month<=9} )%>%
       summarise(BEDD_I=sum(BEDD_day)) %>%
       select("BEDD_I") %>%
       unlist(use.names=FALSE) 
