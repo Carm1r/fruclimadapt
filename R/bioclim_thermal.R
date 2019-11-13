@@ -68,19 +68,20 @@ bioclim_thermal <- function(climdata, lat)
            DOY = yday(Date),
            Tmean = (Tmax+Tmin)/2,
            DTR = Tmax-Tmin,
-           H_day = 0.5*d*((Tmean-10)+(Tmax-10)),
+           H_day = ifelse(0.5*d*((Tmean-10)+(Tmax-10))<0,0,
+                          0.5*d*((Tmean-10)+(Tmax-10))),
            W_day = ifelse(Tmean<10,0,Tmean-10),
            GDD_day = ifelse(Tmean-10<0,0,Tmean-10),
            DTR_adj = ifelse(DTR>13,0.25*(DTR-13), 
                             ifelse(DTR<10,0.25*(DTR-10),0)),
            m_lat = 1-tan(lat)*tan(0.409*cos(pi*DOY/182.625)),
            Day_L = acos(1-m_lat)*24/pi,
-           BEDD_day=ifelse(GDD_day*k+DTR_adj<9,GDD_day*k+DTR_adj))
+           BEDD_day=ifelse(GDD_day*k+DTR_adj<=9,GDD_day*k+DTR_adj,9))
   
   seasons <- unique(climdata$Year)
 
-  indices_cn <- c("Year","Cool_n","GST","GDD","Huglin","Winkler")
-  indices.df <-data.frame(matrix(ncol=6, nrow=0, byrow=FALSE))
+  indices_cn <- c("Year","Cool_n","GST","GDD","BEDD","Huglin","Winkler")
+  indices.df <-data.frame(matrix(ncol=7, nrow=0, byrow=FALSE))
   colnames(indices.df) <- indices_cn
 
   for (sea in 1:length(seasons)){
@@ -133,7 +134,7 @@ bioclim_thermal <- function(climdata, lat)
       unlist(use.names=FALSE) 
       
     new.row.df <- data.frame(Anno) %>%
-        cbind(Coolnight,GST,GDD,Huglin,Winkler)
+        cbind(Coolnight,GST,GDD,BEDD,Huglin,Winkler)
     
     indices.df <-rbind(indices.df,new.row.df)
     }
