@@ -78,7 +78,7 @@ bioclim_thermal <- function(climdata, lat)
            m_lat = 1-tan(lat)*tan(0.409*cos(pi*DOY/182.625)),
            Day_L = acos(1-m_lat)*24/pi,
            BEDD_day=ifelse(GDD_day*d+DTR_adj<=0,0,
-                           ifelse(GDD_day*d+DTR_adj<=9,GDD_day*d+DTR_adj,9))
+                           ifelse(GDD_day*d+DTR_adj<=9,GDD_day*d+DTR_adj,9)))
   
   seasons <- unique(climdata$Year)
 
