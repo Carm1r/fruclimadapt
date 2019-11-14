@@ -45,6 +45,7 @@
 #' @export bioclim_thermal
 #' @import data.table tidyverse zoo lubridate
 #' 
+
 bioclim_thermal <- function(climdata, lat)
 {
   if (abs(lat)>50){stop("latitude too high for grapevine")}
@@ -76,7 +77,8 @@ bioclim_thermal <- function(climdata, lat)
                             ifelse(DTR<10,0.25*(DTR-10),0)),
            m_lat = 1-tan(lat)*tan(0.409*cos(pi*DOY/182.625)),
            Day_L = acos(1-m_lat)*24/pi,
-           BEDD_day=ifelse(GDD_day*k+DTR_adj<=9,GDD_day*k+DTR_adj,9))
+           BEDD_day=ifelse(GDD_day*d+DTR_adj<=0,0,
+                           ifelse(GDD_day*d+DTR_adj<=9,GDD_day*d+DTR_adj,9))
   
   seasons <- unique(climdata$Year)
 
