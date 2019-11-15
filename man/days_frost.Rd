@@ -4,7 +4,7 @@
 \alias{days_frost}
 \title{Estimates the occurence of spring frosts}
 \usage{
-days_frost(mintemps, fendates)
+days_frost(mintemps, fendates, lastday = 181)
 }
 \arguments{
 \item{mintemps}{a dataframe with minimum daily temperatures. Must contain
@@ -13,6 +13,9 @@ the columns julian day of year (DOY )and the minimum daily temperature (Tmin).}
 \item{fendates}{a dataframe with the day of occurrence of the phenological
 stages. Must contain julian day of occurrence of the phenological
 stage (DOY) and the critical frost temperature for the stage (Tcrit)}
+
+\item{lastday}{the last day (day of the year) to evaluate. By default, 
+lastday = 181 (June 3oth).}
 }
 \value{
 a dataframe with the columns

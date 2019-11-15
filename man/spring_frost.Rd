@@ -4,7 +4,7 @@
 \alias{spring_frost}
 \title{Calculates the risk of spring frosts for a climate series}
 \usage{
-spring_frost(tempdata, fendata, tcrit)
+spring_frost(tempdata, fendata, tcrit, lastday = 181)
 }
 \arguments{
 \item{tempdata}{a dataframe with daily minimum temperatures for each
@@ -17,10 +17,15 @@ Must contain the columns Year, Chill_comp and Pheno_date.}
 
 \item{tcrit}{a vector with critical temperatures for all the phenological stages
 indicated in fendata AND Chill_comp date.}
+
+\item{lastday}{the last day (day of the year) to evaluate. By default, 
+lastday = 181 (June 30th).}
 }
 \value{
-a dataframe with the columns Year and Frost_d, which indicates
-the number of frost days for every year in the series.
+a list with two data frames. The df Days_frost has the columns Year, DOY, 
+Tmin, Tcrit and Day_Frost (indicates a day of frost with a 1 if Tmin<=Tcrit). 
+The df Total_frosts indicates the total number of frost days each year in the
+series.
 }
 \description{
 The function evaluates the number of early and spring frosts
@@ -33,8 +38,8 @@ each season and a vector of critical temperatures for each stage.
 \details{
 The function checks each day if Tmin is below Tcrit and,
 if so, that day is considered as a frost day (Fday). The last day
-evaluated each year is DOY 181, to avoid computing autumn and winter
-frosts.
+evaluated each year is user defined, by default set at DOY 181, 
+to avoid computing autumn and winter frosts.
 The function currently works only with phenological dates occuring
 within the same year.
 }

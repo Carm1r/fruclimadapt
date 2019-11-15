@@ -17,7 +17,6 @@ Description: The fruit trees annualy cycle through biological events in response
     and Dryness) to estimate grapevine adaptation. Since verssion 0.2.0 includes functions to
     evaluate spring frost risks. The functions provided here are suitable for
     pome and stone fruit species, and grapevines.
-    
 Imports: data.table, tidyverse, zoo, lubridate
 License: GPL-3
 Encoding: UTF-8

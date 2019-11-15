@@ -4,7 +4,7 @@
 \alias{frostdays}
 \title{Calculates the number of days with minimum temperature below critical values}
 \usage{
-frostdays(mintemps, fendates)
+frostdays(mintemps, fendates, lastday = 181)
 }
 \arguments{
 \item{mintemps}{a dataframe with minimum daily temperatures. Must contain
@@ -13,6 +13,9 @@ the columns julian day of year (DOY )and the minimum daily temperature (Tmin).}
 \item{fendates}{a dataframe with the day of occurrence of the phenological
 stages. Must contain julian day of occurrence of the phenological
 stage (DOY) and the critical frost temperature for the stage (Tcrit)}
+
+\item{lastday}{the last day (day of the year) to evaluate. By default, 
+lastday = 181 (June 30th).}
 }
 \value{
 a value with the number of days in which Tmin is equal or below Tcrit.

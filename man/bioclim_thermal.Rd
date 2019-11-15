@@ -2,7 +2,7 @@
 % Please edit documentation in R/bioclim_thermal.R
 \name{bioclim_thermal}
 \alias{bioclim_thermal}
-\title{Calculation of thermal viticultural indices (Huglin, Winkler and Cool Nights)}
+\title{Calculation of thermal viticultural indices (GDD, GST, Huglin, Winkler and Cool Nights)}
 \usage{
 bioclim_thermal(climdata, lat)
 }
@@ -17,7 +17,8 @@ for Northern latitudes and negatives for Southern.}
 data frame with the values of the indices.
 }
 \description{
-This function calculates the Heliothermal Index of Huglin (1978),
+This function calculates the Growing Season Average Temperature (GST), the
+Growing Degree Days (GDD), the Heliothermal Index of Huglin (1978),
 the Winkler index (Amerine and Winkler, 1974) and the Cool Night 
 index (Tonietto, 1999).
 }
