@@ -15,6 +15,8 @@
 #' @param fendates a dataframe with the day of occurrence of the phenological
 #' stages. Must contain julian day of occurrence of the phenological
 #' stage (DOY) and the critical frost temperature for the stage (Tcrit)
+#' @param lastday the last day (day of the year) to evaluate. By default, 
+#' lastday = 181 (June 3oth).
 #' @return a dataframe with the columns
 #' number of days in which Tmin is equal or below Tcrit.
 #' @author Carlos Miranda
@@ -35,16 +37,16 @@
 #' @export days_frost
 #' @import data.table tidyverse zoo lubridate
 
-days_frost <- function(mintemps, fendates){
-  mintemps <- mintemps %>% filter(mintemps$DOY<=181)
-  Datescrit <- rep(NA,181)
+days_frost <- function(mintemps, fendates, lastday = 181){
+  mintemps <- mintemps %>% filter(mintemps$DOY<=lastday)
+  Datescrit <- rep(NA,lastday)
   len = length(fendates$DOY)
   for (i in 1:len){
     Datescrit[fendates$DOY[i]]=fendates$Tcrit[i]
   }
   #fill in the series of critical data and include in the dataset
   Tcritant <- rep(fendates$Tcrit[1], fendates$DOY[1]-1)
-  Tcritpost <- rep(fendates$Tcrit[len], 181-fendates$DOY[len])
+  Tcritpost <- rep(fendates$Tcrit[len], lastday-fendates$DOY[len])
   Tcrit_gap <- zoo(Datescrit)
   Tcrit_fgap <- na.approx(Tcrit_gap)
   Tcritcent <- coredata(Tcrit_fgap)

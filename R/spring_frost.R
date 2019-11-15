@@ -9,8 +9,8 @@
 #'
 #' The function checks each day if Tmin is below Tcrit and,
 #' if so, that day is considered as a frost day (Fday). The last day
-#' evaluated each year is DOY 181, to avoid computing autumn and winter
-#' frosts.
+#' evaluated each year is user defined, by default set at DOY 181, 
+#' to avoid computing autumn and winter frosts.
 #' The function currently works only with phenological dates occuring
 #' within the same year.
 #'
@@ -22,6 +22,8 @@
 #' Must contain the columns Year, Chill_comp and Pheno_date.
 #' @param tcrit a vector with critical temperatures for all the phenological stages
 #' indicated in fendata AND Chill_comp date.
+#' @param lastday the last day (day of the year) to evaluate. By default, 
+#' lastday = 181 (June 30th).
 #' @return a dataframe with the columns Year and Frost_d, which indicates
 #' the number of frost days for every year in the series.
 #' @author Carlos Miranda
@@ -43,8 +45,11 @@
 #' @export spring_frost
 #' @import data.table tidyverse zoo lubridate
 
-spring_frost <- function(tempdata,fendata,tcrit){
+spring_frost <- function(tempdata,fendata,tcrit, lastday = 181){
   Years <- unique(fendata$Year)
+  days_frost_cn <- c("Year","DOY","Tmin","Tcrit","Day_Frost")
+  days_frost.df <-data.frame(matrix(ncol=5, nrow=0, byrow=FALSE))
+  colnames(days_frost.df) <- days_frost_cn 
   frisks_cn <- c("Year","Frost_d")
   frisk.df <-data.frame(matrix(ncol=2, nrow=0, byrow=FALSE))
   colnames(frisk.df) <- frisks_cn
@@ -52,24 +57,24 @@ spring_frost <- function(tempdata,fendata,tcrit){
     Anno = as.numeric(Years[sea])
     fendata_fil <- fendata %>% filter(fendata$Year==Anno)
     fendata_fil <- arrange(fendata_fil, fendata_fil$Pheno_date)
-    tempdata_fil <- tempdata %>% filter(tempdata$Year==Anno+1)
+    tempdata_fil <- tempdata %>% filter(tempdata$Year==Anno)
     Creq = fendata_fil$Chill_comp[1]
     Efens <- fendata_fil$Pheno_date
     fendates <-data.frame(matrix(ncol=0, nrow=length(Efens)+1, byrow=FALSE))
     fendates$DOY <-c(Creq,Efens)
     fendates$Tcrit <- tcrit
-    frisk <- days_frost(tempdata_fil,fendates)
-    Fday=0
-    for (i in 1:length(mintemps$DOY)){
-      if (mintemps$Tmin[i]<=mintemps$Tcrit[i]){
-        Fday=Fday+1
-      }
-    }
-    new.row.df <- data.frame(Anno,Fday)
+    f_risk <- days_frost(tempdata_fil,fendates,lastday)
+    f_days <- f_risk %>%
+      summarise(frost_d=sum(Day_frost)) %>%
+      select("frost_d") %>%
+      unlist(use.names=FALSE)
+    new.row.df <- data.frame(Anno,f_days)
     frisk.df <-rbind(frisk.df,new.row.df)
+    days_frost.df <-rbind(days_frost.df,f_risk)
   }
   frisk.df <- frisk.df %>% rename(Year=Anno,Frost_d=Fday)
-  return(frisk.df)
+  frost.list <- list(days_frost.df,frisk.df)
+  return(frost.list)
   }
 
 
