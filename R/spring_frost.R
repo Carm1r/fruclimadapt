@@ -24,8 +24,10 @@
 #' indicated in fendata AND Chill_comp date.
 #' @param lastday the last day (day of the year) to evaluate. By default, 
 #' lastday = 181 (June 30th).
-#' @return a dataframe with the columns Year and Frost_d, which indicates
-#' the number of frost days for every year in the series.
+#' @return a list with two data frames. The df Days_frost has the columns Year, DOY, 
+#' Tmin, Tcrit and Day_Frost (indicates a day of frost with a 1 if Tmin<=Tcrit). 
+#' The df Total_frosts indicates the total number of frost days each year in the
+#' series.
 #' @author Carlos Miranda
 #' @examples
 #'
@@ -72,8 +74,8 @@ spring_frost <- function(tempdata,fendata,tcrit, lastday = 181){
     frisk.df <-rbind(frisk.df,new.row.df)
     days_frost.df <-rbind(days_frost.df,f_risk)
   }
-  frisk.df <- frisk.df %>% rename(Year=Anno,Frost_d=Fday)
-  frost.list <- list(days_frost.df,frisk.df)
+  frisk.df <- frisk.df %>% rename(Year=Anno,Frost_d=f_days)
+  frost.list <- list(Days_frost = days_frost.df,Total_frosts = frisk.df)
   return(frost.list)
   }
 
