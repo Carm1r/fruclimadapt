@@ -14,8 +14,10 @@ Description: The fruit trees annualy cycle through biological events in response
     sunburn, wind scab, russet) and evaluate the weather during pollination season, and fruit
     color potential for red-skinned fruit. Since version 0.1.5 it provides tools to estimate
     potential evapotranspiration and bioclimatic indices (Huglin, Winkler, Cool Nigths, Branas
-    and Dryness) to estimate grapevine adaptation. The functions provided here are suitable for
+    and Dryness) to estimate grapevine adaptation. Since verssion 0.2.0 includes functions to
+    evaluate spring frost risks. The functions provided here are suitable for
     pome and stone fruit species, and grapevines.
+    
 Imports: data.table, tidyverse, zoo, lubridate
 License: GPL-3
 Encoding: UTF-8
