@@ -1,7 +1,7 @@
 Package: fruclimadapt
 Type: Package
 Title: Evaluation tools for assessing climate adaptation of fruit tree species
-Version: 0.2.0
+Version: 0.2.1
 Author: Carlos Miranda
 Maintainer: Carlos Miranda <carlos.miranda@unavarra.es>
 Description: The fruit trees annualy cycle through biological events in response to climate cues.
