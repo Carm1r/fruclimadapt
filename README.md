@@ -13,5 +13,6 @@ of chill, spring frosts, sunburn, wind scab, russet) and evaluate the weather du
 pollination season, and fruit color potential for red-skinned fruit. Since version 
 0.1.5 it provides tools to estimate potential evapotranspiration and bioclimatic 
 indices (Huglin, Winkler, Cool Nigths, Branas and Dryness) to estimate grapevine 
-adaptation. The functions provided here are suitable for pome and stone fruit species,
+adaptation. Since verssion 0.2.0 includes functions to evaluate spring frost risks.
+The functions provided here are suitable for pome and stone fruit species,
 and grapevines.
