@@ -20,8 +20,8 @@
 #' @param fendata a dataframe with julian day of occurrence of the phenological
 #' stages that can be produced by phenology_thermal_time or phenology_sequential 
 #' functions. Must contain the columns Year, and Pheno_date. 
-#' @param tcrit a vector with LT10 and LT90 critical temperatures for all the 
-#' phenological stages indicated in fendata.
+#' @param tcrit a dataframe with columns LT_10 and LT_90,  critical temperatures 
+#' for all the  phenological stages indicated in fendata.
 #' @param lastday the last day (day of the year) to evaluate. By default, 
 #' lastday = 181 (June 30th).
 #' @return a list with two data frames. The df Days_frost has the columns Year, DOY, 
@@ -40,8 +40,7 @@
 #' Tmins <- Tempdata %>%
 #'    select(Year, Month, Day, Tmin) %>%
 #'    mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-#' Tcrit <- c(-6.6,-4.8,-4,-1.8,-1.4,-2.3)
-#' Frisk <-spring_frost(Tmins,Tcrit,Phen_data)
+#' Frisk <-spring_frost(Tmins,Phen_data,Tcrit,270)
 #'
 #' }
 #' @export spring_frost
