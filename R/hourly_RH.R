@@ -49,7 +49,9 @@ hourly_RH <- function(climdata,lat)
     mutate(Date = make_date(Year, Month, Day)) %>%
     select("Date","RHmax","RHmin")
   climdata_h = merge(temp.df, RH.df, by = "Date", all = TRUE) %>%
-    mutate(RH = RHmax +(Temp-Tmin)*(RHmin-RHmax)/(Tmax-Tmin)) %>%
+    mutate(RH_aux = RHmax +(Temp-Tmin)*(RHmin-RHmax)/(Tmax-Tmin),
+           RH = ifelse(RH_aux>RHmax,RHmax,
+                       ifelse(RH_aux<RHmin,RHmin,RH_aux))) %>%
     select(Date,Year,Month,Day,DOY,Hour,Temp,RH)
 
   return(climdata_h)
