@@ -10,12 +10,11 @@
 #' hours for pollination within a day. One hour is considered favorable
 #' if the temperature is above 12.5 C, the speed of the wind below
 #' 4.5 m/s and no rainfal occurs (Williams and Sims, 1977; Ramirez and
-#' Davenport, 2013). Hourly temperatures are calculated using the function
-#' stack_hourly_temps from chillR package (Luedeling et al, 2013), hourly
-#' wind speeds from daily means using a modified version of the formula
-#' proposed by (Guo et al, 2016). No hourly downscaling of rainfall is
-#' performed, the function allow daily rainfall below 2.0 mm when
-#' estimating if a day is favorable for pollination or not.
+#' Davenport, 2013). Hourly wind speeds are calculated from daily means 
+#' using a modified version of the formula proposed by (Guo et al, 2016). 
+#' No hourly downscaling of rainfall is performed, the function allow 
+#' daily rainfall below 2.0 mm when estimating if a day is favorable 
+#' for pollination or not.
 #'
 #'
 #' @param climdata a dataframe with daily maximum and minimum temperatures,
@@ -38,10 +37,6 @@
 #' Xie Y. (eds) Geo-Informatics in Resource Management and Sustainable
 #' Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
 #' vol 569. Springer, Berlin, Heidelberg
-#'
-#' Luedeling E, Kunz A and Blanke M, 2013. Identification of chilling and heat
-#' requirements of cherrytrees - a statistical approach.
-#' International Journal of Biometeorology 57,679-689.
 #'
 #' Ramirez F and Davenport TL, 2013. Apple pollination: A review. Scientia
 #' Horticulturae 162, 188-203.
