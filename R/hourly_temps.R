@@ -89,14 +89,14 @@ hourly_temps <- function(climdata,latitude)
            DOY=yday(Date)
            )
  dates_h <- dates_h %>% mutate(
-   Tpredawn = prev_Tsunset - ((prev_Tsunset-prev_Tmin)/
-                              log(max(1,24-(prev_Sunset-Sunrise)))*
-                              log(Hour + 24-prev_Sunset+1)),
+   Tpredawn = prev_Tsunset - ((prev_Tsunset-Tmin)/
+                              log(max(1,24-(Daylength))))*
+                              log(Hour + 24-round(prev_Sunset)+1),
    Tdayhours = Tmin + (Tmax- Tmin)*
      sin(pi*(Hour-Sunrise)/(Daylength+4)),
    Tpostdusk = ifelse(Hour>=round(Sunset),Tsunset-((Tsunset-next_Tmin)/
-                          log(24-(Sunset-next_Sunrise)+1)*
-                          log(Hour-Sunset+1))
+                          log(24-(Daylength)+1))*
+                          log(Hour-round(Sunset)+1)
                       ,0),
    Temp = ifelse(Hour<round(Sunrise),Tpredawn,
                  ifelse(Hour==round(Sunrise),Tmin,
