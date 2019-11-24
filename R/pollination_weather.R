@@ -62,15 +62,16 @@
 #' }
 #' @export pollination_weather
 #' @import data.table tidyverse zoo lubridate
-
-
+climdata <- Beire
+fendata <- Bloom_mzp
+lat <. Lat_Olite
 pollination_weather <- function(climdata, fendata, lat)
 {
   rain <- select(climdata,"Year","Month","Day","Prec") %>%
     mutate(Date = make_date(Year, Month, Day)) %>%
     select(Date,Prec)
   tempd <-select(climdata,"Year","Month","Day","Tmax","Tmin")
-  hourt <- hourly_temps(tempd,lat) %>%
+  hourt <- hourly_temps(tempd,lat) 
   hourt.df <- hourt %>%
     mutate(Datetime = make_datetime(Year, Month, Day, Hour,min = 0)) %>%
     select(Datetime,Date,Year,Month,Day,DOY,Hour,Temp)
