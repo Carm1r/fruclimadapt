@@ -62,9 +62,7 @@
 #' }
 #' @export pollination_weather
 #' @import data.table tidyverse zoo lubridate
-climdata <- Beire
-fendata <- Bloom_mzp
-lat <. Lat_Olite
+
 pollination_weather <- function(climdata, fendata, lat)
 {
   rain <- select(climdata,"Year","Month","Day","Prec") %>%
