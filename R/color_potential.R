@@ -51,8 +51,8 @@ color_potential <- function(climdata, harvest)
            Hot=ifelse(Tmin>=20,1,0))
   seasons <- unique(climdata$Year)
 
-  colorpot_cn <- c("Year","Harvest_d","Cool_d","Hot_d")
-  colorpot.df <-data.frame(matrix(ncol=4, nrow=0, byrow=FALSE))
+  colorpot_cn <- c("Year","Harvest_d","Cool_d","Hot_d","Tmax_avg","Tmin_avg")
+  colorpot.df <-data.frame(matrix(ncol=6, nrow=0, byrow=FALSE))
   colnames(colorpot.df) <- colorpot_cn
 
   for (sea in 1:length(seasons)){
@@ -63,8 +63,8 @@ color_potential <- function(climdata, harvest)
       Day_h <- as.numeric(harvest[nharv])
       evacol_fil <- climdata_fil %>%
         filter(climdata_fil$DOY>(Day_h-30) & climdata_fil$DOY<=Day_h) %>%
-        summarise(Cool_d=sum(Cool),Hot_d=sum(Hot)) %>%
-        select(Cool_d,Hot_d)
+        summarise(Cool_d=sum(Cool),Hot_d=sum(Hot),Tmax_avg=mean(Tmax),Tmin_avg=mean(Tmin)) %>%
+        select(Cool_d,Hot_d,Tmax_avg,Tmin_avg)
       new.row.df <- data.frame(Anno,Day_h) %>%
         cbind(evacol_fil)
       colorpot.df <-rbind(colorpot.df,new.row.df)
