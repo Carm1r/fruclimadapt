@@ -34,7 +34,7 @@
 #' @export phenology_thermal_time
 #' @import data.table tidyverse zoo lubridate
 
-phenology_thermal_time <- function(GDH_day,Reqs){
+phenology_thermal_time2 <- function(GDH_day,Reqs){
   Seasons <- unique(GDH_day$Year)
   Phendates_cols <- c("Dreq","Freq","Season","Dreq_Year","Dreq_DOY","Freq_Year","Freq_DOY")
   Phendates_pred <-data.frame(matrix(ncol=7, nrow=0, byrow=FALSE))
@@ -43,8 +43,8 @@ phenology_thermal_time <- function(GDH_day,Reqs){
     Sel_reqs <- slice(Reqs, i)
     Dreq <- as.numeric(Sel_reqs[1])
     Freq <- as.numeric(Sel_reqs[2])
-    for(sea in 1:(length(Seasons)-1)){
-      Anno = as.numeric(Seasons[sea])+1
+    for(sea in 1:(length(Seasons))){
+      Anno = as.numeric(Seasons[sea])
       if (Dreq>=305){
         Data_fil <- GDH_day %>% filter(
           (GDH_day$Year == Anno-1 & GDH_day$DOY>= Dreq) |
