@@ -6,12 +6,17 @@
 #' equation from the Environmental Water Resources Institute of the American 
 #' Society of Civil Engineers (Allen et al, 2005).  
 #' 
-#' This version of the function requires the user to supply in weather data daily
-#' values for temperature (Tmax and Tmin), relative humidity (RHmax and RHmin), 
-#' solar radiation (Rad in MJ m-2 day-1) and wind speed at 2m height(u2 in m s-1).
+#' Minimum data requirements to calculate ET are daily temperatures (maximum 
+#' and minimum temperatures, Tmax and Tmin), whereas relative humidity (RHmax and 
+#' RHmin, %), solar radiation (Rad, MJ m-2 day-1) and wind speed at 2m height
+#' (u2,m s-1) are optional. If missing, the function integrates FAO56 estimations 
+#' for solar radiation and vapor pressure (air humidity) from daily 
+#' temperatures. If there is no information available on wind speed, the function 
+#' assumes a constant value of 2 m s-1.  
 #'
 #' @param climdata a dataframe with daily weather data.
-#'  Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Rad, u2.
+#'  Required columns are Year, Month, Day, Tmax and Tmin. Optional columns are
+#'  RHmax, RHmin, Rad and u2.
 #' @param lat the latitude of the site, in decimal degrees. 
 #' @param elev the elevation of the site, in meters above sea level.
 #' @return data frame with Year, Month, Day, DOY, ETos and ETrs values.
@@ -52,7 +57,13 @@ ET_penman_monteith <- function(climdata, lat, elev){
   es_Tmax <- 0.6108 * exp(17.27 * climdata$Tmax / (climdata$Tmax + 237.3)) 
   es_Tmin <- 0.6108 * exp(17.27 * climdata$Tmin / (climdata$Tmin + 237.3)) 
   es <- (es_Tmax + es_Tmin)/2 
-  ea <- (es_Tmin * climdata$RHmax/100 + es_Tmax * climdata$RHmin/100)/2 
+  if(!"RHmax" %in% colnames(climdata)|!"RHmin" %in% colnames(climdata))
+  {
+    cat("Warning: No relative humidity data provided,\nreal vapor pressure (ea) will be estimated using Tmin\n");
+    ea <- 0.611 * exp(17.27*climdata$Tmin/(climdata$Tmin+237.3))
+  }else{
+    ea <- (es_Tmin * climdata$RHmax/100 + es_Tmax * climdata$RHmin/100)/2 
+      }
   d_r <- 1 + 0.033*cos(2*pi/365 * DOY) 
   delta2 <- 0.409 * sin(2*pi/365 * DOY - 1.39)
   w_s <- acos(-tan(lat_rad) * tan(delta2))  
@@ -60,16 +71,31 @@ ET_penman_monteith <- function(climdata, lat, elev){
   R_a <- (1440/pi) * Gsc * d_r * 
     (w_s * sin(lat_rad) * sin(delta2) + cos(lat_rad) * cos(delta2) * sin(w_s)) 
   R_so <- (0.75 + (2*10^-5)* elev) * R_a 
-  R_ns <- (1-0.23)*climdata$Rad
-  R_nl <- sigma * ((climdata$Tmax+273.2)^4 + (climdata$Tmin+273.2)^4)/2 * 
-    (0.34 - 0.14 * sqrt(ea)) * (1.35 * climdata$Rad / R_so - 0.35)
+  if(!"Rad" %in% colnames(climdata))
+  {
+    cat("Warning: No radiation data provided,\nsolar radiation (Rs) will be derived from daily thermal difference\n");
+    R_s <- 0.16*sqrt(climdata$Tmax-climdata$Tmin)*R_a
+    R_ns <- (1-0.23)*R_s
+    R_nl <- sigma * ((climdata$Tmax+273.2)^4 + (climdata$Tmin+273.2)^4)/2 * 
+      (0.34 - 0.14 * sqrt(ea)) * (1.35 * R_s / R_so - 0.35)
+  }else{
+    R_ns <- (1-0.23)*climdata$Rad
+    R_nl <- sigma * ((climdata$Tmax+273.2)^4 + (climdata$Tmin+273.2)^4)/2 * 
+      (0.34 - 0.14 * sqrt(ea)) * (1.35 * climdata$Rad / R_so - 0.35)
+  }
+
   R_n <- R_ns - R_nl
+  if(!"u2" %in% colnames(climdata))
+  {
+    cat("Warning: No windspeed data provided,\na constant windspeed of 2 ms-1 will be asumed\n");
+    climdata <- climdata %>% mutate(u2=2)
+  }
   ET_os.Daily <- (0.408 * delta * (R_n - G) + gamma * 900 * climdata$u2 * (es - ea)/(Tmean + 273)) / 
       (delta + gamma * (1 + 0.34*climdata$u2)) 
   ET_rs.Daily <- (0.408 * delta * (R_n - G) + gamma * 1600 * climdata$u2 * (es - ea)/(Tmean + 273)) / 
       (delta + gamma * (1 + 0.38*climdata$u2))
-  
-  climdata <- climdata %>% mutate(DOY = DOY, ET_os = ET_os.Daily, ET_rs = ET_rs.Daily) %>%
+  climdata <- climdata %>% 
+    mutate(DOY = DOY, ET_os = ET_os.Daily, ET_rs = ET_rs.Daily) %>%
     select(Date, Year, Month, Day, DOY, everything()) %>%
     arrange(Date,DOY)
   return(climdata)
