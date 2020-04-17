@@ -41,7 +41,7 @@
 #'
 #' }
 #' @export chill_portions
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 chill_portions <- function(climdata, Start){
 

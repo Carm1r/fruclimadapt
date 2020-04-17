@@ -32,7 +32,7 @@
 #'
 #' }
 #' @export chill_hours
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 #'
 chill_hours <- function(climdata, Start){
 

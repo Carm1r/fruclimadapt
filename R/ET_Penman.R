@@ -26,7 +26,7 @@
 #' ET_Penman <- ET_penman(Weather, latitude, elevation)
 #'}
 #' @export ET_penman
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 #'
 
 ET_penman <- function(climdata, lat, elev){

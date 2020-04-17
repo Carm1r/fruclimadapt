@@ -40,7 +40,7 @@
 #' }
 #'
 #' @export GDH_asymcur
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 GDH_asymcur <- function(Hourdata,Tb,Topt,Tcrit)
   {

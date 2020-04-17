@@ -56,7 +56,7 @@
 #'
 #'}
 #' @export bioclim_hydrotherm
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 #' 
 #' 
 bioclim_hydrotherm <- function(climdata, lat, elev)

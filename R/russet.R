@@ -35,7 +35,7 @@
 #'
 #' }
 #' @export russet
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 russet <- function(climdata, fendata)
 {

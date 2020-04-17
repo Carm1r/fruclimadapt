@@ -35,7 +35,7 @@
 #' print(Frostdays_1997)
 #' }
 #' @export frostdays
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 frostdays <- function(mintemps, fendates, lastday = 181){
   mintemps <- mintemps %>% filter(mintemps$DOY<=lastday)

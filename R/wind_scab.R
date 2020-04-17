@@ -64,7 +64,7 @@
 #'
 #' }
 #' @export wind_scab
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 wind_scab <- function(climdata,fendata)
 {

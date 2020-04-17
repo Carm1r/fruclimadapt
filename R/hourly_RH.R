@@ -35,7 +35,7 @@
 #'
 #' }
 #' @export hourly_RH
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 hourly_RH <- function(climdata,lat)
 {

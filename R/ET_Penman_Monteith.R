@@ -40,7 +40,7 @@
 #' ET_PM <- ET_penman_monteith(Weather, latitude, elevation)
 #'}
 #' @export ET_penman_monteith
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 #'
 
 ET_penman_monteith <- function(climdata, lat, elev){

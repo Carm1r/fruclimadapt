@@ -31,7 +31,7 @@
 #'
 #' }
 #' @export solar_times
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 solar_times <- function(latitude,DOY){
   Gamma<-2*pi/365*((DOY)-1)

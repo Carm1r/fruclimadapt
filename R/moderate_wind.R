@@ -38,7 +38,7 @@
 #'
 #' }
 #' @export moderate_wind
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 moderate_wind <- function(climdata)
 {

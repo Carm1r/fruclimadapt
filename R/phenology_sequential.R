@@ -36,7 +36,7 @@
 #'
 #' }
 #' @export phenology_sequential
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 phenology_sequential <- function(GDH_day,Reqs,Start_chill){
   Seasons <- unique(GDH_day$Year)

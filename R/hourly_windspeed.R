@@ -30,7 +30,7 @@
 #'}
 #'
 #' @export hourly_windspeed
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 hourly_windspeed <- function(climdata)
 {

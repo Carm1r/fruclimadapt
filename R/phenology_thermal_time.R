@@ -32,7 +32,7 @@
 #'
 #' }
 #' @export phenology_thermal_time
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 phenology_thermal_time <- function(GDH_day,Reqs){
   Seasons <- unique(GDH_day$Year)

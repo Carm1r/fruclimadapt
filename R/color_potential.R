@@ -40,7 +40,7 @@
 #'
 #'}
 #' @export color_potential
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 color_potential <- function(climdata, harvest)
 {

@@ -33,7 +33,7 @@
 #'
 #'}
 #' @export coolness_index
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 coolness_index <- function(climdata, harvest)
 {

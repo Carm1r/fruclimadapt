@@ -32,7 +32,7 @@
 #' THourly<-hourly_temps(50.4,weather$weather)
 #' }
 #' @export hourly_temps
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 hourly_temps <- function(climdata,latitude)
 {

@@ -33,7 +33,7 @@
 #'
 #' }
 #' @export GDH_linear
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 GDH_linear <- function(Hourdata,Tb,Topt,Tcrit)
 {

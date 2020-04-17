@@ -43,7 +43,7 @@
 #'
 #'}
 #' @export bioclim_thermal
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 #' 
 
 bioclim_thermal <- function(climdata, lat)

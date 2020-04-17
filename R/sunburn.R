@@ -52,7 +52,7 @@
 #'
 #' }
 #' @export sunburn
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 
 sunburn <- function(climdata,first_d, last_d)

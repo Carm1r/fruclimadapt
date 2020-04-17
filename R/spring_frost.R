@@ -44,7 +44,7 @@
 #'
 #' }
 #' @export spring_frost
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo lubridate::make_date()
 
 spring_frost <- function(tempdata,fendata,tcrit, lastday = 181){
   Years <- unique(fendata$Year)
