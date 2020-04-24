@@ -2,7 +2,7 @@
 % Please edit documentation in R/GDD_linear.R
 \name{GDD_linear}
 \alias{GDD_linear}
-\title{Calculates growing degree days using linear method}
+\title{Calculates growing degree days (GDD) using a linear method}
 \usage{
 GDD_linear(Temp_Day, Tb, Topt, Tcrit)
 }
@@ -24,13 +24,13 @@ Tmean and GDD.
 \description{
 The function calculates the daily heat unit accumulation (GDD)
 from daily temperature data with a linear method based on averaging
-the daily maximum and minimum temperatures (Arnold, 1960). Heat accumulation
-begins when mean temperatures are above a minimum (base temperature,
-Tb), and growth increases with linearly with temperature up to a
-point (optimum temperature, Topt) at which there is no longer
-an increase. The critical temperature (Tcrit) is the maximum
-temperature at which growth will continue. The function allows
-the user to define Tb, Topt and Tcrit.
+the daily maximum and minimum temperatures (Arnold, 1960). Heat 
+accumulation begins when mean temperatures are above a minimum 
+(base temperature, Tb), and growth increases with linearly with 
+temperature up to a point (optimum temperature, Topt) at which 
+there is no longer an increase. The critical temperature (Tcrit) 
+is the maximum temperature at which growth will continue. The function
+allows the user to define Tb, Topt and Tcrit.
 }
 \examples{
 
@@ -46,5 +46,5 @@ Arnold,  C.Y.  1960.  Maximum-minimum  temperatures as a basis for computing
 heat units. Proc.Amer. Soc. Hort. Sci. 76:682–692.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

@@ -2,14 +2,17 @@
 #'
 #' This function calculates a night coolness index based in the
 #' Cool Night index of Tonietto (1999) as the mean of minimum 
-#' temperatures in the 30 days prior to harvest.
+#' temperatures in the 30 days prior to a  harvest date defined
+#' by the user. The function allows testing for several harvest 
+#' dates simultaneously.
 #'
 #' @param climdata a dataframe with daily maximum and minimum temperatures.
 #'  Must contain the columns Year, Month, Day, Tmax, Tmin.
 #' @param harvest a vector with expected harvest days
 #' (expressed as day of the year)
-#' @return data frame with the values of the indices.
-#' @author Carlos Miranda
+#' @return data frame with the values of the indices. It contains the
+#' columns Year, Harvest, Coolness 
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Tonietto J. 1999. Les macroclimats viticoles mondiaux et l'influence du
@@ -33,7 +36,8 @@
 #'
 #'}
 #' @export coolness_index
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 coolness_index <- function(climdata, harvest)
 {

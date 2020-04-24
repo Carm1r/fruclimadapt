@@ -1,15 +1,16 @@
 #' Evaluation of weather conditions for sunburn in apple fruit surface
 #'
-#'
-#' This function estimates the number of days in which apple fruit
+#'#' This function estimates the number of days in which apple fruit
 #' surface temperature (FST) exceeds the thresholds indicated by
 #' Rackso and Schrader (2012) for two types of sunburn damages.
+#' 
 #' Sunburn necrosis (SN), the most severe type of sunburn , with a dark
-#' brown or black necrotic spot on the exposed fruit surface would
-#' appear when FST reaches 52ºC. Sunburn browning (SB) is the most prevalent
-#' type of sunburn on attached sun-exposed apples (acclimated to high light).
-#' The threshold temperature for SB would be 46ºC in the most sensitive
-#' cultivars (like Cameo or Honeycrisp).
+#' brown or black necrotic spot on the exposed fruit surface is considered
+#' to appear when FST reaches 52ºC. Sunburn browning (SB) is the most 
+#' prevalent type of sunburn on attached sun-exposed apples (acclimated to
+#' high light). The threshold temperature for SB is set in 46ºC, and 
+#' corresponds to the most sensitive apple cultivars (like Cameo or 
+#' Honeycrisp).
 #'
 #' FST is estimated from daily maximum air temperature using the expression
 #' proposed by Schrader et al (2003).
@@ -23,7 +24,7 @@
 #' @return data frame with the number of days within the assessed period(s).
 #' Contains the columns Year, Harvest (values from last_d), SB_browning
 #' and SB_necrosis.
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Rackso J and Schrader LE, 2012. Sunburn of apple fruit: Historical
@@ -52,7 +53,8 @@
 #'
 #' }
 #' @export sunburn
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 
 sunburn <- function(climdata,first_d, last_d)

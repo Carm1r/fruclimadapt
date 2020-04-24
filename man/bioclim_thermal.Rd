@@ -2,7 +2,7 @@
 % Please edit documentation in R/bioclim_thermal.R
 \name{bioclim_thermal}
 \alias{bioclim_thermal}
-\title{Calculation of thermal viticultural indices (GDD, GST, Huglin, Winkler and Cool Nights)}
+\title{Calculation of bioclimatic viticultural indices focusing on temperature}
 \usage{
 bioclim_thermal(climdata, lat)
 }
@@ -14,34 +14,63 @@ Must contain the columns Year, Month, Day, Tmax, Tmin.}
 for Northern latitudes and negatives for Southern.}
 }
 \value{
-data frame with the values of the indices.
+data frame with the values of the indices. It contains the columns
+Year, CI, GST, BEDD, HI, WI
 }
 \description{
 This function calculates the Growing Season Average Temperature (GST), the
-Growing Degree Days (GDD), the Heliothermal Index of Huglin (1978),
-the Winkler index (Amerine and Winkler, 1974) and the Cool Night 
-index (Tonietto, 1999).
+Heliothermal Index (HI) of Huglin (1978), the Winkler (WI) index (Amerine and Winkler
+, 1974), the Biologically Effective Degree Day (BEDD) index (Gladstones, 1992) 
+and the Cool Night (CI) index (Tonietto, 1999).
+}
+\details{
+GST index correlates broadly to the maturity potential for grape cultivars 
+grown across many wine regions and provides the basis for zoning viticultural
+areas in both hemispheres (Hall and Jones, 2009). It is calculated by taking
+the average of the growing season (April-October in Northern hemisphere, October
+-April in Southern hemisphere).
+
+HI is a bioclimatic heat index for viticulture regions using heliothermic 
+potential, which calculates the temperature sum above 10ºC from April 
+until September (Northern hemisphere) or from October until March (Southern h).
+The index takes into consideration daily maximum and average temperature, 
+and slighty modifies the calculated total using the latitude of the location.
+
+WI index, also known as growing degree days (GDD) classifies regions based 
+on the accumulation of heat summation units by adding up hours above 10ºC during 
+the growing season.
+
+BEDD index is another variant on calculating heat summation which incorporates
+both and adjustment for diurnal temperature range (accounts for heat accumulation
+between 10 and 19ºC) and a day length correction similar to HI.
+
+CI index takes into account the minimum temperature during grape maturation, which
+is normally the average minimum air temperature in September/March(Northern or
+Southern hemispheres, respectively).
 }
 \examples{
 
 \dontrun{
 
 #select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, create a vector or harvest dates and
-#estimate the Huglin and Cool night indices on each year
-#in the series.
+#in Year, Month, Day format, and estimate indices on each year in the series.
 
 Weather <- Tempdata \%>\%
    select(Year, Month, Day, Tmax, Tmin)
-harvest <- c(225, 250, 275)
 latitude <- 42.08
-Vitic_indices <- bioclim_thermal(Weather, harvest, latitude)
+Vitic_indices <- bioclim_thermal(Weather, latitude)
 
 }
 }
 \references{
 Amerine MA and Winkler AJ. 1944. Composition and quality of musts and wines
 of California grapes. Hilgardia 15: 493-675.
+
+Gladstones J. 1992. Viticulture and environment. Winetitles, Adelaide, Australia 
+
+Hall A., Jones GV. 2009. Effect of potential atmospheric warming on 
+temperature-based indices describing Australian winegrape growing conditions.
+Aust J Grape Wine Res 15. 97-119.
 
 Huglin P. 1978. Noveau mode d'evaluation des possibilites héliothermiques
 d'un milieu viticole. In: Proceedings of the Symposium International sur
@@ -54,5 +83,5 @@ sud de la France: methodologie de carácterisation. Thése Doctorat. Ecole
 Nationale Supérieure Agronomique, Montpellier, 233pp.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

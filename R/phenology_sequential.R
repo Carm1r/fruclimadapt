@@ -12,11 +12,11 @@
 #' (recommended, particularly for warm climates or in climate change studies),
 #' forcing heat can be supplied either as GDD or GDH. The function allows
 #' predicting several stages (or the same for different cultivars), by supplying
-#' a dataframe in which each rows contains chill and heat requirements for a
+#' a dataframe in which each row contains chill and heat requirements for a
 #' phenological stage.
 #'
-#' @param GDH_day a dataframe with daily chilling and forcing accumulation
-#' must contain the columns Year, Month, Day, DOY, Chill, GD.
+#' @param GDH_day a dataframe with daily chilling and forcing accumulation.
+#' Must contain the columns Year, Month, Day, DOY, Chill, GD.
 #' @param Reqs a dataframe with chilling and forcing requirements, must
 #' contain the columns Creq (for chilling), Freq (for forcing heat).
 #' @param Start_chill parameter indicating the day of the year when chill
@@ -27,7 +27,7 @@
 #' DOY), and the date in which the phenological stage is met (Year and DOY).
 #' It contains the columns Creq, Freq, Season, Creq_Year,
 #' Creq_DOY, Freq_Year, Freq_DOY.
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @examples
 #'
 #' \dontrun{
@@ -36,7 +36,8 @@
 #'
 #' }
 #' @export phenology_sequential
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 phenology_sequential <- function(GDH_day,Reqs,Start_chill){
   Seasons <- unique(GDH_day$Year)

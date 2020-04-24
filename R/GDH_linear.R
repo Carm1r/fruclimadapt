@@ -1,4 +1,4 @@
-#' Calculates growing degree hours using a linear method
+#' Calculates growing degree hours (GDH) using a linear method
 #'
 #' The function calculates the daily heat unit accumulation (GDH)
 #' from hourly temperature data, using the linear model
@@ -19,7 +19,7 @@
 #' @param Tcrit the critical temperature
 #' @return data frame with daily data. It contains the columns Date,
 #' Year, Month, Day, DOY (day of the year), and GDH
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Anderson JL and Seeley SD, 1992. Modelling strategy in pomology:
@@ -33,7 +33,8 @@
 #'
 #' }
 #' @export GDH_linear
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 GDH_linear <- function(Hourdata,Tb,Topt,Tcrit)
 {

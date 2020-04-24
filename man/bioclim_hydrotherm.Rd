@@ -7,9 +7,9 @@
 bioclim_hydrotherm(climdata, lat, elev)
 }
 \arguments{
-\item{climdata}{a dataframe with daily weather data.
-Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Prec, 
-Rad, u2.}
+\item{climdata}{a dataframe with daily weather data, including temperature
+Required columns are Year, Month, Day, Tmax, Tmin and Prec. Optional columns 
+are RHmax, RHmin, Rad and u2.}
 
 \item{lat}{the latitude of the site, in decimal degrees. Use positive values
 for Northern latitudes and negatives for Southern.}
@@ -22,16 +22,17 @@ climdata file.
 }
 \description{
 This function calculates the hydrotermic index of Branas, Bernon and 
-Levandoux (Branas et al 1946) and the Dryness index (Riou et al 1994).
-The Branas Index (BBLI) takes  into  account  the influence  of  both  
+Levandoux (BBLI, Branas et al 1946) and the Dryness index (Riou et al 1994).
+}
+\details{
+The BBLI takes  into  account  the influence  of  both  
 temperature  and  precipitation  on  grape yield  and  wine  quality.  
 This  index  is  the  sum of  the products of monthly mean temperature 
 (Tmean,in Celsius) and monthly  accumulated  precipitation  amount  (Prec,in mm)
 during the April to September season (Northern Hemisphere) or October to 
 February (Southern Hemisphere).
-}
-\details{
-The  dryness  index  (DI)  is  measured  based  on  an adaptation  of  
+
+The  Dryness  index  (DI)  is  measured  based  on  an adaptation  of  
 the  potential  water  balance  of  the  soil index of Riou (Riou et al., 
 1994), developed specially for vineyard use. It  enables  the  characterization
 of the  water  component  of  the  climate  in  a  grape-growing  region,
@@ -39,26 +40,39 @@ taking into account the climatic demand of a standard vineyard, evaporation
 from bare soil, rainfall without deduction for surface runoff or drainage. 
 It indicates the  potential  water  availability  in  the  soil,  related  
 to the level of dryness in a region (Tonietto and Carbonneau, 2004). The
-index uses potential evapotranspiration using the Penman Monteith method.
+index uses potential evapotranspiration calculated here with 
+the Penman Monteith method.
+
+Minimum data requirements to calculate the indices are daily temperatures 
+(maximum and minimum temperatures, Tmax and Tmin) and rainfall (l m-2), 
+whereas relative humidity (RHmax and RHmin, %), solar radiation 
+(Rad, MJ m-2 day-1) and wind speed at 2m height (u2,m s-1) are optional. 
+If missing, the function integrates FAO56 (Allen et al 1998) estimations 
+for solar radiation and vapor pressure (air humidity) from daily temperatures. 
+If there is no information available on wind speed, the function assumes a 
+constant value of 2 m s-1.
 }
 \examples{
 
 \dontrun{
 
 #select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, create a vector or harvest dates and
-#estimate the Huglin and Cool night indices on each year
-#in the series.
+#in Year, Month, Day format, define the values for the parameters latitude 
+#and elevation and estimate the hydrotermal indices on each year in the series.
 
 Weather <- Tempdata \%>\%
-   select(Year, Month, Day, Tmax, Tmin)
-harvest <- c(225, 250, 275)
+   select(Year, Month, Day, Tmax, Tmin, Prec, HRmax, HRmin, Rad, u2)
+elevation <- 325
 latitude <- 42.08
-Vitic_indices <- viticultural_indices(Weather, harvest, latitude)
+Vitic_indices <- viticultural_indices(Weather, latitude, elevation)
 
 }
 }
 \references{
+Allen RG, Pereira LS, Raes D, Smith M. 1998. Crop evapotranspiration. Guidelines
+for computing crop water requirements. FAO Irrigation and drainage paper 56. Food 
+and Agriculture Organization of the United Nations
+
 Riou C, Carbonneau A, Becker N, Caló A, Costacurta A, Castro R, Pinto PA, 
 Carneiro LC, Lopes C, Climaco P, Panagiotou MM, Sotes V,Beaumond HC, Burril A, 
 Maes J, Vossen P. 1994.Le determinisme climatique de la maturation du raisin: 
@@ -69,5 +83,5 @@ Tonietto J, Carbonneau A. 2004. A multicriteria climatic classification system
 for grape-growing regions worldwide. Agricultural and Forest Meteorology, 124:81-97.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

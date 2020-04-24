@@ -3,18 +3,22 @@
 #'
 #' This function estimates the daily hours with less than
 #' 'moderate breeze' wind (below 5.5 m/s in the Beaufort scale) from a
-#' dataset with mean daily wind speeds. Hourly wind speeds
-#' from daily means are computed using a modified version of the
-#' formula proposed by (Guo et al, 2016), so that maximum speeds
-#' are obtained at mid-day.
+#' dataset with daily wind speeds. Hourly wind speeds
+#' from daily values are computed using the formulas proposed
+#' by (Guo et al, 2016), using mean daily values (WSmed, required)
+#' and maximum ones (WSmax, optional). If only mean wind values
+#' are available, the function uses a modified version of the 
+#' Guo formula, so that the maximum values are obtained in 
+#' daytime hours.
 #'
-#' @param climdata a dataframe with daily mean wind speed data (WSmed).
-#' Must contain the columns Year, Month, Day and WSmed.
+#' @param climdata a dataframe with daily wind speed data.
+#' Required columns are Year, Month, Day and WSmed. WSmax
+#' is an optional data column.
 #'
 #' @return data frame with the columns Date, Year, Month, Day, DOY,
 #' Hour and h_wind (hours with wind speed below 5.5 m/s).
 #'
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind
@@ -38,7 +42,8 @@
 #'
 #' }
 #' @export moderate_wind
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date make_datetime
 
 moderate_wind <- function(climdata)
 {

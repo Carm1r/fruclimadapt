@@ -4,7 +4,11 @@
 #' proposed by Fishman et al. (1987a,b), using the formulas extracted by
 #' Luedeling et al (2009) from the Excel functions produced by Erez and Fishman,
 #' available at the University of California, Agriculture and Natural Resources
-#' (UC ANR) website http://ucanr.edu/sites/fruittree/files/49319.xls
+#' (UC ANR) website http://ucanr.edu/sites/fruittree/files/49319.xls. To date, 
+#' Chill portions is the best existing model for most growing regions, so chill
+#' fulfilment should preferably be calculated using thit method, especially
+#' when transferring varieties from one region to another, or in studies on 
+#' climate change.
 #'
 #' @param climdata a dataframe with hourly temperature data. It
 #' must contain the columns Year, Month, Day, DOY, Temp.
@@ -13,8 +17,8 @@
 #' @return data frame with the chill accumulated for all the seasons in the
 #' dataset. Seasons begin at the start date and end the day before the start
 #' date of the following year.
-#' It contains the columns Year, Month, Day, Doy, CHill
-#' @author Carlos Miranda
+#' It contains the columns Year, Month, Day, DOY, Chill
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Erez A, Fishman S, Linsley-Noakes GC and Allan P, 1990. The dynamic model for
@@ -41,7 +45,8 @@
 #'
 #' }
 #' @export chill_portions
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 chill_portions <- function(climdata, Start){
 

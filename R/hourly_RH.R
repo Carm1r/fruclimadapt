@@ -13,7 +13,7 @@
 #' @param lat latitude (decimal format) of the site
 #' @return data frame with columns Date, Year, Month, Day, DOY,
 #' Hour, Temp and RH
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Waichler SR and Wigmosta MS, 2003. Development of hourly meteorological
@@ -35,7 +35,8 @@
 #'
 #' }
 #' @export hourly_RH
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date make_datetime date
 
 hourly_RH <- function(climdata,lat)
 {

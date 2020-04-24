@@ -6,20 +6,24 @@
 #' daily weather data.
 #'
 #' Days are classified considering the classification proposed by
-#' Williams and Sims (1977), by accounthing the number of favorable
+#' Williams and Sims (1977), by accounting the number of favorable
 #' hours for pollination within a day. One hour is considered favorable
 #' if the temperature is above 12.5 C, the speed of the wind below
 #' 4.5 m/s and no rainfal occurs (Williams and Sims, 1977; Ramirez and
-#' Davenport, 2013). Hourly wind speeds are calculated from daily means 
-#' using a modified version of the formula proposed by (Guo et al, 2016). 
-#' No hourly downscaling of rainfall is performed, the function allow 
-#' daily rainfall below 2.0 mm when estimating if a day is favorable 
-#' for pollination or not.
+#' Davenport, 2013). Hourly wind speeds from daily values are computed
+#' using the formulas proposed by (Guo et al, 2016), using mean daily
+#' values (WSmed, required) and maximum ones (WSmax, optional). If 
+#' only mean wind values are available, the function uses a modified
+#' version of the Guo formula, so that the maximum values are obtained in 
+#' daytime hours.No hourly downscaling of rainfall is performed, the 
+#' function allow daily rainfall below 2.0 mm when estimating if a day
+#' is favorable for pollination or not.
 #'
 #'
 #' @param climdata a dataframe with daily maximum and minimum temperatures,
-#' wind speed and precipitation. Must contain the columns Year, Month, Day,
-#' Tmax, Tmin, WSmed (daily mean wind speed) and Prec (precipitation)
+#' wind speed and precipitation. Required columns are Year, Month, Day,
+#' Tmax, Tmin, WSmed (daily mean wind speed) and Prec (precipitation).
+#' WSmax (daily maximum wind speed) is optional.
 #' @param lat latitude (decimal format) of the site, used to estimate hourly
 #' temperatures.
 #' @param fendata a dataframe with julian day of the beginning (sbloom)
@@ -29,7 +33,7 @@
 #' , Ebloom (end of bloom, DOY), Bloom_length (in days), Favor (number of
 #' favorable days), Modfavor (number of moderately favorable days) and
 #' Unfavor (number of unfavorable days).
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind
@@ -61,7 +65,8 @@
 #'
 #' }
 #' @export pollination_weather
-#' @import data.table tidyverse zoo lubridate
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date make_datetime
 
 pollination_weather <- function(climdata, fendata, lat)
 {

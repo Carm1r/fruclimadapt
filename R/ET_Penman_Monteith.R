@@ -1,4 +1,4 @@
-#' Calculation of dailiy reference evapotranspiration by Penman-Monteith method  
+#' Calculation of daily reference evapotranspiration by Penman-Monteith method  
 #'
 #' This function calculates the reference evapotranspiration (ETref) for short
 #' (ETos) and tall (ETrs) canopies using daily weather data. The method is based
@@ -8,7 +8,7 @@
 #' 
 #' Minimum data requirements to calculate ET are daily temperatures (maximum 
 #' and minimum temperatures, Tmax and Tmin), whereas relative humidity (RHmax and 
-#' RHmin, %), solar radiation (Rad, MJ m-2 day-1) and wind speed at 2m height
+#' RHmin), solar radiation (Rad, MJ m-2 day-1) and wind speed at 2m height
 #' (u2,m s-1) are optional. If missing, the function integrates FAO56 estimations 
 #' for solar radiation and vapor pressure (air humidity) from daily 
 #' temperatures. If there is no information available on wind speed, the function 
@@ -20,7 +20,7 @@
 #' @param lat the latitude of the site, in decimal degrees. 
 #' @param elev the elevation of the site, in meters above sea level.
 #' @return data frame with Year, Month, Day, DOY, ETos and ETrs values.
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Allen RG, Pereira LS, Raes D, Smith M. 1998. Crop evapotranspiration. Guidelines
@@ -40,7 +40,8 @@
 #' ET_PM <- ET_penman_monteith(Weather, latitude, elevation)
 #'}
 #' @export ET_penman_monteith
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 #'
 
 ET_penman_monteith <- function(climdata, lat, elev){

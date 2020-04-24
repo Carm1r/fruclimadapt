@@ -2,13 +2,13 @@
 % Please edit documentation in R/GDH_asymcur.R
 \name{GDH_asymcur}
 \alias{GDH_asymcur}
-\title{Calculates growing degree hours using ASYMCUR method}
+\title{Calculates growing degree hours (GDH) using ASYMCUR method}
 \usage{
 GDH_asymcur(Hourdata, Tb, Topt, Tcrit)
 }
 \arguments{
 \item{Hourdata}{a dataframe of hourly temperatures. This data frame
-must have a column for Year, Month, Day, DOY (day of year),Hour,
+must have a column for Year, Month, Day, DOY (day of year), Hour,
 Temp (hourly temperature) and Chill (Chill accumulated).}
 
 \item{Tb}{the base temperatures to calculate GDH}
@@ -53,5 +53,5 @@ Anderson JL and Seeley SD, 1992. Modelling strategy in pomology:
 Development of the Utah models. Acta Horticulturae 313, 297-306.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

@@ -10,7 +10,7 @@
 #' @param DOY numeric (usually integer) value or vector specifying the
 #' day of the year for which calculations should be done.
 #' @return list with Sunrise, Sunset and Daylength.
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #' Spencer JW, 1971. Fourier series representation of the position of the Sun.
 #' Search 2(5), 172.
@@ -24,14 +24,15 @@
 #' \dontrun{
 #'
 #' #create a vector with 365 days in sequence and calculate sunrise and
-#' #sunset hours for that year in a site placed a 45.5?? N
+#' #sunset hours for that year in a site placed a 45.5 N
 #'
 #' Days <- seq(1:365)
 #' Sunrise_Sunset <- solar_times(41.5,Days)
 #'
 #' }
 #' @export solar_times
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 solar_times <- function(latitude,DOY){
   Gamma<-2*pi/365*((DOY)-1)

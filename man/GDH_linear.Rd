@@ -2,14 +2,14 @@
 % Please edit documentation in R/GDH_linear.R
 \name{GDH_linear}
 \alias{GDH_linear}
-\title{Calculates growing degree hours using a linear method}
+\title{Calculates growing degree hours (GDH) using a linear method}
 \usage{
 GDH_linear(Hourdata, Tb, Topt, Tcrit)
 }
 \arguments{
 \item{Hourdata}{a dataframe of hourly temperatures. This data frame
-must have a column for Year, Month, Day, DOY (day of year),Hour,
-Temp (hourly temperature) and Chill (Chill accumulated).}
+must have a column for Year, Month, Day, DOY (day of year),Hour, and
+Temp (hourly temperature).}
 
 \item{Tb}{the base temperatures to calculate GDH}
 
@@ -19,7 +19,7 @@ Temp (hourly temperature) and Chill (Chill accumulated).}
 }
 \value{
 data frame with daily data. It contains the columns Date,
-Year, Month, Day, DOY (day of the year), Chill, and GDH
+Year, Month, Day, DOY (day of the year), and GDH
 }
 \description{
 The function calculates the daily heat unit accumulation (GDH)
@@ -46,5 +46,5 @@ Anderson JL and Seeley SD, 1992. Modelling strategy in pomology:
 Development of the Utah models. Acta Horticulturae 313, 297-306.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

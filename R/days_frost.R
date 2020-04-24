@@ -1,5 +1,7 @@
-#' Estimates the occurence of spring frosts
+#' Estimates the occurence of spring frosts 
 #'
+#' (This is an internal function for spring_fros) not intended
+#' to be stand alone used 
 #' The function evaluates the early and spring frosts occurring
 #' during a season. It compares minimum daily temperature (Tmin) with the critical
 #' temperature (Tcrit). Daily critical temperatures are linearly
@@ -20,8 +22,8 @@
 #' lastday = 181 (June 3oth).
 #' @return a dataframe with the columns
 #' number of days in which Tmin is equal or below Tcrit.
-#' @author Carlos Miranda
-#' @keywords frost prediction
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
+#' @keywords internal
 #' @examples
 #'
 #' \dontrun{
@@ -36,7 +38,8 @@
 #' Frostdays_2018 <-days_frost(Tmins_2018,Tcrit)
 #' }
 #' @export days_frost
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 days_frost <- function(mintemps, fendates, lastday = 181){
   mintemps <- mintemps %>% filter(mintemps$DOY<=lastday)

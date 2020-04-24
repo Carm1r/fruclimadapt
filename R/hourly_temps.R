@@ -13,7 +13,7 @@
 #' @return a data frame containing the columns Date, Year, Month, Day, DOY,
 #' Hour, Sunrise (hour of sunrise), Sunset (hour of sunset), Daylength and
 #' Temp (hourly temperature).
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Linvill DE, 1990. Calculating chilling hours and chill units from daily
@@ -32,7 +32,8 @@
 #' THourly<-hourly_temps(50.4,weather$weather)
 #' }
 #' @export hourly_temps
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date make_datetime date
 
 hourly_temps <- function(climdata,latitude)
 {
@@ -79,6 +80,7 @@ hourly_temps <- function(climdata,latitude)
     rename(Datetime=1) %>%
     mutate(Date=date(Datetime), Year=year(Datetime), Month=month(Datetime),
            Day=day(Datetime), DOY=yday(Datetime), Hour=hour(Datetime))
+  
 
   dates_h = merge(dates, climdata, by="Date", all = TRUE) %>%
     select(Date,Hour,Tmax,Tmin,Sunrise,Sunset,Daylength,prev_Sunset,

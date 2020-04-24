@@ -1,23 +1,27 @@
-#' Evaluation of weather conditions for anthocyain formation
+#' Evaluation of weather conditions for anthocyanin formation
 #' in apple skin
 #'
-#' This function estimates the number of days favorable and
-#' unfavorable for anthocyanin accumulation in the skin of
-#' red apple cultivars during the month (30 days) before harvest.
-#' A favorable day (Cool day) is considered when the daily maximum
-#' temperature is below 26ºC, an unfavorable day (Hot day) when
-#' the minimum temperature is above 20ºC (Lin-Wang et al, 2011). The
-#' function allows testing several harvest dates, supplied as
-#' a vector.
+#' This function estimates the number of days that can be 
+#' considered as highly favorable or unfavorable for anthocyanin 
+#' accumulation in the skin of red apple cultivars during the 
+#' month (30 days) before harvest. A highly favorable day (Cool
+#' day) is considered when the daily maximum temperature is below
+#' 26ºC, an highly unfavorable day (Hot day) when the minimum 
+#' temperature is above 20ºC (Lin-Wang et al, 2011). The average
+#' of maximum and minimum temperatures during the same period is 
+#' also provided. The function allows testing for several harvest 
+#' dates.
 #'
 #' @param climdata a dataframe with daily maximum and minimum temperatures.
 #'  Must contain the columns Year, Month, Day, Tmax, Tmin.
 #' @param harvest a vector with expected harvest days
 #' (expressed as day of the year)
-#' @return data frame with the number of favorable (Cool_d) and unfavorable
-#' (Hot_d) days for red color, for each year (Year) in the series and
-#' harvest date (Day_h) provided.
-#' @author Carlos Miranda
+#' @return data frame with the number of highly favorable (Cool_d) 
+#' and unfavorable (Hot_d) days for red color, as well as the 
+#' average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
+#' temperatures for each year (Year) in the series during the 
+#' 30 days previous to each harvest date (Day_h) provided.
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Lin-Wang K, Micheletti D et al, 2011. High temperature reduces apple fruit
@@ -40,7 +44,8 @@
 #'
 #'}
 #' @export color_potential
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 color_potential <- function(climdata, harvest)
 {

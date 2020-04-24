@@ -1,19 +1,33 @@
 #' Calculates the risk of spring frosts for a climate series
 #'
-#' The function evaluates the number of early and spring frosts
-#' on each season within a climate data series. It compares minimum
-#' daily temperature (Tmin) with the critical temperature (Tcrit).
-#' Daily critical temperatures are linearly interpolated from a
-#' user-provided dataframe with the day of occurrence of the stages on
-#' each season and a vector of critical temperatures for each stage.
-#'
-#' The function checks each day if Tmin is below Tcrit and,
-#' if so, that day is considered as a frost day (Fday). The last day
-#' evaluated each year is user defined, by default set at DOY 181, 
-#' to avoid computing autumn and winter frosts.
+#' The function evaluates the number of early and spring frosts and
+#' the expected frost damage on each season within a climate data 
+#' series. Frost damage is assumed to be multiplicative, directly
+#' related to the minimum temperature and unrelated to the duration
+#' of the frost. The function is an enhanced version of the 
+#' Damage Estimator Excel application program (DEST.xls) created by 
+#' de Melo-Abreu and Snyder and bundled with FAO Environment and
+#' Natural Resources Series 10 manual (Snyder and de Melo-Abreu, 2005). 
+#' The function compares daily minimum temperature (Tmin) with the 
+#' critical temperatures (Tcrit) for that day. Daily Tcrit are 
+#' linearly interpolated from a user-provided dataframe with the day 
+#' of occurrence of the stages on each season and a vector of critical 
+#' temperatures (the lethal temperatures for 10\% (LT_10) and 90\% (LT_90)
+#' of the organs) for each phenological stage. The main difference of 
+#' spring_frost with DEST.xls is that the latter uses the same dates of 
+#' phenological ocurrence for all the years evaluated (up to 50 years of
+#' data), while spring_frost is able to use the expected dates of ocurrence 
+#' for each year from historical records or estimations produced by the 
+#' functions phenology_thermal_time or phenology_sequential, included in 
+#' this package. There is no limit for the number of years evaluated. 
+#' 
+#' The last day in the year for the evaluation can be defined by the user, 
+#' and it is set by default set at DOY 181, to avoid computing autumn 
+#' and winter frosts.
+#' 
 #' The function currently works only with phenological dates occuring
 #' within the same year.
-#'
+#' 
 #' @param tempdata a dataframe with daily minimum temperatures for each
 #' year in a series. Must contain the columns Year, julian day of year (DOY) and
 #' the minimum daily temperature (Tmin).
@@ -26,9 +40,14 @@
 #' lastday = 181 (June 30th).
 #' @return a list with two data frames. The df Days_frost has the columns Year, DOY, 
 #' Tmin, Tcrit and Day_Frost (indicates a day of frost with a 1 if Tmin<=Tcrit). 
-#' The df Total_frosts indicates the total number of frost days each year in the
-#' series and the expected damage (as % of organs).
-#' @author Carlos Miranda
+#' The df Total_frosts indicates the total number of frost days and the expected 
+#' damage (as proportion (\%) of organs) for every year in the series.
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
+#' @references 
+#' Snyder RL, de Melo-Abreu JP. 2005. Frost Protection: fundamentals, practice and 
+#' economics (2 volumes). FAO Environment and Natural Resources Service Series, 
+#' No. 10 - FAO, Rome.
+#' 
 #' @examples
 #'
 #' \dontrun{
@@ -44,7 +63,8 @@
 #'
 #' }
 #' @export spring_frost
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 spring_frost <- function(tempdata,fendata,tcrit, lastday = 181){
   Years <- unique(fendata$Year)

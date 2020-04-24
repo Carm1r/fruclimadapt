@@ -5,18 +5,18 @@
 #' relative humidity above 75% in the critical period
 #' (between 12 and 30 days after full bloom, DAFB). The
 #' function requires hourly temperatures and humidities, if
-#' only daily data is available, the function hourly_RH_temp
+#' only daily data is available, the function hourly_RH
 #' can be used to estimate them.
 #'
-#' @param climdata a dataframe with hourly RH produced by hourly_RH.
-#' Must contain the columns Date, Year, Month, Day, DOY (julian day),
+#' @param climdata a dataframe with hourly temperature and RH
+#' data. Required columns are Date, Year, Month, Day, DOY (julian day),
 #' Hour and RH.
 #' @param fendata a dataframe with julian day of occurrence of the full
 #' bloom (F2) phenological stage.
 #' Must contain the columns Year and Fday in that order.
 #' @return data frame with the number of hours with RH>75%
 #' between 12 and 30 DAFB (Russet_h) each year in the series.
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @examples
 #'
 #' \dontrun{
@@ -35,7 +35,8 @@
 #'
 #' }
 #' @export russet
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 russet <- function(climdata, fendata)
 {

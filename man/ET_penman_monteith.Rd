@@ -2,13 +2,14 @@
 % Please edit documentation in R/ET_Penman_Monteith.R
 \name{ET_penman_monteith}
 \alias{ET_penman_monteith}
-\title{Calculation of dailiy reference evapotranspiration by Penman-Monteith method}
+\title{Calculation of daily reference evapotranspiration by Penman-Monteith method}
 \usage{
 ET_penman_monteith(climdata, lat, elev)
 }
 \arguments{
 \item{climdata}{a dataframe with daily weather data.
-Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Rad, u2.}
+Required columns are Year, Month, Day, Tmax and Tmin. Optional columns are
+RHmax, RHmin, Rad and u2.}
 
 \item{lat}{the latitude of the site, in decimal degrees.}
 
@@ -25,9 +26,13 @@ equation from the Environmental Water Resources Institute of the American
 Society of Civil Engineers (Allen et al, 2005).
 }
 \details{
-This version of the function requires the user to supply in weather data daily
-values for temperature (Tmax and Tmin), relative humidity (RHmax and RHmin), 
-solar radiation (Rad in MJ m-2 day-1) and wind speed at 2m height(u2 in m s-1).
+Minimum data requirements to calculate ET are daily temperatures (maximum 
+and minimum temperatures, Tmax and Tmin), whereas relative humidity (RHmax and 
+RHmin), solar radiation (Rad, MJ m-2 day-1) and wind speed at 2m height
+(u2,m s-1) are optional. If missing, the function integrates FAO56 estimations 
+for solar radiation and vapor pressure (air humidity) from daily 
+temperatures. If there is no information available on wind speed, the function 
+assumes a constant value of 2 m s-1.
 }
 \examples{
 
@@ -48,5 +53,5 @@ The ASCE standardized reference evapotranspiration equation. Reston, VA:American
 Society of Civil Engineers. 59 p.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

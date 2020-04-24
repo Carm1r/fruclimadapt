@@ -1,14 +1,14 @@
-#' Calculates growing degree days using linear method
+#' Calculates growing degree days (GDD) using a linear method
 #'
 #' The function calculates the daily heat unit accumulation (GDD)
 #' from daily temperature data with a linear method based on averaging
-#' the daily maximum and minimum temperatures (Arnold, 1960). Heat accumulation
-#' begins when mean temperatures are above a minimum (base temperature,
-#' Tb), and growth increases with linearly with temperature up to a
-#' point (optimum temperature, Topt) at which there is no longer
-#' an increase. The critical temperature (Tcrit) is the maximum
-#' temperature at which growth will continue. The function allows
-#' the user to define Tb, Topt and Tcrit.
+#' the daily maximum and minimum temperatures (Arnold, 1960). Heat 
+#' accumulation begins when mean temperatures are above a minimum 
+#' (base temperature, Tb), and growth increases with linearly with 
+#' temperature up to a point (optimum temperature, Topt) at which 
+#' there is no longer an increase. The critical temperature (Tcrit) 
+#' is the maximum temperature at which growth will continue. The function
+#' allows the user to define Tb, Topt and Tcrit.
 #'
 #' @param Temp_Day a dataframe of daily temperatures. This data frame must
 #' have a column for Year, Month, Day, and daily minimum ("Tmin") and
@@ -18,7 +18,7 @@
 #' @param Tcrit the critical temperature to calculate GDD
 #' @return data frame consisting of the columns Year, Month, Day, Tmax, Tmin,
 #' Tmean and GDD.
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Arnold,  C.Y.  1960.  Maximum-minimum  temperatures as a basis for computing
@@ -33,7 +33,8 @@
 #' }
 #'
 #' @export GDD_linear
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 GDD_linear <- function(Temp_Day,Tb,Topt,Tcrit)
 {

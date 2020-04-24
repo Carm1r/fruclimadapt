@@ -22,8 +22,8 @@
 #' @return data frame with the chill accumulated for all the seasons in the
 #' dataset. Seasons begin at the start date and end the day before the start
 #' date of the following year.
-#' It contains the columns Year, Month, Day, Doy, CHill
-#' @author Carlos Miranda
+#' It contains the columns Year, Month, Day, Doy, Chill
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Richardson EA, Seeley SD and Walker DR, 1974. A model for estimating the
@@ -38,7 +38,8 @@
 #'
 #' }
 #' @export chill_units
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 chill_units <- function(climdata, Start){
 

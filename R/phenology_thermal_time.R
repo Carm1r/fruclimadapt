@@ -3,7 +3,7 @@
 #'
 #' The function predicts phenological phases for a climate series
 #' from daily chill and heat requirements and forcing data.
-#' The thermal time model used in the fucntion consider consider that
+#' The thermal time model used in the function considers that
 #' only heat accumulated from a set date to a given sum explain the
 #' date of occurrence of the phenological stage (i.e, it assumes that
 #' dormancy release occurs before that date). The function is independent
@@ -16,14 +16,14 @@
 #' @param GDH_day a dataframe with daily forcing accumulation
 #' must contain the columns Year, Month, Day, DOY, GD.
 #' @param Reqs a dataframe with starting dates and forcing requirements,
-#' must contain the columns Dreq, Freq.
+#' must contain the columns Dreq (start date), Freq (requirements).
 #' @return data frame with the predicted dates for every season in GDH_day
 #' and stages in Reqs. For each season and phenological stage, the information
 #' provided is the date in which forcing begins (Year and DOY), and the
 #' date in which the phenological stage is met (Year and DOY).
 #' It contains the columns Dreq, Freq, Season, Dreq_Year,
 #' Dreq_DOY, Freq_Year, Freq_DOY.
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @examples
 #'
 #' \dontrun{
@@ -32,7 +32,8 @@
 #'
 #' }
 #' @export phenology_thermal_time
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 phenology_thermal_time <- function(GDH_day,Reqs){
   Seasons <- unique(GDH_day$Year)

@@ -1,4 +1,4 @@
-#' Calculates growing degree hours using ASYMCUR method
+#' Calculates growing degree hours (GDH) using ASYMCUR method
 #'
 #' The function calculates the daily heat unit accumulation (GDH)
 #' from hourly temperature data, using the ASYMCUR model
@@ -15,14 +15,14 @@
 #' The function allows the user to define Tb, Topt and Tcrit.
 #'
 #' @param Hourdata a dataframe of hourly temperatures. This data frame
-#' must have a column for Year, Month, Day, DOY (day of year),Hour,
+#' must have a column for Year, Month, Day, DOY (day of year), Hour,
 #' Temp (hourly temperature) and Chill (Chill accumulated).
 #' @param Tb the base temperatures to calculate GDH
 #' @param Topt the optimal temperatures to calculate GDH
 #' @param Tcrit the critical temperature
 #' @return data frame with daily data. It contains the columns Date,
 #' Year, Month, Day, DOY (day of the year), Chill, and GDH
-#' @author Carlos Miranda
+#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
 #' Anderson JL, Richardson EA and Kesner CD, 1986. Validation of chill
@@ -40,7 +40,8 @@
 #' }
 #'
 #' @export GDH_asymcur
-#' @import data.table tidyverse zoo lubridate::make_date()
+#' @import data.table tidyverse zoo 
+#' @importFrom lubridate make_date
 
 GDH_asymcur <- function(Hourdata,Tb,Topt,Tcrit)
   {
