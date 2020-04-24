@@ -11,8 +11,7 @@ Climate is a critical component limiting growing range of plant species, which
     regarding ongoing and future changes.  ‘fruclimadapt’ streamlines the assessment of 
     climate adaptation and the identification of potential risks for grapevines and fruit 
     trees. 
-    Procedures included in the package allow to: 
-    i) generate hourly weather data from daily values, 
+    Procedures included in the package allow to:\ni) generate hourly weather data from daily values, 
     ii) estimate chilling and forcing heat units, 
     iii) estimate plant phenology, 
     iv) calculate bioclimatic indices to evaluate fruit tree and grapevine adaptation, 
