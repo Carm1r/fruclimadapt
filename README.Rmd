@@ -1,42 +1,48 @@
+---
+output: github_document
+---
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  eval = FALSE
+)
+```
 
 ## [fruclimadapt](https://github.com/Carm1r/fruclimadapt): Evaluation tools for assessing climate adaptation of fruit tree species in [R](https://www.r-project.org).
 
-[![License: GPL
-v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-This package is a compilation of functions for the assessment of climate
-adaptation and the identification of potential risks for grapevines and
-fruit trees. Procedures in the package allow to:
+This package is a compilation of functions for the assessment of climate adaptation and the identification of potential risks for grapevines and fruit trees. Procedures in the package allow to:
 
-  - Downscale daily meteorological variables to hourly values
-  - Estimate chilling and forcing heat accumulation
-  - Estimate plant phenology
-  - Calculate bioclimatic indices to evaluate fruit tree and grapevine
-    adaptation
-  - Estimate the indicence of weather-related disorders in fruits
-  - Estimate plant water requirements.
+* Downscale daily meteorological variables to hourly values
+* Estimate chilling and forcing heat accumulation
+* Estimate plant phenology
+* Calculate bioclimatic indices to evaluate fruit tree and grapevine adaptation
+* Estimate the indicence of weather-related disorders in fruits
+* Estimate plant water requirements. 
 
 <div id="menu" />
 
------
-
+---------------------------------------------
 ## Resources
 
-  - [Installation](#Instal)
-  - [1. Required packages](#P1)
-  - [2. Example: Estimate the phenology of a peach cultivar](#P2)
-  - [3. Example: Estimate the number and damage caused by spring
-    frosts](#P3)
+* [Installation](#Instal)
+* [1. Required packages](#P1)
+* [2. Example: Estimate the phenology of a peach cultivar](#P2)
+* [3. Example: Estimate the number and damage caused by spring frosts](#P3)
 
 <div id="Instal" />
 
------
-
+---------------------------------------------
 ## Installation
 
-You can install the released version of fruclimadapt from
-[CRAN](https://CRAN.R-project.org) with:
+You can install the released version of fruclimadapt from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("fruclimadapt")
@@ -49,23 +55,21 @@ install.packages("devtools")
 library(devtools)
 devtools::install_github("Carm1r/fruclimadapt")
 ```
-
 [Menu](#menu)
 
 <div id="P1" />
 
------
-
+---------------------------------------------
 ## Using fruclimadapt
 
-### 1\. Required packages
+### 1. Required packages
 
->   - **[data.table](https://CRAN.R-project.org/package=data.table)**
->   - **[lubridate](https://CRAN.R-project.org/package=lubridate)**
->   - **[tidyverse](https://CRAN.R-project.org/package=tidyverse)**
->   - **[zoo](https://CRAN.R-project.org/package=zoo)**
+> * **[data.table](https://CRAN.R-project.org/package=data.table)** 
+> * **[lubridate](https://CRAN.R-project.org/package=lubridate)** 
+> * **[tidyverse](https://CRAN.R-project.org/package=tidyverse)** 
+> * **[zoo](https://CRAN.R-project.org/package=zoo)**
 
-``` r
+```r
 install.packages("data.table")
 install.packages("lubridate")
 install.packages("tidyverse")
@@ -75,22 +79,18 @@ library(fruclimadapt)
 library(data.table)
 library(tidyverse)
 library(zoo)
-```
 
+```
 [Menu](#menu)
 
 <div id="P2" />
 
------
+---------------------------------------------
+### 2. Example. Estimate the phenology of a peach cultivar
 
-### 2\. Example. Estimate the phenology of a peach cultivar
+This example shows how to use the functions *hourly_temps*, *chill_portions*, *GDH_linear* and *phenology_sequential* to estimate the date of occurrence of the phenological stages for a nectarine cultivar, using daily weather data. 
 
-This example shows how to use the functions *hourly\_temps*,
-*chill\_portions*, *GDH\_linear* and *phenology\_sequential* to estimate
-the date of occurrence of the phenological stages for a nectarine
-cultivar, using daily weather data.
-
-``` r
+```{r example1}
 library(fruclimadapt)
 # Generate a dataset with hourly temperatures from the dataset with daily values (Tudela_DW, included in the package)
 data(Tudela_DW)
@@ -109,21 +109,16 @@ Tudela_CH <- merge(Chill,GDH) %>%
 data(Bigtop_reqs)
 Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
 ```
-
 [Menu](#menu)
 
 <div id="P3" />
 
------
+---------------------------------------------
+### 3. Estimate the number and damage caused by spring frosts
 
-### 3\. Estimate the number and damage caused by spring frosts
+This example shows how to use the function *spring_frost* to estimate the number and accumulated damage caused by spring frosts from budbreaking for the same nectarine cultivar used to estimate the phenology in the previous example. 
 
-This example shows how to use the function *spring\_frost* to estimate
-the number and accumulated damage caused by spring frosts from
-budbreaking for the same nectarine cultivar used to estimate the
-phenology in the previous example.
-
-``` r
+```{r example2}
 library(fruclimadapt)
 
 # Use the dataframe with the phenological dates obtained with phenology_sequential to generate a new one with the format required by the function spring_frost
@@ -139,15 +134,13 @@ Phenology_frost <- Phenology_BT %>%
  Frost_BT <- spring_frost(Tmin_Tudela, Phenology_frost, Tcrits_peach, 181)
  Frost_results <- as.data.frame(Frost_BT[['Damage_frosts']])
 ```
-
 [Menu](#menu)
 
 ## Licenses
 
-The R/fruclimadapt package as a whole is distributed under [GPL-3 (GNU
-General Public License
-version 3)](https://www.gnu.org/licenses/gpl-3.0).
+The R/fruclimadapt package as a whole is distributed under [GPL-3 (GNU General Public License version 3)](https://www.gnu.org/licenses/gpl-3.0).
 
 ## Author
 
 [Carlos Miranda](https://github.com/Carm1r)
+
