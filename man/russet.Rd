@@ -2,13 +2,13 @@
 % Please edit documentation in R/russet.R
 \name{russet}
 \alias{russet}
-\title{Estimation of the russet risk for apple}
+\title{Estimation of the russet risk for apple and pear fruits}
 \usage{
 russet(climdata, fendata)
 }
 \arguments{
-\item{climdata}{a dataframe with hourly RH produced by hourly_RH.
-Must contain the columns Date, Year, Month, Day, DOY (julian day),
+\item{climdata}{a dataframe with hourly temperature and RH
+data. Required columns are Date, Year, Month, Day, DOY (julian day),
 Hour and RH.}
 
 \item{fendata}{a dataframe with julian day of occurrence of the full
@@ -16,36 +16,33 @@ bloom (F2) phenological stage.
 Must contain the columns Year and Fday in that order.}
 }
 \value{
-data frame with the number of hours with RH>75%
+data frame with the number of hours with RH>75\%
 between 12 and 30 DAFB (Russet_h) each year in the series.
 }
 \description{
-This function assesses the risk of russet in
-pome fruits by estimating the number of hours with
-relative humidity above 75% in the critical period
-(between 12 and 30 days after full bloom, DAFB). The
-function requires hourly temperatures and humidities, if
-only daily data is available, the function hourly_RH_temp
-can be used to estimate them.
+This function assesses the risk of russet in apple and pear 
+fruits by estimating the number of hours with relative 
+humidity above 75\% in the critical period (between 12 
+and 30 days after full bloom, DAFB). The function requires
+hourly temperatures and humidity, if only daily data is 
+available, the function hourly_RH can be used to estimate them.
 }
 \examples{
 
 \dontrun{
 
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, include date and DOY information and estimate
-#the number favorable days on each year in the series with the function
-hourly_RH_temp, feed the result into the russetrisk function along with
-the phenological data.
-
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, Tmax, Tmin, WSmed) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-RH_h <- hourly_RH_temp(Weather, 41.5)
-Russet_Risk <-russet(RH_h,Bloom_d)
-
+#Select the appropiate columns from the example dataset
+#Bloom_BT and rename column names to make the file compatible
+#with the function
+Bloom <- Bloom_BT \%>\%
+   select(Year, sbloom) \%>\%
+   rename(Fday=sbloom)
+#Obtain estimated hourly RH from the example dataset Tudela_DW
+RH_h <- hourly_RH(Tudela_DW, 42.13132)
+#Estimate the number of russet-inducing days for each season
+Russet_Risk <-russet(RH_h,Bloom)
 }
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

@@ -25,14 +25,16 @@ and SB_necrosis.
 This function estimates the number of days in which apple fruit
 surface temperature (FST) exceeds the thresholds indicated by
 Rackso and Schrader (2012) for two types of sunburn damages.
-Sunburn necrosis (SN), the most severe type of sunburn , with a dark
-brown or black necrotic spot on the exposed fruit surface would
-appear when FST reaches 52ºC. Sunburn browning (SB) is the most prevalent
-type of sunburn on attached sun-exposed apples (acclimated to high light).
-The threshold temperature for SB would be 46ºC in the most sensitive
-cultivars (like Cameo or Honeycrisp).
 }
 \details{
+Sunburn necrosis (SN), the most severe type of sunburn, with a dark
+brown or black necrotic spot on the exposed fruit surface is considered
+to appear when FST reaches 52ºC. Sunburn browning (SB) is the most 
+prevalent type of sunburn on attached sun-exposed apples (acclimated to
+high light). The threshold temperature for SB is set in 46ºC, and 
+corresponds to the most sensitive apple cultivars (like Cameo or 
+Honeycrisp). 
+
 FST is estimated from daily maximum air temperature using the expression
 proposed by Schrader et al (2003).
 }
@@ -40,19 +42,11 @@ proposed by Schrader et al (2003).
 
 \dontrun{
 
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, include date and DOY information, indicate the
-#start date (i.e. hand thinning) and a vector with harvest dates to test
-#the risk for several cultivars to estimate the number of days with temperatures
-#favorable for suburn injuries on each year in the series.
-
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, Tmax, Tmin) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-First_d <- 135
+Create one vector with start date (i.e. hand thinning) and a vector 
+with harvest dates to test the risk for several cultivars.
+Thinning_d <- 135
 Harvest_d <- c(225,245,260)
-Sunburn_risk <- sunburn(Weather,Hthin_d, Harvest_d)
-
+Sunburn_risk <- sunburn(Tudela_DW,Thinning_d, Harvest_d)
 }
 }
 \references{
@@ -64,5 +58,5 @@ Schrader L, Zhang J and Sun J, 2003. Environmental stresses that cause
 sunburn of apple. Acta Horticulturae 618, 397-405.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

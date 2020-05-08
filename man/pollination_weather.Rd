@@ -8,21 +8,22 @@ pollination_weather(climdata, fendata, lat)
 }
 \arguments{
 \item{climdata}{a dataframe with daily maximum and minimum temperatures,
-wind speed and precipitation. Must contain the columns Year, Month, Day,
-Tmax, Tmin, WSmed (daily mean wind speed) and Prec (precipitation)}
+wind speed and precipitation. Required columns are Year, Month, Day,
+Tmax, Tmin, u2med (daily mean wind speed) and Prec (precipitation).
+u2max (daily maximum wind speed) is optional.}
 
 \item{fendata}{a dataframe with julian day of the beginning (sbloom)
 and end (ebloom) of the flowering season. Must contain the columns
 Year, sbloom and ebloom in that order.}
 
-\item{lat}{latitude (decimal format) of the site, used to estimate hourly
-temperatures.}
+\item{lat}{the latitude of the site, in decimal degrees, used to estimate 
+hourly temperatures.}
 }
 \value{
 a data frame with the columns Year, Sbloom (bloom start, DOY)
-, Ebloom (end of bloom, DOY), Bloom_length (in days), Favor (number of
-favorable days), Modfavor (number of moderately favorable days) and
-Unfavor (number of unfavorable days).
+, Ebloom (end of bloom, DOY), Bloom_length (in days), Fav_d (number of
+favorable days), Modfav_d (number of moderately favorable days) and
+Unfav_d (number of unfavorable days).
 }
 \description{
 This function estimates the number of days with conditions
@@ -32,31 +33,26 @@ daily weather data.
 }
 \details{
 Days are classified considering the classification proposed by
-Williams and Sims (1977), by accounthing the number of favorable
+Williams and Sims (1977), by accounting the number of favorable
 hours for pollination within a day. One hour is considered favorable
 if the temperature is above 12.5 C, the speed of the wind below
-4.5 m/s and no rainfal occurs (Williams and Sims, 1977; Ramirez and
-Davenport, 2013). Hourly temperatures are calculated using the function
-stack_hourly_temps from chillR package (Luedeling et al, 2013), hourly
-wind speeds from daily means using a modified version of the formula
-proposed by (Guo et al, 2016). No hourly downscaling of rainfall is
-performed, the function allow daily rainfall below 2.0 mm when
-estimating if a day is favorable for pollination or not.
+4.5 m s-1 and no rainfal occurs (Williams and Sims, 1977; Ramirez and
+Davenport, 2013). Hourly wind speeds from daily values are computed
+using the formulas proposed by Guo et al (2016), using mean daily
+values (u2med, required) and maximum ones (u2max, optional). If 
+only mean wind values are available, the function uses a modified
+version of the Guo formula, so that the maximum values are obtained in 
+daytime hours. No hourly downscaling of rainfall is performed, the 
+function allow daily rainfall below 2.0 mm when estimating if a day
+is favorable for pollination or not.
 }
 \examples{
 
 \dontrun{
-
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, include date and DOY information and estimate
-#the number favorable days on each year in the series
-
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, Tmax, Tmin, WSmed, Prec) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-Pollin_eval <- pollination_weather(Weather,Bloom_D, 41.5)
-
-
+#Estimate weather conditions during blooming season using the example
+#datasets included in the package
+Bloom_BT <- Dates_BT \%>\% select(Year, sbloom, ebloom)
+Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
 }
 }
 \references{
@@ -66,10 +62,6 @@ Xie Y. (eds) Geo-Informatics in Resource Management and Sustainable
 Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
 vol 569. Springer, Berlin, Heidelberg
 
-Luedeling E, Kunz A and Blanke M, 2013. Identification of chilling and heat
-requirements of cherrytrees - a statistical approach.
-International Journal of Biometeorology 57,679-689.
-
 Ramirez F and Davenport TL, 2013. Apple pollination: A review. Scientia
 Horticulturae 162, 188-203.
 
@@ -78,5 +70,5 @@ in flowering time when deciding pollination schemes for Cox's Orange
 Pippin. Experimental Horticulture 29, 15-26.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

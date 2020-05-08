@@ -9,7 +9,7 @@ bioclim_hydrotherm(climdata, lat, elev)
 \arguments{
 \item{climdata}{a dataframe with daily weather data, including temperature
 Required columns are Year, Month, Day, Tmax, Tmin and Prec. Optional columns 
-are RHmax, RHmin, Rad and u2.}
+are RHmax, RHmin, Rad and u2med.}
 
 \item{lat}{the latitude of the site, in decimal degrees. Use positive values
 for Northern latitudes and negatives for Southern.}
@@ -17,7 +17,7 @@ for Northern latitudes and negatives for Southern.}
 \item{elev}{the elevation of the site, in meters above sea level.}
 }
 \value{
-data frame with the values of the indices for each season in the
+dataframe with the values of the indices for each season in the
 climdata file.
 }
 \description{
@@ -45,8 +45,8 @@ the Penman Monteith method.
 
 Minimum data requirements to calculate the indices are daily temperatures 
 (maximum and minimum temperatures, Tmax and Tmin) and rainfall (l m-2), 
-whereas relative humidity (RHmax and RHmin, %), solar radiation 
-(Rad, MJ m-2 day-1) and wind speed at 2m height (u2,m s-1) are optional. 
+whereas relative humidity (RHmax and RHmin, \%), solar radiation 
+(Rad, MJ m-2 day-1) and mean wind speed at 2m height (u2med,m s-1) are optional. 
 If missing, the function integrates FAO56 (Allen et al 1998) estimations 
 for solar radiation and vapor pressure (air humidity) from daily temperatures. 
 If there is no information available on wind speed, the function assumes a 
@@ -60,11 +60,11 @@ constant value of 2 m s-1.
 #in Year, Month, Day format, define the values for the parameters latitude 
 #and elevation and estimate the hydrotermal indices on each year in the series.
 
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, Tmax, Tmin, Prec, HRmax, HRmin, Rad, u2)
-elevation <- 325
-latitude <- 42.08
-Vitic_indices <- viticultural_indices(Weather, latitude, elevation)
+Weather <- Tudela_DW \%>\%
+   select(Year, Month, Day, Tmax, Tmin, Prec, HRmax, HRmin, Rad, u2med)
+elevation <- 314
+latitude <- 42.13132
+Tudela_BHI <- bioclim_hydrotherm(Weather, latitude, elevation)
 
 }
 }
@@ -75,7 +75,7 @@ and Agriculture Organization of the United Nations
 
 Riou C, Carbonneau A, Becker N, Caló A, Costacurta A, Castro R, Pinto PA, 
 Carneiro LC, Lopes C, Climaco P, Panagiotou MM, Sotes V,Beaumond HC, Burril A, 
-Maes J, Vossen P. 1994.Le determinisme climatique de la maturation du raisin: 
+Maes J, Vossen P. 1994. Le determinisme climatique de la maturation du raisin: 
 application au zonage de la teneur em sucre dans la communaute europenne. 
 Office des Publications Officielles des Communautes Europennes: Luxembourg, 322pp.
 

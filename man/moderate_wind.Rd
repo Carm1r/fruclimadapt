@@ -8,20 +8,24 @@ daily weather data}
 moderate_wind(climdata)
 }
 \arguments{
-\item{climdata}{a dataframe with daily mean wind speed data (WSmed).
-Must contain the columns Year, Month, Day and WSmed.}
+\item{climdata}{a dataframe with daily wind speed data.
+Required columns are Year, Month, Day and u2med. u2max
+is an optional data column.}
 }
 \value{
-data frame with the columns Date, Year, Month, Day, DOY,
-Hour and h_wind (hours with wind speed below 5.5 m/s).
+dataframe with the columns Date, Year, Month, Day, DOY,
+and h_wind (hours with wind speed equal or above 5.5 m/s).
 }
 \description{
-This function estimates the daily hours with less than
-'moderate breeze' wind (below 5.5 m/s in the Beaufort scale) from a
-dataset with mean daily wind speeds. Hourly wind speeds
-from daily means are computed using a modified version of the
-formula proposed by (Guo et al, 2016), so that maximum speeds
-are obtained at mid-day.
+This function estimates the daily hours with wind speed equal or
+above than 'moderate breeze' wind (5.5 m s-1 in the Beaufort scale)
+from a dataset with daily wind speeds. Hourly wind speeds
+from daily values are computed using the formulas proposed
+by Guo et al (2016), using mean daily values (u2med, required)
+and maximum ones (u2max, optional). If only mean wind values
+are available, the function uses a modified version of the 
+Guo formula, so that the maximum values are obtained in 
+daytime hours.
 }
 \examples{
 
@@ -31,10 +35,9 @@ are obtained at mid-day.
 #in Year, Month, Day format, include date and DOY information and estimate
 #the number favorable days on each year in the series
 
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, WSmed) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-hours_modwind <- moderate_wind(Weather)
+# Estimate daily hours with wind speed above moderate speeds for the example
+# dataset
+Tudela_Mu2 <- moderate_wind(Tudela_DW)
 
 }
 }
@@ -46,5 +49,5 @@ Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
 vol 569. Springer, Berlin, Heidelberg
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

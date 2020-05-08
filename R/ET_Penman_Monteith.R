@@ -8,18 +8,18 @@
 #' 
 #' Minimum data requirements to calculate ET are daily temperatures (maximum 
 #' and minimum temperatures, Tmax and Tmin), whereas relative humidity (RHmax and 
-#' RHmin), solar radiation (Rad, MJ m-2 day-1) and wind speed at 2m height
-#' (u2,m s-1) are optional. If missing, the function integrates FAO56 estimations 
+#' RHmin), solar radiation (Rad, MJ m-2 day-1) and mean wind speed at 2m height
+#' (u2med,m s-1) are optional. If missing, the function integrates FAO56 estimations 
 #' for solar radiation and vapor pressure (air humidity) from daily 
 #' temperatures. If there is no information available on wind speed, the function 
 #' assumes a constant value of 2 m s-1.  
 #'
 #' @param climdata a dataframe with daily weather data.
 #'  Required columns are Year, Month, Day, Tmax and Tmin. Optional columns are
-#'  RHmax, RHmin, Rad and u2.
+#'  RHmax, RHmin, Rad and u2med.
 #' @param lat the latitude of the site, in decimal degrees. 
 #' @param elev the elevation of the site, in meters above sea level.
-#' @return data frame with Year, Month, Day, DOY, ETos and ETrs values.
+#' @return dataframe with Year, Month, Day, DOY, ETos and ETrs values.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
@@ -35,9 +35,10 @@
 #'
 #' \dontrun{
 #'
-#' elevation <- 315
-#' latitude <- 42.08
-#' ET_PM <- ET_penman_monteith(Weather, latitude, elevation)
+#' #Calculate ET by Penman-Monteith method in the Tudela_DW example dataset
+#' elevation <- 314
+#' latitude <- 42.13132
+#' ET_PM <- ET_penman_monteith(Tudela_DW, latitude, elevation)
 #'}
 #' @export ET_penman_monteith
 #' @import data.table tidyverse zoo 
@@ -86,15 +87,15 @@ ET_penman_monteith <- function(climdata, lat, elev){
   }
 
   R_n <- R_ns - R_nl
-  if(!"u2" %in% colnames(climdata))
+  if(!"u2med" %in% colnames(climdata))
   {
     cat("Warning: No windspeed data provided,\na constant windspeed of 2 ms-1 will be asumed\n");
-    climdata <- climdata %>% mutate(u2=2)
+    climdata <- climdata %>% mutate(u2med=2)
   }
-  ET_os.Daily <- (0.408 * delta * (R_n - G) + gamma * 900 * climdata$u2 * (es - ea)/(Tmean + 273)) / 
-      (delta + gamma * (1 + 0.34*climdata$u2)) 
-  ET_rs.Daily <- (0.408 * delta * (R_n - G) + gamma * 1600 * climdata$u2 * (es - ea)/(Tmean + 273)) / 
-      (delta + gamma * (1 + 0.38*climdata$u2))
+  ET_os.Daily <- (0.408 * delta * (R_n - G) + gamma * 900 * climdata$u2med * (es - ea)/(Tmean + 273)) / 
+      (delta + gamma * (1 + 0.34*climdata$u2med)) 
+  ET_rs.Daily <- (0.408 * delta * (R_n - G) + gamma * 1600 * climdata$u2med * (es - ea)/(Tmean + 273)) / 
+      (delta + gamma * (1 + 0.38*climdata$u2med))
   climdata <- climdata %>% 
     mutate(DOY = DOY, ET_os = ET_os.Daily, ET_rs = ET_rs.Daily) %>%
     select(Date, Year, Month, Day, DOY, everything()) %>%

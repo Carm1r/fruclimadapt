@@ -7,14 +7,13 @@
 solar_times(latitude, DOY)
 }
 \arguments{
-\item{latitude}{numeric value specifying the geographic latitude
-(in decimal degrees) of the location of interest}
+\item{latitude}{the latitude of the site, in decimal degrees.}
 
-\item{DOY}{numeric (usually integer) value or vector specifying the
+\item{DOY}{numeric value or vector specifying the
 day of the year for which calculations should be done.}
 }
 \value{
-list with Sunrise, Sunset and Daylength.
+list with Sunrise and Sunset times and Daylength.
 }
 \description{
 This function estimates the sunrise and sunset hour
@@ -22,12 +21,15 @@ for a location, characterized by latitude, and the
 day of the year (DOY). The function uses the equations by
 Spencer (1971) and Almorox et al. (2005).
 }
+\note{
+Code adapted from the function \code{\link[chillR]{daylength}}, of the \href{https://CRAN.R-project.org/package=chillR}{chillR} Package
+}
 \examples{
 
 \dontrun{
 
 #create a vector with 365 days in sequence and calculate sunrise and
-#sunset hours for that year in a site placed a 45.5?? N
+#sunset hours for that year in a site placed a 45.5 N
 
 Days <- seq(1:365)
 Sunrise_Sunset <- solar_times(41.5,Days)
@@ -35,13 +37,13 @@ Sunrise_Sunset <- solar_times(41.5,Days)
 }
 }
 \references{
-Spencer JW, 1971. Fourier series representation of the position of the Sun.
-Search 2(5), 172.
-
 Almorox J, Hontoria C and Benito M, 2005. Statistical validation of
 daylength definitions for estimation of global solar radiation in Toledo,
-Spain. Energy Conversion and Management 46(9-10), 1465-1471)
-}
-\author{
-Carlos Miranda
+Spain. Energy Conversion and Management 46(9-10), 1465-1471
+
+Luedeling E, 2018. chillR: Statistical Methods for Phenology Analysis in 
+Temperate Fruit Trees. R package version 0.70.12. \url{https://CRAN.R-project.org/package=chillR}
+
+Spencer JW, 1971. Fourier series representation of the position of the Sun.
+Search 2(5), 172.
 }

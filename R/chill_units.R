@@ -19,10 +19,10 @@
 #' must contain the columns Year, Month, Day, DOY, Temp.
 #' @param Start parameter indicating the day of the year when chill
 #' accumulation is supposed to start.
-#' @return data frame with the chill accumulated for all the seasons in the
+#' @return dataframe with the chill accumulated for all the seasons in the
 #' dataset. Seasons begin at the start date and end the day before the start
 #' date of the following year.
-#' It contains the columns Year, Month, Day, Doy, Chill
+#' It contains the columns Year, Month, Day, DOY, Chill
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
@@ -34,7 +34,10 @@
 #'
 #' \dontrun{
 #'
-#' Chill_acum <- chill_units(Weather,305)
+#' # Generate hourly temperatures
+#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#' # Calculate chill as chill units, starting on DOY 305
+#' Chill_u <- chill_units(Tudela_HT,305)
 #'
 #' }
 #' @export chill_units

@@ -1,14 +1,15 @@
 #' Estimation of the risk for wind scab on fruit skin
 #'
 #' The function estimates the risk of wind-induced abrasion injuries
-#' (wind scab) in fruit skin during the sensitive periods of the 
+#' (wind scab) on fruit skin during the sensitive periods of the 
 #' species. This function estimates as risky the daily hours with 
-#' 'moderate breeze' wind (above 5.5 m/s in the Beaufort scale) or 
-#' stronger, estimated from a dataset with daily wind speeds. 
+#' 'moderate breeze' wind (equal or above 5.5 m s-1 in the Beaufort 
+#' scale) or stronger, estimated from a dataset with daily wind 
+#' speeds. 
 #' 
 #' Hourly wind speeds from daily values are computed using the 
 #' formulas proposed by (Guo et al, 2016), using mean daily 
-#' values (WSmed, required) and maximum ones (WSmax, optional). 
+#' values (u2med, required) and maximum ones (u2max, optional). 
 #' If only mean wind values are available, the function uses a
 #' modified version of the Guo formula, so that the maximum 
 #' values are obtained in daytime hours.
@@ -24,17 +25,17 @@
 #' allows to set both periods or only one of them.
 #'
 #' @param climdata a dataframe with daily wind speed data.
-#' Required columns are Year, Month, Day, WSmed. WSmax is
+#' Required columns are Year, Month, Day, u2med. u2max is
 #' optional.
 #' @param fendata a dataframe which can contain early fruit growth and
 #' harvest dates. Start of initial growth (Start_ing) and end of initial growth
 #' (End_ing) dates are used to assess for early wind-induced abrasion risk and
 #' harvest dates (Harvest) are used for late (pre-harvest) abrasion risks.
-#' Must contain the column Year and can contain either Start_ing and End_ing
-#' or Harvest columns or the three all.
+#' Must contain the column Year, and can contain either Start_ing and End_ing
+#' or Harvest columns, or the three of them.
 #' @return data frame with the columns Year, Day_s, Day_e, WA_efg (accumulated
-#' hours with WS>5.5 m/s on early fruit growth stage), Day_h, WA_bh
-#' (accumulated hours with WS>5.5 m/s on the month before harvest).
+#' hours with u2>5.5 m s-1 on early fruit growth stage), Day_h, WA_bh
+#' (accumulated hours with u2>5.5 m s-1 on the month before harvest).
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
@@ -58,14 +59,11 @@
 #'
 #' \dontrun{
 #'
-#' #select the appropiate columns from a larger dataset with date information
-#' #in Year, Month, Day format, include date and DOY information and estimate
-#' #the number favorable days on each year in the series
-#'
-#' Weather <- Tempdata %>%
-#'    select(Year, Month, Day, WSmed) %>%
-#'    mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-#' WindRisk <- wind_scab(Weather,Sensit_dates)
+#' #Select the appropiate columns from the example Dates_BT dataset
+#' #and estimate wind scab risk for Big Top nectarine in Tudela using
+#' #the example weather dataset Tudela_DW
+#' Growth_BT <- Dates_BT %>% select(Year, Start_ing, End_ing, Harvest)
+#' WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
 #'
 #' }
 #' @export wind_scab
@@ -74,11 +72,11 @@
 
 wind_scab <- function(climdata,fendata)
 {
-  if(!"WSmax" %in% colnames(climdata))
+  if(!"u2max" %in% colnames(climdata))
   {
     cat("Warning: No maximum windspeed data provided,\nhourly values will
-        be estimated using WSmed only\n");
-    Viento <- select(climdata,"Year","Month","Day","WSmed") %>%
+        be estimated using u2med only\n");
+    Viento <- select(climdata,"Year","Month","Day","u2med") %>%
       mutate(Datetime = make_datetime(Year, Month, Day, hour=0,min = 0),
              Date=make_date(Year, Month, Day))
     minday = as_datetime(Viento$Date[1])
@@ -89,10 +87,10 @@ wind_scab <- function(climdata,fendata)
              Day=day(Datetime), DOY=yday(Datetime), Hour=hour(Datetime))
     
     wind_h = merge(dates, Viento, by = "Date", all = TRUE) %>%
-      mutate(WS = ifelse(WSmed + (1/2)*WSmed*cos((Hour+12)*pi/12)<0,0,
-                         WSmed + (1/2)*WSmed*cos((Hour+12)*pi/12)))
+      mutate(u2 = ifelse(u2med + (1/2)*u2med*cos((Hour+12)*pi/12)<0,0,
+                         u2med + (1/2)*u2med*cos((Hour+12)*pi/12)))
   }else{
-    Viento <- select(climdata,"Year","Month","Day","WSmed","WSmax") %>%
+    Viento <- select(climdata,"Year","Month","Day","u2med","u2max") %>%
       mutate(Datetime = make_datetime(Year, Month, Day, hour=0,min = 0),
              Date=make_date(Year, Month, Day))
     minday = as_datetime(Viento$Date[1])
@@ -103,12 +101,12 @@ wind_scab <- function(climdata,fendata)
              Day=day(Datetime), DOY=yday(Datetime), Hour=hour(Datetime))
     
     wind_h = merge(dates, Viento, by = "Date", all = TRUE) %>%
-      mutate(WS = ifelse(WSmed + (1/pi)*WSmax*cos(Hour*pi/12)<0,0,
-                         WSmed + (1/pi)*WSmax*cos(Hour*pi/12)))
+      mutate(u2 = ifelse(u2med + (1/pi)*u2max*cos(Hour*pi/12)<0,0,
+                         u2med + (1/pi)*u2max*cos(Hour*pi/12)))
   }
-  wind_h <- wind_h %>% select(Date,DOY,Hour,WS) %>%
+  wind_h <- wind_h %>% select(Date,DOY,Hour,u2) %>%
     group_by(Date)%>%
-    summarise(h_wind= sum(WS>=5.5)) %>%
+    summarise(h_wind= sum(u2>=5.5)) %>%
     mutate(Year=year(Date),Month=month(Date),Day=day(Date),DOY = yday(Date)) %>%
     select(1,3:6,2)
 

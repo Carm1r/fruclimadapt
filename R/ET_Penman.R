@@ -5,13 +5,14 @@
 #' 
 #' This version of the function requires the user to supply in weather data daily
 #' values for temperature (Tmax and Tmin), relative humidity (RHmax and RHmin), 
-#' solar radiation (Rad in MJ m-2 day-1) and wind speed at 2m height (u2 in m s-1).
+#' solar radiation (Rad in MJ m-2 day-1) and mean wind speed at 2m height 
+#' (u2med in m s-1).
 #'
 #' @param climdata a dataframe with daily weather data.
-#'  Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Rad, u2.
+#'  Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Rad, u2med.
 #' @param lat the latitude of the site, in decimal degrees. 
 #' @param elev the elevation of the site, in meters above sea level.
-#' @return data frame in which Date, DOY and ET columns have been added to the ones
+#' @return dataframe where Date, DOY and ET columns have been added to the ones
 #' in climadata data frame.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
@@ -22,10 +23,10 @@
 #' @examples
 #'
 #' \dontrun{
-#'
-#' elevation <- 315
-#' latitude <- 42.08
-#' ET_Penman <- ET_penman(Weather, latitude, elevation)
+#' #Calculate ET by Penman method in the Tudela_DW example dataset
+#' elevation <- 314
+#' latitude <- 42.13132
+#' ET_Penman <- ET_penman(Tudela_DW, latitude, elevation)
 #'}
 #' @export ET_penman
 #' @import data.table tidyverse zoo 
@@ -57,7 +58,7 @@ ET_penman <- function(climdata, lat, elev){
   R_nl <- sigma * ((climdata$Tmax+273.2)^4 + (climdata$Tmin+273.2)^4)/2 * 
     (0.34 - 0.14 * sqrt(ea)) * (1.35 * climdata$Rad / R_so - 0.35)
   R_n <- R_ns - R_nl
-  f_u <- 2.626+1.381*climdata$u2
+  f_u <- 2.626+1.381*climdata$u2med
   Ea <- f_u * (es-ea)
   ET_penman.Daily <- delta / (delta + gamma) *(R_n/2.45) + gamma / (delta + gamma) * Ea
     

@@ -2,11 +2,11 @@
 #'
 #' The function calculates chill portions according to the Dynamic model
 #' proposed by Fishman et al. (1987a,b), using the formulas extracted by
-#' Luedeling et al (2009) from the Excel functions produced by Erez and Fishman,
+#' Luedeling et al (2009) from functions produced by Erez and Fishman (1990), 
 #' available at the University of California, Agriculture and Natural Resources
 #' (UC ANR) website http://ucanr.edu/sites/fruittree/files/49319.xls. To date, 
-#' Chill portions is the best existing model for most growing regions, so chill
-#' fulfilment should preferably be calculated using thit method, especially
+#' chill portions is the best existing model for most growing regions, so chill
+#' fulfilment should  be calculated preferably using this method, especially
 #' when transferring varieties from one region to another, or in studies on 
 #' climate change.
 #'
@@ -14,7 +14,7 @@
 #' must contain the columns Year, Month, Day, DOY, Temp.
 #' @param Start parameter indicating the day of the year when chill
 #' accumulation is supposed to start.
-#' @return data frame with the chill accumulated for all the seasons in the
+#' @return dataframe with the chill accumulated for all the seasons in the
 #' dataset. Seasons begin at the start date and end the day before the start
 #' date of the following year.
 #' It contains the columns Year, Month, Day, DOY, Chill
@@ -40,8 +40,11 @@
 #' @examples
 #'
 #' \dontrun{
+#' # Generate hourly temperatures
+#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#' # Calculate chill as chill portions, starting on DOY 305
+#' Chill_p <- chill_portions(Tudela_HT,305)
 #'
-#' Chill_acum <- chill_portions(Weather,305)
 #'
 #' }
 #' @export chill_portions

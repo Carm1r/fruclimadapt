@@ -19,9 +19,8 @@ Year, CI, GST, BEDD, HI, WI
 }
 \description{
 This function calculates the Growing Season Average Temperature (GST), the
-Heliothermal Index (HI) of Huglin (1978), the Winkler (WI) index (Amerine and Winkler
-, 1974), the Biologically Effective Degree Day (BEDD) index (Gladstones, 1992) 
-and the Cool Night (CI) index (Tonietto, 1999).
+Heliothermal Index (HI) of Huglin, the Winkler (WI) index, the Biologically
+Effective Degree Day (BEDD) index and the Cool Night (CI) index.
 }
 \details{
 GST index correlates broadly to the maturity potential for grape cultivars 
@@ -30,23 +29,23 @@ areas in both hemispheres (Hall and Jones, 2009). It is calculated by taking
 the average of the growing season (April-October in Northern hemisphere, October
 -April in Southern hemisphere).
 
-HI is a bioclimatic heat index for viticulture regions using heliothermic 
-potential, which calculates the temperature sum above 10ºC from April 
-until September (Northern hemisphere) or from October until March (Southern h).
-The index takes into consideration daily maximum and average temperature, 
+HI (Huglin, 1978) is a bioclimatic heat index for viticulture regions using 
+heliothermic potential, which calculates the temperature sum above 10ºC from 
+April until September (Northern hemisphere) or from October until March (Southern
+ hem.). The index takes into consideration daily maximum and average temperature, 
 and slighty modifies the calculated total using the latitude of the location.
 
-WI index, also known as growing degree days (GDD) classifies regions based 
-on the accumulation of heat summation units by adding up hours above 10ºC during 
-the growing season.
+WI index (Amerine and Winkler, 1974), also known as growing degree days (GDD) 
+classifies regions based on the accumulation of heat summation units by adding up 
+hours above 10ºC during the growing season.
 
-BEDD index is another variant on calculating heat summation which incorporates
-both and adjustment for diurnal temperature range (accounts for heat accumulation
-between 10 and 19ºC) and a day length correction similar to HI.
+BEDD index (Gladstones, 1992) is another variant on calculating heat summation 
+which incorporates upper and lower temperature thresholds (accounts for heat 
+accumulation between 10 and 19ºC) and a day length correction similar to HI.
 
-CI index takes into account the minimum temperature during grape maturation, which
-is normally the average minimum air temperature in September/March(Northern or
-Southern hemispheres, respectively).
+CI index (Tonietto, 1999) takes into account the minimum temperature during 
+grape maturation, which is normally the average minimum air temperature in 
+September/March(Northern or Southern hemispheres, respectively).
 }
 \examples{
 
@@ -55,10 +54,10 @@ Southern hemispheres, respectively).
 #select the appropiate columns from a larger dataset with date information
 #in Year, Month, Day format, and estimate indices on each year in the series.
 
-Weather <- Tempdata \%>\%
+Weather <- Tudela_DW \%>\%
    select(Year, Month, Day, Tmax, Tmin)
-latitude <- 42.08
-Vitic_indices <- bioclim_thermal(Weather, latitude)
+latitude <- 42.13132
+Tudela_BTI <- bioclim_thermal(Weather, latitude)
 
 }
 }

@@ -4,7 +4,7 @@
 \alias{GDH_asymcur}
 \title{Calculates growing degree hours (GDH) using ASYMCUR method}
 \usage{
-GDH_asymcur(Hourdata, Tb, Topt, Tcrit)
+GDH_asymcur(Hourdata, Tb = 4, Topt = 25, Tcrit = 36)
 }
 \arguments{
 \item{Hourdata}{a dataframe of hourly temperatures. This data frame
@@ -18,7 +18,7 @@ Temp (hourly temperature) and Chill (Chill accumulated).}
 \item{Tcrit}{the critical temperature}
 }
 \value{
-data frame with daily data. It contains the columns Date,
+dataframe with daily data. It contains the columns Date,
 Year, Month, Day, DOY (day of the year), Chill, and GDH
 }
 \description{
@@ -30,18 +30,24 @@ by a base, optimum and critical temperature. Heat accumulation
 begins when temperatures are above a minimum (base temperature,
 Tb), and growth increases with temperature up to a
 point (optimum temperature, Topt) at which there is no longer
-an increase. The critical temperature (Tcrit) is the maximum
-temperature at which growth will continue. The difference of
-ASYMCUR model with the linear is that the former uses an
-assymmetric curvilinear relationship to model GDH accumulation.
-The function allows the user to define Tb, Topt and Tcrit.
+an increase. The critical temperature (Tcrit) is the temperature
+above which growth ceases. The difference of ASYMCUR model with 
+the linear by Anderson and Seeley (1992)is that the former uses 
+an assymmetric curvilinear relationship to model GDH accumulation. 
+The function allows the user to define Tb, Topt and Tcrit, and uses
+as default the values set by Anderson et al (1986) for fruit trees:
+Tb=4ºC, Topt=25ºC and Tcrit=36ºC.
 }
 \examples{
 
 \dontrun{
-
-GDH <- GDH_asymcur(Weather,4.5,25,36)
-
+# Generate hourly temperatures for the example dataset
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#Calculate GDH using default threshold temperatures
+GDH_default <- GDH_asymcur(Tudela_HT)
+#Calculate GDH using as custom set temperature thresholds
+#Tb=4.5, Topt=22 and Tcrit=32
+GDH_custom <- GDH_asymcur(Tudela_HT, 4.5, 22, 32)
 }
 
 }

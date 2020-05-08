@@ -8,14 +8,14 @@ ET_penman(climdata, lat, elev)
 }
 \arguments{
 \item{climdata}{a dataframe with daily weather data.
-Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Rad, u2.}
+Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Rad, u2med.}
 
 \item{lat}{the latitude of the site, in decimal degrees.}
 
 \item{elev}{the elevation of the site, in meters above sea level.}
 }
 \value{
-data frame in which Date, DOY and ET columns have been added to the ones
+dataframe where Date, DOY and ET columns have been added to the ones
 in climadata data frame.
 }
 \description{
@@ -25,15 +25,16 @@ weather data and the Penman (1948) method
 \details{
 This version of the function requires the user to supply in weather data daily
 values for temperature (Tmax and Tmin), relative humidity (RHmax and RHmin), 
-solar radiation (Rad in MJ m-2 day-1) and wind speed at 2m height (u2 in m s-1).
+solar radiation (Rad in MJ m-2 day-1) and mean wind speed at 2m height 
+(u2med in m s-1).
 }
 \examples{
 
 \dontrun{
-
-elevation <- 315
-latitude <- 42.08
-ET_Penman <- ET_penman(Weather, latitude, elevation)
+#Calculate ET by Penman method in the Tudela_DW example dataset
+elevation <- 314
+latitude <- 42.13132
+ET_Penman <- ET_penman(Tudela_DW, latitude, elevation)
 }
 }
 \references{

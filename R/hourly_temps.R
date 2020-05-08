@@ -3,18 +3,22 @@
 #' This function generates hourly temperatures from daily maximum and
 #' minimum values, using the method proposed by Linvill (1990), which also
 #' requires sunset and sunrise calculation for each day in the series.
-#' Sunset and sunrise hours for a location are estimated from the latitude
-#' and the day of the year (DOY) using the equations by Spencer (1971) and
-#' Almorox et al. (2005).
+#' Sunset and sunrise hours for a location are internally estimated using 
+#' the function solar_times from the latitude and the day of the year (DOY)
+#' using the equations by Spencer (1971) and Almorox et al. (2005).
 #'
-#' @param latitude the latitude (in decimal degrees) of the site.
+#' @param latitude the latitude of the site, in decimal degrees.
 #' @param climdata a data frame containing the columns Year, Month, Day,
 #' Tmax and Tmin. Data must not contain any gap.
-#' @return a data frame containing the columns Date, Year, Month, Day, DOY,
+#' @return a dataframe containing the columns Date, Year, Month, Day, DOY,
 #' Hour, Sunrise (hour of sunrise), Sunset (hour of sunset), Daylength and
 #' Temp (hourly temperature).
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
+#'
+#' Almorox J, Hontoria C and Benito M, 2005. Statistical validation of
+#' daylength definitions for estimation of global solar radiation in Toledo,
+#' Spain. Energy Conversion and Management 46, 1465-1471.
 #'
 #' Linvill DE, 1990. Calculating chilling hours and chill units from daily
 #' maximum and minimum temperature observations. HortScience 25, 14-16.
@@ -22,14 +26,11 @@
 #' Spencer JW, 1971. Fourier series representation of the position of the Sun.
 #' Search 2, 172.
 #'
-#' Almorox J, Hontoria C and Benito M, 2005. Statistical validation of
-#' daylength definitions for estimation of global solar radiation in Toledo,
-#' Spain. Energy Conversion and Management 46, 1465-1471.
-#'
 #' @examples
 #'
 #' \dontrun{
-#' THourly<-hourly_temps(50.4,weather$weather)
+#' # Generate hourly temperatures
+#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' }
 #' @export hourly_temps
 #' @import data.table tidyverse zoo 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/color_potential.R
 \name{color_potential}
 \alias{color_potential}
-\title{Evaluation of weather conditions for anthocyain formation
+\title{Evaluation of weather conditions for anthocyanin formation
 in apple skin}
 \usage{
 color_potential(climdata, harvest)
@@ -15,33 +15,36 @@ Must contain the columns Year, Month, Day, Tmax, Tmin.}
 (expressed as day of the year)}
 }
 \value{
-data frame with the number of favorable (Cool_d) and unfavorable
-(Hot_d) days for red color, for each year (Year) in the series and
-harvest date (Day_h) provided.
+dataframe with the number of highly favorable (Cool_d) 
+and unfavorable (Hot_d) days for apple red color, as well as the 
+average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
+temperatures for each year (Year) in the series during the 
+30 days previous to each harvest date (Day_h) provided.
 }
 \description{
-This function estimates the number of days favorable and
-unfavorable for anthocyanin accumulation in the skin of
-red apple cultivars during the month (30 days) before harvest.
-A favorable day (Cool day) is considered when the daily maximum
-temperature is below 26ºC, an unfavorable day (Hot day) when
-the minimum temperature is above 20ºC (Lin-Wang et al, 2011). The
-function allows testing several harvest dates, supplied as
-a vector.
+This function estimates the number of days that can be 
+considered as highly favorable or unfavorable for anthocyanin 
+accumulation in the skin of red apple cultivars during the 
+month (30 days) before harvest. A highly favorable day (Cool
+day) is considered when the daily maximum temperature is below
+26ºC, a highly unfavorable day (Hot day) when the minimum 
+temperature is above 20ºC (Lin-Wang et al, 2011). The average
+of maximum and minimum temperatures during the same period is 
+also provided. The function allows testing for several harvest 
+dates.
 }
 \examples{
 
 \dontrun{
 
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, create a vector or harvest dates and
-#estimate the number favorable and unfavorable days on each year
-#in the series.
+#select the appropiate columns from Tudela_DW example dataset, create
+#a vector or harvest dates and estimate the number favorable and 
+#unfavorable days on each year in the dataset.
 
-Weather <- Tempdata \%>\%
+Weather <- Tudela_DW \%>\%
    select(Year, Month, Day, Tmax, Tmin)
 harvest <- c(225, 250, 275)
-Colorassess <- color_potential(Weather, harvest)
+Color_assess <- color_potential(Weather, harvest)
 
 }
 }
@@ -51,5 +54,5 @@ colour via modulation of the anthocyanin regulatory complex. Plant, Cell
 and Environment 34, 1176-1190.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

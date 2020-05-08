@@ -7,46 +7,60 @@
 phenology_sequential(GDH_day, Reqs, Start_chill)
 }
 \arguments{
-\item{GDH_day}{a dataframe with daily chilling and forcing accumulation
-must contain the columns Year, Month, Day, DOY, Chill, GD.}
+\item{GDH_day}{a dataframe with daily chilling and forcing accumulation.
+It must contain the columns Year, Month, Day, DOY, Chill, GD.}
 
-\item{Reqs}{a dataframe with chilling and forcing requirements, must
-contain the columns Creq (for chilling), Freq (for forcing heat).}
+\item{Reqs}{a dataframe in which each row contains the chilling and forcing
+heat requirements of one phenological stage. It must contain the columns 
+Creq (for chilling) and Freq (for forcing heat).}
 
 \item{Start_chill}{parameter indicating the day of the year when chill
 accumulation is supposed to start.}
 }
 \value{
-data frame with the predicted dates for every season in GDH_day
-and stages in Reqs. For each season and phenological stage, the information
-provided is the date in which chill requirements are satisfied (Year and
-DOY), and the date in which the phenological stage is met (Year and DOY).
-It contains the columns Creq, Freq, Season, Creq_Year,
-Creq_DOY, Freq_Year, Freq_DOY.
+dataframe with the predicted dates of chilling requirement fulfillment
+and date of occurrence of each phenological stage defined in Reqs. Columns are
+Creq and Freq (chilling and forcing heat requirements for the phenological stage),
+Season, Creq_Year and Creq_DOY (year and day of the year in which chill 
+requirements are fulfilled), Freq_Year and Freq_DOY (year and day of the year
+of occurrence the phenological stage).
 }
 \description{
 The function predicts phenological phases for a climate series
-from daily chill and heat requirements and daily chill and forcing data.
-The sequential model used in the fucntion consider that chilling and heat
-have independent effects. It consists of an accumulation of chill up to the
-plant requirement followed by heat up to forcing requirement, with no
-overlap between both phases. The function is independent of the
+from daily chill and heat requirements and daily chill and forcing heat 
+data. The sequential model used in the function considers that chilling 
+and heat have independent effects. It consists of an accumulation of chill 
+up to the plant requirement, followed by heat up to forcing requirement, 
+with no overlap between both phases. The function is independent of the
 method used to calculate chill and forcing heat, so that chill can
-be supplied as chill hours, chill units or chill portions
-(recommended, particularly for warm climates or in climate change studies),
-forcing heat can be supplied either as GDD or GDH. The function allows
+be supplied as chill hours, chill units or chill portions (recommended, 
+particularly for warm climates or in climate change studies), forcing heat 
+accummulation can be supplied either as GDD or GDH. The function allows
 predicting several stages (or the same for different cultivars), by supplying
-a dataframe in which each rows contains chill and heat requirements for a
+a dataframe in which each row contains chill and heat requirements for a
 phenological stage.
 }
 \examples{
 
 \dontrun{
-
-Predicted_Dates <- phenology_sequential(Weather,Golden_reqs)
+# Generate hourly temperatures from the example dataset
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+# Calculate chill as chill portions, starting on DOY 305
+Chill <- chill_portions(Tudela_HT,305)
+# Calculate forcing heat as growing degree hours (GDH) with the linear model,
+# using base temperature 4.7 C and no upper thresholds
+GDH <- GDH_linear(Tudela_HT,4.7,999,999)
+# Combine Chill and GDH values in a dataframe with a format compatible with
+# the function phenology_sequential
+Tudela_CH <- merge(Chill,GDH) \%>\%
+  select(Date, Year, Month, Day, DOY, Chill,GDH) \%>\%
+    arrange(Date) \%>\%
+    rename(GD=GDH)
+# Obtain the predicted dates using the example dataset with requirements
+Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
 
 }
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

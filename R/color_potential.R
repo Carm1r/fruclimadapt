@@ -6,7 +6,7 @@
 #' accumulation in the skin of red apple cultivars during the 
 #' month (30 days) before harvest. A highly favorable day (Cool
 #' day) is considered when the daily maximum temperature is below
-#' 26ºC, an highly unfavorable day (Hot day) when the minimum 
+#' 26ºC, a highly unfavorable day (Hot day) when the minimum 
 #' temperature is above 20ºC (Lin-Wang et al, 2011). The average
 #' of maximum and minimum temperatures during the same period is 
 #' also provided. The function allows testing for several harvest 
@@ -16,8 +16,8 @@
 #'  Must contain the columns Year, Month, Day, Tmax, Tmin.
 #' @param harvest a vector with expected harvest days
 #' (expressed as day of the year)
-#' @return data frame with the number of highly favorable (Cool_d) 
-#' and unfavorable (Hot_d) days for red color, as well as the 
+#' @return dataframe with the number of highly favorable (Cool_d) 
+#' and unfavorable (Hot_d) days for apple red color, as well as the 
 #' average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
 #' temperatures for each year (Year) in the series during the 
 #' 30 days previous to each harvest date (Day_h) provided.
@@ -32,15 +32,14 @@
 #'
 #' \dontrun{
 #'
-#' #select the appropiate columns from a larger dataset with date information
-#' #in Year, Month, Day format, create a vector or harvest dates and
-#' #estimate the number favorable and unfavorable days on each year
-#' #in the series.
+#' #select the appropiate columns from Tudela_DW example dataset, create
+#' #a vector or harvest dates and estimate the number favorable and 
+#' #unfavorable days on each year in the dataset.
 #'
-#' Weather <- Tempdata %>%
+#' Weather <- Tudela_DW %>%
 #'    select(Year, Month, Day, Tmax, Tmin)
 #' harvest <- c(225, 250, 275)
-#' Colorassess <- color_potential(Weather, harvest)
+#' Color_assess <- color_potential(Weather, harvest)
 #'
 #'}
 #' @export color_potential

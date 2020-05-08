@@ -4,45 +4,46 @@
 \alias{GDD_linear}
 \title{Calculates growing degree days (GDD) using a linear method}
 \usage{
-GDD_linear(Temp_Day, Tb, Topt, Tcrit)
+GDD_linear(Temp_Day, Tb, Tu = 999)
 }
 \arguments{
 \item{Temp_Day}{a dataframe of daily temperatures. This data frame must
-have a column for Year, Month, Day, and daily minimum ("Tmin") and
-maximum ("Tmax") temperatures}
+have a column for Year, Month, Day, and daily minimum (Tmin) and
+maximum (Tmax) temperatures.}
 
-\item{Tb}{the base temperature to calculate GDD}
+\item{Tb}{the base temperature required to calculate GDD.}
 
-\item{Topt}{the optimal temperature to calculate GDD}
-
-\item{Tcrit}{the critical temperature to calculate GDD}
+\item{Tu}{an optional upper temperature threshold.}
 }
 \value{
-data frame consisting of the columns Year, Month, Day, Tmax, Tmin,
+dataframe consisting of the columns Year, Month, Day, Tmax, Tmin,
 Tmean and GDD.
 }
 \description{
 The function calculates the daily heat unit accumulation (GDD)
 from daily temperature data with a linear method based on averaging
-the daily maximum and minimum temperatures (Arnold, 1960). Heat 
-accumulation begins when mean temperatures are above a minimum 
-(base temperature, Tb), and growth increases with linearly with 
-temperature up to a point (optimum temperature, Topt) at which 
-there is no longer an increase. The critical temperature (Tcrit) 
-is the maximum temperature at which growth will continue. The function
-allows the user to define Tb, Topt and Tcrit.
+the daily maximum and minimum temperatures (Arnold, 1960). GDD are
+calculated by subtracting the plant's lower base temperature (Tb) 
+from the average daily air temperature. The user can define an upper 
+temperature threshold (Tu) so that all temperatures above Tu will 
+have equal value in GDD summation.
 }
 \examples{
 
 \dontrun{
 
-GDH <- GDD_linear(Weather,4.5,25,36)
+# Calculate GDD in the example dataset using 4.5ÂºC as base temperature and no 
+# upper threshold.
+GDH <- GDD_linear(Tudela_DW,4.5)
 
+# Calculate GDD in the example dataset using 4.5ÂºC as base temperature and an 
+# upper threshold at 25ÂºC.
+GDH <- GDD_linear(Tudela_DW,4.5,25)
 }
 
 }
 \references{
-Arnold,  C.Y.  1960.  Maximum-minimum  temperatures as a basis for computing
+Arnold,  C.Y.  1960.  Maximum-minimum temperatures as a basis for computing
 heat units. Proc.Amer. Soc. Hort. Sci. 76:682–692.
 }
 \author{

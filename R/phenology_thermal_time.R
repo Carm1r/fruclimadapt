@@ -2,7 +2,7 @@
 #'
 #'
 #' The function predicts phenological phases for a climate series
-#' from daily chill and heat requirements and forcing data.
+#' using a certain starting date and forcing heat requirements data.
 #' The thermal time model used in the function considers that
 #' only heat accumulated from a set date to a given sum explain the
 #' date of occurrence of the phenological stage (i.e, it assumes that
@@ -13,30 +13,44 @@
 #' a dataframe in which each row contains the day for starting forcing
 #' and heat requirements for a phenological stage.
 #'
-#' @param GDH_day a dataframe with daily forcing accumulation
+#' @param GD_day a dataframe with daily forcing accumulation. It
 #' must contain the columns Year, Month, Day, DOY, GD.
-#' @param Reqs a dataframe with starting dates and forcing requirements,
-#' must contain the columns Dreq (start date), Freq (requirements).
-#' @return data frame with the predicted dates for every season in GDH_day
-#' and stages in Reqs. For each season and phenological stage, the information
-#' provided is the date in which forcing begins (Year and DOY), and the
-#' date in which the phenological stage is met (Year and DOY).
-#' It contains the columns Dreq, Freq, Season, Dreq_Year,
-#' Dreq_DOY, Freq_Year, Freq_DOY.
+#' @param Reqs a dataframe in which each row contains the start date
+#' for forcing and the heat requirements of one phenological stage. 
+#' It must contain the columns Dreq (the start date) and Freq (the forcing 
+#' heat requirements).
+#' @return dataframe with the predicted dates of occurrence of each phenological 
+#' stage defined in Reqs. Columns are Dreq and Freq (start date and forcing heat 
+#' requirements for the phenological stage), Season, Dreq_Year and Dreq_DOY 
+#' (year and day of the year in which forcing begins), Freq_Year and Freq_DOY 
+#' (year and day of the year of occurrence the phenological stage). 
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @examples
 #'
 #' \dontrun{
 #'
-#' Predicted_Dates <- phenology_thermal_time(Weather,Golden_reqs)
-#'
+#' # Calculate GDD values from a climate dataset with daily temperature data,
+#' # using a base temperature of 0 C and format it to be compatible with 
+#' # phenology_thermal_time
+#' 
+#' Tudela_GDD <- GDD_linear(Tudela_DW,0) %>% rename(GD=GDD)
+#' 
+#' # Create a dataframe with start dates and forcing requirements for
+#' # bloom and veraison in the GFV model for 'Chardonnay' (Parker et al, 
+#' # 2013, Agric Forest Meteorol 180:249-264) in the format required for 
+#' # the function
+#' Dreq <- c(60,60) 
+#' Freq <- c(1217,2547)
+#' Chardonnay_reqs <- as.data.frame(cbind(Dreq,Freq))
+#' # Obtain the predicted dates 
+#' Phenology_Chardonnay <- phenology_sequential(Tudela_GDD,Chardonnay_reqs)
 #' }
 #' @export phenology_thermal_time
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date
 
-phenology_thermal_time <- function(GDH_day,Reqs){
-  Seasons <- unique(GDH_day$Year)
+phenology_thermal_time <- function(GD_day,Reqs){
+  Seasons <- unique(GD_day$Year)
   Phendates_cols <- c("Dreq","Freq","Season","Dreq_Year","Dreq_DOY","Freq_Year","Freq_DOY")
   Phendates_pred <-data.frame(matrix(ncol=7, nrow=0, byrow=FALSE))
   colnames(Phendates_pred) <- Phendates_cols
@@ -47,12 +61,12 @@ phenology_thermal_time <- function(GDH_day,Reqs){
     for(sea in 1:(length(Seasons))){
       Anno = as.numeric(Seasons[sea])
       if (Dreq>=305){
-        Data_fil <- GDH_day %>% filter(
-          (GDH_day$Year == Anno-1 & GDH_day$DOY>= Dreq) |
-            (GDH_day$Year == Anno))
+        Data_fil <- GD_day %>% filter(
+          (GD_day$Year == Anno-1 & GD_day$DOY>= Dreq) |
+            (GD_day$Year == Anno))
       } else {
-        Data_fil <- GDH_day %>% filter(
-          (GDH_day$Year == Anno & GDH_day$DOY>= Dreq))
+        Data_fil <- GD_day %>% filter(
+          (GD_day$Year == Anno & GD_day$DOY>= Dreq))
       }
       Data_fil <- arrange(Data_fil, Data_fil$Year, Data_fil$DOY)
       Data_fil2 <- Data_fil %>%

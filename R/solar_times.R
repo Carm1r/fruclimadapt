@@ -5,20 +5,22 @@
 #' day of the year (DOY). The function uses the equations by
 #' Spencer (1971) and Almorox et al. (2005).
 #'
-#' @param latitude numeric value specifying the geographic latitude
-#' (in decimal degrees) of the location of interest
-#' @param DOY numeric (usually integer) value or vector specifying the
+#' @param latitude the latitude of the site, in decimal degrees.
+#' @param DOY numeric value or vector specifying the
 #' day of the year for which calculations should be done.
-#' @return list with Sunrise, Sunset and Daylength.
-#' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
+#' @return list with Sunrise and Sunset times and Daylength.
+#' @note Code adapted from the function \code{\link[chillR]{daylength}}, of the \href{https://CRAN.R-project.org/package=chillR}{chillR} Package
 #' @references
-#' Spencer JW, 1971. Fourier series representation of the position of the Sun.
-#' Search 2(5), 172.
 #'
 #' Almorox J, Hontoria C and Benito M, 2005. Statistical validation of
 #' daylength definitions for estimation of global solar radiation in Toledo,
-#' Spain. Energy Conversion and Management 46(9-10), 1465-1471)
-#'
+#' Spain. Energy Conversion and Management 46(9-10), 1465-1471
+#' 
+#' Luedeling E, 2018. chillR: Statistical Methods for Phenology Analysis in 
+#' Temperate Fruit Trees. R package version 0.70.12. \url{https://CRAN.R-project.org/package=chillR}
+#' 
+#' Spencer JW, 1971. Fourier series representation of the position of the Sun.
+#' Search 2(5), 172.
 #' @examples
 #'
 #' \dontrun{

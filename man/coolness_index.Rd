@@ -14,23 +14,27 @@ Must contain the columns Year, Month, Day, Tmax, Tmin.}
 (expressed as day of the year)}
 }
 \value{
-data frame with the values of the indices.
+dataframe with the values of the indices. It contains the
+columns Year, Harvest, Coolness
 }
 \description{
 This function calculates a night coolness index based in the
-Cool Night index of Tonietto (1999) as the mean of minimum 
-temperatures in the 30 days prior to harvest.
+Cool Night index of Tonietto (1999). Instead of calculating 
+the mean of minimum temperatures in September/March (Northern
+or Southern hemispheres, respectively), this function allows 
+to define the harvest date, and calculates the mean of minimum
+temperatures in the previous 30 days. The function allows 
+testing for several harvest dates simultaneously.
 }
 \examples{
 
 \dontrun{
 
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, create a vector or harvest dates and
-#estimate the Huglin and Cool night indices on each year
-#in the series.
+#select the appropiate columns from the Tudela_DW example dataset,
+#create a vector or harvest dates and estimate the coolness index 
+#for each year in the dataset.
 
-Weather <- Tempdata \%>\%
+Weather <- Tudela_DW \%>\%
    select(Year, Month, Day, Tmax, Tmin)
 harvest <- c(225, 250, 275)
 coolness <- coolness_index(Weather, harvest)
@@ -44,5 +48,5 @@ sud de la France: methodologie de carácterisation. Thése Doctorat. Ecole
 Nationale Supérieure Agronomique, Montpellier, 233pp.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

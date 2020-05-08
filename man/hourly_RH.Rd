@@ -12,16 +12,16 @@ each day in a series. Must contain the columns Year, Month, Day,
 Tmax, Tmin, RHmax (daily maximum relative humidity) and RHmin
 (minimum daily relative humidity).}
 
-\item{lat}{latitude (decimal format) of the site}
+\item{lat}{the latitude of the site, in decimal degrees.}
 }
 \value{
-data frame with columns Date, Year, Month, Day, DOY,
+dataframe with columns Date, Year, Month, Day, DOY,
 Hour, Temp and RH
 }
 \description{
 This function estimates the hourly relative humidity (RH),
 using daily temperature and humidity data. Hourly humidity is
-estimated with the formula used by Waichler and Wigmosta (2003)
+estimated with the formula proposed by Waichler and Wigmosta (2003)
 which require maximum and minimum values of daily temperature
 and relative humidity.
 }
@@ -29,14 +29,8 @@ and relative humidity.
 
 \dontrun{
 
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, include date and DOY information and estimate
-#the hourly temperature and relative humidity for each day in the series.
-
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, Tmax, Tmin, WSmed) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-RH_h <- hourly_RH_temp(Weather, 41.5)
+# Generate hourly relative humidity
+Tudela_HRH <- hourly_RH_temp(Tudela_DW, 42.13132)
 
 }
 }
@@ -46,5 +40,5 @@ values from daily data and significance to hydrological modeling at H.J.
 Andrews experimental forest. Journal of Hydrometeorology 4, 251-263.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

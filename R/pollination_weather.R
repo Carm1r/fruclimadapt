@@ -9,30 +9,30 @@
 #' Williams and Sims (1977), by accounting the number of favorable
 #' hours for pollination within a day. One hour is considered favorable
 #' if the temperature is above 12.5 C, the speed of the wind below
-#' 4.5 m/s and no rainfal occurs (Williams and Sims, 1977; Ramirez and
+#' 4.5 m s-1 and no rainfal occurs (Williams and Sims, 1977; Ramirez and
 #' Davenport, 2013). Hourly wind speeds from daily values are computed
-#' using the formulas proposed by (Guo et al, 2016), using mean daily
-#' values (WSmed, required) and maximum ones (WSmax, optional). If 
+#' using the formulas proposed by Guo et al (2016), using mean daily
+#' values (u2med, required) and maximum ones (u2max, optional). If 
 #' only mean wind values are available, the function uses a modified
 #' version of the Guo formula, so that the maximum values are obtained in 
-#' daytime hours.No hourly downscaling of rainfall is performed, the 
+#' daytime hours. No hourly downscaling of rainfall is performed, the 
 #' function allow daily rainfall below 2.0 mm when estimating if a day
 #' is favorable for pollination or not.
 #'
 #'
 #' @param climdata a dataframe with daily maximum and minimum temperatures,
 #' wind speed and precipitation. Required columns are Year, Month, Day,
-#' Tmax, Tmin, WSmed (daily mean wind speed) and Prec (precipitation).
-#' WSmax (daily maximum wind speed) is optional.
-#' @param lat latitude (decimal format) of the site, used to estimate hourly
-#' temperatures.
+#' Tmax, Tmin, u2med (daily mean wind speed) and Prec (precipitation).
+#' u2max (daily maximum wind speed) is optional.
+#' @param lat the latitude of the site, in decimal degrees, used to estimate 
+#' hourly temperatures.
 #' @param fendata a dataframe with julian day of the beginning (sbloom)
 #' and end (ebloom) of the flowering season. Must contain the columns
 #' Year, sbloom and ebloom in that order.
 #' @return a data frame with the columns Year, Sbloom (bloom start, DOY)
-#' , Ebloom (end of bloom, DOY), Bloom_length (in days), Favor (number of
-#' favorable days), Modfavor (number of moderately favorable days) and
-#' Unfavor (number of unfavorable days).
+#' , Ebloom (end of bloom, DOY), Bloom_length (in days), Fav_d (number of
+#' favorable days), Modfav_d (number of moderately favorable days) and
+#' Unfav_d (number of unfavorable days).
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
@@ -52,17 +52,10 @@
 #' @examples
 #'
 #' \dontrun{
-#'
-#' #select the appropiate columns from a larger dataset with date information
-#' #in Year, Month, Day format, include date and DOY information and estimate
-#' #the number favorable days on each year in the series
-#'
-#' Weather <- Tempdata %>%
-#'    select(Year, Month, Day, Tmax, Tmin, WSmed, Prec) %>%
-#'    mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-#' Pollin_eval <- pollination_weather(Weather,Bloom_D, 41.5)
-#'
-#'
+#' #Estimate weather conditions during blooming season using the example
+#' #datasets included in the package
+#' Bloom_BT <- Dates_BT %>% select(Year, sbloom, ebloom)
+#' Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
 #' }
 #' @export pollination_weather
 #' @import data.table tidyverse zoo 
@@ -83,12 +76,12 @@ pollination_weather <- function(climdata, fendata, lat)
     mutate(Datetime = make_datetime(Year, Month, Day, Hour,min = 0))
 
   climdata_h = merge(hourt.df,wind.df, by = "Datetime", all=TRUE) %>%
-    select(Datetime,Temp,WS) %>%
+    select(Datetime,Temp,u2) %>%
     mutate(Date=date(Datetime),Year=year(Datetime),Month=month(Datetime),Day=day(Datetime),Hour=hour(Datetime)) %>%
     select(1,4:8,2:3)
 
   pollinw <- climdata_h %>%
-    mutate(wpol= if_else(Temp>=12.5 & Temp<=30 & WS <=5.6,1,0)) %>%
+    mutate(wpol= if_else(Temp>=12.5 & Temp<=30 & u2 <=4.5,1,0)) %>%
     group_by(Date) %>%
     summarise(h_wpol= sum(wpol)) %>%
     right_join(rain, by = "Date", all = TRUE) %>%
@@ -110,7 +103,8 @@ pollination_weather <- function(climdata, fendata, lat)
       filter(pollinw$Year==Anno & pollinw$DOY>=Sbloom & pollinw$DOY<=Ebloom) %>%
       mutate(Days=length(Year)) %>%
       group_by(Year) %>%
-      summarise(Bloom_length = mean(Days), Favor = sum(h_wpol >=6), Unfavor = sum(h_wpol < 2), Modfavor=mean(Days)-(Favor+Unfavor))
+      summarise(Bloom_length = mean(Days), Fav_d = sum(h_wpol >=6), 
+                Unfav_d = sum(h_wpol < 2), Modfav_d = mean(Days)-(Favor+Unfavor))
     new.row.df <- data.frame(Sbloom,Ebloom) %>%
       cbind(polhours_fil) %>%
       select(3,1:2,4,5,7,6)

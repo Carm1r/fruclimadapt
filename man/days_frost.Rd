@@ -12,16 +12,19 @@ the columns julian day of year (DOY )and the minimum daily temperature (Tmin).}
 
 \item{fendates}{a dataframe with the day of occurrence of the phenological
 stages. Must contain julian day of occurrence of the phenological
-stage (DOY) and the critical frost temperature for the stage (Tcrit)}
+stage (DOY) and the critical frost temperature for 10% (LT_10) and 90%
+(LT_90) for each stage.}
 
 \item{lastday}{the last day (day of the year) to evaluate. By default, 
-lastday = 181 (June 3oth).}
+lastday = 181 (June 30th).}
 }
 \value{
 a dataframe with the columns
 number of days in which Tmin is equal or below Tcrit.
 }
 \description{
+(This is an internal function for spring_frost) not intended
+to be stand alone used 
 The function evaluates the early and spring frosts occurring
 during a season. It compares minimum daily temperature (Tmin) with the critical
 temperature (Tcrit). Daily critical temperatures are linearly
@@ -46,7 +49,6 @@ Frostdays_2018 <-days_frost(Tmins_2018,Tcrit)
 }
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }
-\keyword{frost}
-\keyword{prediction}
+\keyword{internal}

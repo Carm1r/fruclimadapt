@@ -7,26 +7,28 @@
 hourly_windspeed(climdata)
 }
 \arguments{
-\item{climdata}{a dataframe with daily mean wind speed data (WSmed).
-Must contain the columns Year, Month, Day and WSmed.}
+\item{climdata}{a dataframe with daily wind speed data.
+Required columns are Year, Month, Day and u2med. u2max
+is an optional data column.}
 }
 \value{
-data frame with the columns Date, Year, Month, Day, DOY,
-Hour and WS (hourly wind speed).
+dataframe with the columns Date, Year, Month, Day, DOY,
+Hour and u2 (hourly wind speed, m s-1).
 }
 \description{
 This function estimates the hourly wind speed from a
 dataset with mean daily wind speeds. Hourly wind speeds
-from daily means are computed using a modified version of the
-formula proposed by (Guo et al, 2016), so that maximum speeds
-are obtained at mid-day.
+from daily values are computed using the formulas proposed
+by Guo et al (2016), using mean daily values (u2med, required)
+and maximum ones (u2max, optional). If only mean wind values
+are available, the function uses a modified version of the 
+Guo formula, so that the maximum values are obtained in 
+daytime hours.
 }
 \examples{
 \dontrun{
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, WSmed) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-Windspeed_hourly <- hourly_windspeed(Weather)
+# Generate hourly wind speed for the example dataset
+Tudela_Hu2 <- hourly_windspeed(Tudela_DW)
 }
 
 }
@@ -38,5 +40,5 @@ Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
 vol 569. Springer, Berlin, Heidelberg
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

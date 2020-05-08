@@ -40,8 +40,9 @@
 #' lastday = 181 (June 30th).
 #' @return a list with two data frames. The df Days_frost has the columns Year, DOY, 
 #' Tmin, Tcrit and Day_Frost (indicates a day of frost with a 1 if Tmin<=Tcrit). 
-#' The df Total_frosts indicates the total number of frost days and the expected 
-#' damage (as proportion (\%) of organs) for every year in the series.
+#' The df Damage_frosts indicates the total number of frost days and the expected 
+#' damage (as \% of organs) for every year in the series. It has the columns 
+#' Year, Frost_d, Damage.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references 
 #' Snyder RL, de Melo-Abreu JP. 2005. Frost Protection: fundamentals, practice and 
@@ -51,15 +52,35 @@
 #' @examples
 #'
 #' \dontrun{
-#'
-#' #select the appropiate columns from a larger dataset with date information
-#' #in Year, Month, Day format, include date and DOY information and estimate
-#' #the number of frost days for the series
-#'
-#' Tmins <- Tempdata %>%
-#'    select(Year, Month, Day, Tmin) %>%
-#'    mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-#' Frisk <-spring_frost(Tmins,Phen_data,Tcrit,270)
+#' # Generate hourly temperatures from the example dataset Tudela_DW
+#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#' # Calculate chill as chill portions, starting on DOY 305
+#' Chill <- chill_portions(Tudela_HT,305)
+#' # Calculate forcing heat as growing degree hours (GDH) with the linear model,
+#' # using base temperature 4.7 C and no upper thresholds
+#' GDH <- GDH_linear(Tudela_HT,4.7,999,999)
+#' # Combine Chill and GDH values in a dataframe with a format compatible with
+#' # the function phenology_sequential
+#' Tudela_CH <- merge(Chill,GDH) %>%
+#'    select(Date, Year, Month, Day, DOY, Chill,GDH) %>%
+#'    arrange(Date) %>%
+#'    rename(GD=GDH)
+#' # Obtain the predicted dates using the example dataset with the requirements 
+#' # indicated in the Bigtop_reqs example dataset and create a dataframe with a
+#' # format compatible with the function spring_frost
+#' Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305) %>% 
+#'    select(Freq_Year,Freq_DOY) %>%
+#'    rename(Year=Freq_Year,Pheno_date=Freq_DOY)
+#' # Create a dataframe with daily minimum temperatures with the 
+#' # format required by spring_frost
+#' Tmin_Tudela <- Tudela_DW %>% 
+#'   mutate(Date=make_date(Year,Month,Day), DOY=yday(Date)) %>%
+#'   select(Year, DOY, Tmin) 
+#' # Predict the number and accumulated damage of the spring frosts using the
+#' # critical values contained in the example dataset Tcrits_peach and extract
+#' # the dataframe with the total results for each year
+#' Frost_BT <- spring_frost(Tmin_Tudela, Phenology_BT, Tcrits_peach, 181)
+#' Frost_results <- as.data.frame(Frost_BT[['Damage_frosts']]) 
 #'
 #' }
 #' @export spring_frost

@@ -1,6 +1,6 @@
 #' Estimates the occurence of spring frosts 
 #'
-#' (This is an internal function for spring_fros) not intended
+#' (This is an internal function for spring_frost) not intended
 #' to be stand alone used 
 #' The function evaluates the early and spring frosts occurring
 #' during a season. It compares minimum daily temperature (Tmin) with the critical
@@ -19,7 +19,7 @@
 #' stage (DOY) and the critical frost temperature for 10% (LT_10) and 90%
 #' (LT_90) for each stage.
 #' @param lastday the last day (day of the year) to evaluate. By default, 
-#' lastday = 181 (June 3oth).
+#' lastday = 181 (June 30th).
 #' @return a dataframe with the columns
 #' number of days in which Tmin is equal or below Tcrit.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}

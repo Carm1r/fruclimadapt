@@ -14,10 +14,10 @@ must contain the columns Year, Month, Day, DOY, Temp.}
 accumulation is supposed to start.}
 }
 \value{
-data frame with the chill accumulated for all the seasons in the
+dataframe with the chill accumulated for all the seasons in the
 dataset. Seasons begin at the start date and end the day before the start
 date of the following year.
-It contains the columns Year, Month, Day, Doy, CHill
+It contains the columns Year, Month, Day, DOY, Chill
 }
 \description{
 The function calculates chill units using the Utah model (Richardson
@@ -39,7 +39,10 @@ studies on climate change.
 
 \dontrun{
 
-Chill_acum <- chill_units(Weather,305)
+# Generate hourly temperatures
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+# Calculate chill as chill units, starting on DOY 305
+Chill_u <- chill_units(Tudela_HT,305)
 
 }
 }
@@ -49,5 +52,5 @@ completion of rest for Redhaven and Elberta peach trees. HortScience 9,
 331-332.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

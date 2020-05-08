@@ -8,16 +8,16 @@ chill_hours(climdata, Start)
 }
 \arguments{
 \item{climdata}{a dataframe with hourly temperature data. It
-must contain the columns Year, Month, Day, DOY, Temp.}
+must contain the columns Year, Month, Day, DOY, Hour, Temp.}
 
 \item{Start}{parameter indicating the day of the year when chill
 accumulation is supposed to start.}
 }
 \value{
-data frame with the chill accumulated for all the seasons in the
+dataframe with the chill accumulated for all the seasons in the
 dataset. Seasons begin at the start date and end the day before the start
-date of the following year.
-It contains the columns Year, Month, Day, Doy, CHill
+date of the following year. It contains the columns Year, Month, Day, 
+DOY and Chill.
 }
 \description{
 The function calculates chill hours using the Weinberger (1950),
@@ -33,8 +33,10 @@ performance) and compatibility with older bibliography.
 \examples{
 
 \dontrun{
-
-Chill_acum <- chill_hours(Weather,305)
+# Generate hourly temperatures
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+# Calculate chill as chill hours, starting on DOY 305
+Chill_h <- chill_hours(Tudela_HT,305)
 
 }
 }
@@ -43,5 +45,5 @@ Weinberger JH, 1950. Chilling requirements of peach varieties. Proc Am Soc
 Hortic Sci 56, 122-128.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

@@ -9,14 +9,14 @@ ET_penman_monteith(climdata, lat, elev)
 \arguments{
 \item{climdata}{a dataframe with daily weather data.
 Required columns are Year, Month, Day, Tmax and Tmin. Optional columns are
-RHmax, RHmin, Rad and u2.}
+RHmax, RHmin, Rad and u2med.}
 
 \item{lat}{the latitude of the site, in decimal degrees.}
 
 \item{elev}{the elevation of the site, in meters above sea level.}
 }
 \value{
-data frame with Year, Month, Day, DOY, ETos and ETrs values.
+dataframe with Year, Month, Day, DOY, ETos and ETrs values.
 }
 \description{
 This function calculates the reference evapotranspiration (ETref) for short
@@ -28,8 +28,8 @@ Society of Civil Engineers (Allen et al, 2005).
 \details{
 Minimum data requirements to calculate ET are daily temperatures (maximum 
 and minimum temperatures, Tmax and Tmin), whereas relative humidity (RHmax and 
-RHmin), solar radiation (Rad, MJ m-2 day-1) and wind speed at 2m height
-(u2,m s-1) are optional. If missing, the function integrates FAO56 estimations 
+RHmin), solar radiation (Rad, MJ m-2 day-1) and mean wind speed at 2m height
+(u2med,m s-1) are optional. If missing, the function integrates FAO56 estimations 
 for solar radiation and vapor pressure (air humidity) from daily 
 temperatures. If there is no information available on wind speed, the function 
 assumes a constant value of 2 m s-1.
@@ -38,9 +38,10 @@ assumes a constant value of 2 m s-1.
 
 \dontrun{
 
-elevation <- 315
-latitude <- 42.08
-ET_PM <- ET_penman_monteith(Weather, latitude, elevation)
+#Calculate ET by Penman-Monteith method in the Tudela_DW example dataset
+elevation <- 314
+latitude <- 42.13132
+ET_PM <- ET_penman_monteith(Tudela_DW, latitude, elevation)
 }
 }
 \references{

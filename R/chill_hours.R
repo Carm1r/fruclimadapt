@@ -11,13 +11,13 @@
 #' performance) and compatibility with older bibliography.
 #'
 #' @param climdata a dataframe with hourly temperature data. It
-#' must contain the columns Year, Month, Day, DOY, Temp.
+#' must contain the columns Year, Month, Day, DOY, Hour, Temp.
 #' @param Start parameter indicating the day of the year when chill
 #' accumulation is supposed to start.
-#' @return data frame with the chill accumulated for all the seasons in the
+#' @return dataframe with the chill accumulated for all the seasons in the
 #' dataset. Seasons begin at the start date and end the day before the start
-#' date of the following year.
-#' It contains the columns Year, Month, Day, Doy, Chill
+#' date of the following year. It contains the columns Year, Month, Day, 
+#' DOY and Chill.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
@@ -27,8 +27,10 @@
 #' @examples
 #'
 #' \dontrun{
-#'
-#' Chill_acum <- chill_hours(Weather,305)
+#' # Generate hourly temperatures
+#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#' # Calculate chill as chill hours, starting on DOY 305
+#' Chill_h <- chill_hours(Tudela_HT,305)
 #'
 #' }
 #' @export chill_hours

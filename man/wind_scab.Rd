@@ -7,54 +7,57 @@
 wind_scab(climdata, fendata)
 }
 \arguments{
-\item{climdata}{a dataframe with daily mean wind speed data (WSmed).
-Must contain the columns Year, Month, Day, WSmed.}
+\item{climdata}{a dataframe with daily wind speed data.
+Required columns are Year, Month, Day, u2med. u2max is
+optional.}
 
 \item{fendata}{a dataframe which can contain early fruit growth and
 harvest dates. Start of initial growth (Start_ing) and end of initial growth
 (End_ing) dates are used to assess for early wind-induced abrasion risk and
 harvest dates (Harvest) are used for late (pre-harvest) abrasion risks.
-Must contain the column Year and can contain either Start_ing and End_ing
-or Harvest columns or the three all.}
+Must contain the column Year, and can contain either Start_ing and End_ing
+or Harvest columns, or the three of them.}
 }
 \value{
 data frame with the columns Year, Day_s, Day_e, WA_efg (accumulated
-hours with WS>5.5 m/s on early fruit growth stage), Day_h, WA_bh
-(accumulated hours with WS>5.5 m/s on the month before harvest).
+hours with u2>5.5 m s-1 on early fruit growth stage), Day_h, WA_bh
+(accumulated hours with u2>5.5 m s-1 on the month before harvest).
 }
 \description{
 The function estimates the risk of wind-induced abrasion injuries
-(wind scab) in fruit skin during the sensitive periods of the species.
-This function estimates the daily hours with 'moderate breeze' wind
-(below 5.5 m/s in the Beaufort scale) or stronger from a
-dataset with mean daily wind speeds. Hourly wind speeds
-from daily means are computed using a modified version of the
-formula proposed by (Guo et al, 2016), so that maximum speeds
-are obtained at mid-day.
+(wind scab) on fruit skin during the sensitive periods of the 
+species. This function estimates as risky the daily hours with 
+'moderate breeze' wind (equal or above 5.5 m s-1 in the Beaufort 
+scale) or stronger, estimated from a dataset with daily wind 
+speeds.
 }
 \details{
+Hourly wind speeds from daily values are computed using the 
+formulas proposed by (Guo et al, 2016), using mean daily 
+values (u2med, required) and maximum ones (u2max, optional). 
+If only mean wind values are available, the function uses a
+modified version of the Guo formula, so that the maximum 
+values are obtained in daytime hours.
+
 Sensitive periods for wind scab in plums or nectarines
 correspond to the early stages of fruit growth, usually the
-first three weeks after full bloom (Michailides
-et al 1992, Michailides and Morgan 1992), mainly due to persistent leaf
-brushing on fruit skin between the stages "8mm-fruit" and "20mm-fruit".
-A second sensitive period for cherries, plums, peaches and
-nectarines is pre-harvest (30 days prior to that), due to
-persistent friction against branches. The function allows to
-introduce both periods or only one of them.
+first three weeks after full bloom (Michailides et al 1992, 
+Michailides and Morgan 1992), mainly due to persistent leaf
+brushing on fruit skin between the stages "8mm-fruit" and 
+"20mm-fruit". A second sensitive period for cherries, plums, 
+peaches and nectarines is pre-harvest (30 days prior to that), 
+due to persistent friction against branches. The function 
+allows to set both periods or only one of them.
 }
 \examples{
 
 \dontrun{
 
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, include date and DOY information and estimate
-#the number favorable days on each year in the series
-
-Weather <- Tempdata \%>\%
-   select(Year, Month, Day, WSmed) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date))
-WindRisk <- wind_scab(Weather,Sensit_dates)
+#Select the appropiate columns from the example Dates_BT dataset
+#and estimate wind scab risk for Big Top nectarine in Tudela using
+#the example weather dataset Tudela_DW
+Growth_BT <- Dates_BT \%>\% select(Year, Start_ing, End_ing, Harvest)
+WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
 
 }
 }
@@ -76,5 +79,5 @@ fungal decay by wind scab and russet scab.California dried plum board
 research reports 1992, 149-156.
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

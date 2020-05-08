@@ -4,27 +4,28 @@
 \alias{phenology_thermal_time}
 \title{Prediction of phenological stages using a thermal time model}
 \usage{
-phenology_thermal_time(GDH_day, Reqs)
+phenology_thermal_time(GD_day, Reqs)
 }
 \arguments{
-\item{GDH_day}{a dataframe with daily forcing accumulation
+\item{GD_day}{a dataframe with daily forcing accumulation. It
 must contain the columns Year, Month, Day, DOY, GD.}
 
-\item{Reqs}{a dataframe with starting dates and forcing requirements,
-must contain the columns Dreq, Freq.}
+\item{Reqs}{a dataframe in which each row contains the start date
+for forcing and the heat requirements of one phenological stage. 
+It must contain the columns Dreq (the start date) and Freq (the forcing 
+heat requirements).}
 }
 \value{
-data frame with the predicted dates for every season in GDH_day
-and stages in Reqs. For each season and phenological stage, the information
-provided is the date in which forcing begins (Year and DOY), and the
-date in which the phenological stage is met (Year and DOY).
-It contains the columns Dreq, Freq, Season, Dreq_Year,
-Dreq_DOY, Freq_Year, Freq_DOY.
+dataframe with the predicted dates of occurrence of each phenological 
+stage defined in Reqs. Columns are Dreq and Freq (start date and forcing heat 
+requirements for the phenological stage), Season, Dreq_Year and Dreq_DOY 
+(year and day of the year in which forcing begins), Freq_Year and Freq_DOY 
+(year and day of the year of occurrence the phenological stage).
 }
 \description{
 The function predicts phenological phases for a climate series
-from daily chill and heat requirements and forcing data.
-The thermal time model used in the fucntion consider consider that
+using a certain starting date and forcing heat requirements data.
+The thermal time model used in the function considers that
 only heat accumulated from a set date to a given sum explain the
 date of occurrence of the phenological stage (i.e, it assumes that
 dormancy release occurs before that date). The function is independent
@@ -38,10 +39,23 @@ and heat requirements for a phenological stage.
 
 \dontrun{
 
-Predicted_Dates <- phenology_thermal_time(Weather,Golden_reqs)
+# Calculate GDD values from a climate dataset with daily temperature data,
+# using a base temperature of 0 C and format it to be compatible with 
+# phenology_thermal_time
 
+Tudela_GDD <- GDD_linear(Tudela_DW,0) \%>\% rename(GD=GDD)
+
+# Create a dataframe with start dates and forcing requirements for
+# bloom and veraison in the GFV model for 'Chardonnay' (Parker et al, 
+# 2013, Agric Forest Meteorol 180:249-264) in the format required for 
+# the function
+Dreq <- c(60,60) 
+Freq <- c(1217,2547)
+Chardonnay_reqs <- as.data.frame(cbind(Dreq,Freq))
+# Obtain the predicted dates 
+Phenology_Chardonnay <- phenology_sequential(Tudela_GDD,Chardonnay_reqs)
 }
 }
 \author{
-Carlos Miranda
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }
