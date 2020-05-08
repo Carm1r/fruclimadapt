@@ -1,13 +1,13 @@
 globalVariables(c("%>%","BEDD_day","Chill","Cool","Cool_d","Cool_n","DOY","DTR",
                          "DTR_adj","Dam","Date","Datetime","Day","Daylength","Days",
-                         "ET_m","ET_os","E_s","FST","Favor","GD","GDD","GDD_day","GDH",
+                         "ET_m","ET_os","E_s","FST","Fav_d","GD","GDD","GDD_day","GDH",
                          "H_day","Hot","Hot_d","Hour","HourC","Inter_E","JPm","K","LT_0",
                          "LT_10","LT_100","LT_90","Month","N","Prec","Prec_m","RH","RH_aux",
                          "RHmax","RHmin","SB_browning","SB_necrosis","T_v","Tdayhours",
                          "Temp","Temp_K","Tmax","Tmax_avg","Tmean","Tmean_m","Tmin",
-                         "Tmin_avg","Tpostdusk","Tpredawn","TxP","Unfavor","Units","u2",
+                         "Tmin_avg","Tpostdusk","Tpredawn","TxP","Unfav_d","Units","u2",
                          "u2med","u2max","W_bal","W_day","Wo","Year","a_K","arrange","as_datetime",
                          "bind_cols","bind_rows","day","delt","everything","filter",
                          "ftmprt","group_by","h_russ","h_wind","h_wpol","if_else","m_lat",
                          "make_datetime","mutate","rename","right_join","select","slice",
-                         "sr","summarise","summarise_all","tail","windh","wpol"))
+                         "sr","summarise","summarise_all","tail","windh","wpol","case_when"))

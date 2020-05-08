@@ -16,8 +16,8 @@ automatic weather station by Gobierno de Navarra.
     \item{\code{Day}}{a numeric vector, the observation day}
     \item{\code{Tmax}}{a numeric vector, daily maximum temperature in Celsius}
     \item{\code{Tmin}}{a numeric vector, daily minimum temperature in Celsius}
-    \item{\code{Hrmax}}{a numeric vector, daily maximum relative humidity in \%}
-    \item{\code{Hrmin}}{a numeric vector, daily minimum relative humidity in \%}
+    \item{\code{RHmax}}{a numeric vector, daily maximum relative humidity in \%}
+    \item{\code{RHmin}}{a numeric vector, daily minimum relative humidity in \%}
     \item{\code{Prec}}{a numeric vector, daily rainfall in mm}
     \item{\code{u2med}}{a numeric vector, daily mean wind speed in m s-1}
     \item{\code{u2max}}{a numeric vector, daily maximum wind speed in m s-1}

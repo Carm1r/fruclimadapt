@@ -28,11 +28,11 @@
 #'
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and no 
 #' # upper threshold.
-#' GDH <- GDD_linear(Tudela_DW,4.5)
+#' GDD <- GDD_linear(Tudela_DW,4.5)
 #' 
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and an 
 #' # upper threshold at 25ºC.
-#' GDH <- GDD_linear(Tudela_DW,4.5,25)
+#' GDD <- GDD_linear(Tudela_DW,4.5,25)
 #' }
 #'
 #' @export GDD_linear
@@ -42,7 +42,9 @@
 GDD_linear <- function(Temp_Day,Tb,Tu=999)
 {
   Temp_Day <- Temp_Day %>%
-    mutate(Tmean=ifelse(Tmax>Tu,(Tu+Tmin)/2,(Tmax+Tmin)/2),
+    mutate(Date = make_date(Year,Month,Day),
+           DOY=yday(Date),
+           Tmean=ifelse(Tmax>Tu,(Tu+Tmin)/2,(Tmax+Tmin)/2),
            GDD = ifelse(Tmean-Tb<0,0,
                         ifelse(Tmean<Tu,Tmean-Tb,Tu-Tb))) %>%
     select(Date, Year, Month, Day, DOY, GDD)

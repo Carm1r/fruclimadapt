@@ -104,7 +104,7 @@ pollination_weather <- function(climdata, fendata, lat)
       mutate(Days=length(Year)) %>%
       group_by(Year) %>%
       summarise(Bloom_length = mean(Days), Fav_d = sum(h_wpol >=6), 
-                Unfav_d = sum(h_wpol < 2), Modfav_d = mean(Days)-(Favor+Unfavor))
+                Unfav_d = sum(h_wpol < 2), Modfav_d = mean(Days)-(Fav_d+Unfav_d))
     new.row.df <- data.frame(Sbloom,Ebloom) %>%
       cbind(polhours_fil) %>%
       select(3,1:2,4,5,7,6)

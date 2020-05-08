@@ -25,7 +25,7 @@
 #' \dontrun{
 #'
 #' # Generate hourly relative humidity
-#' Tudela_HRH <- hourly_RH_temp(Tudela_DW, 42.13132)
+#' Tudela_HRH <- hourly_RH(Tudela_DW, 42.13132)
 #'
 #' }
 #' @export hourly_RH

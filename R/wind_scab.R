@@ -149,12 +149,12 @@ wind_scab <- function(climdata,fendata)
       Anno <- as.numeric(seasons[sea])
       climdata_fil <- wind_h %>%
         filter(wind_h$Year==Anno)
-      Harvd <- as.numeric(fendata$Harvest[sea])
+      Harv_d <- as.numeric(fendata$Harvest[sea])
       evawfg_fil <- climdata_fil %>%
-        filter(climdata_fil$DOY>(Harvd-30) & climdata_fil$DOY<=Harvd) %>%
+        filter(climdata_fil$DOY>(Harv_d-30) & climdata_fil$DOY<=Harv_d) %>%
         summarise(windh=sum(h_wind)) %>%
         select(windh)
-      new.row.df <- data.frame(Anno,Harvd) %>%
+      new.row.df <- data.frame(Anno,Harv_d) %>%
         cbind(evawfg_fil)
       latew.df <-rbind(latew.df,new.row.df)
       }

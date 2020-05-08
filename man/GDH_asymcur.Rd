@@ -9,7 +9,7 @@ GDH_asymcur(Hourdata, Tb = 4, Topt = 25, Tcrit = 36)
 \arguments{
 \item{Hourdata}{a dataframe of hourly temperatures. This data frame
 must have a column for Year, Month, Day, DOY (day of year), Hour,
-Temp (hourly temperature) and Chill (Chill accumulated).}
+Temp (hourly temperature).}
 
 \item{Tb}{the base temperatures to calculate GDH}
 
@@ -19,7 +19,7 @@ Temp (hourly temperature) and Chill (Chill accumulated).}
 }
 \value{
 dataframe with daily data. It contains the columns Date,
-Year, Month, Day, DOY (day of the year), Chill, and GDH
+Year, Month, Day, DOY (day of the year), and GDH
 }
 \description{
 The function calculates the daily heat unit accumulation (GDH)

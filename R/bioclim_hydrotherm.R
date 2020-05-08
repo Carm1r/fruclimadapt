@@ -63,7 +63,7 @@
 #' #and elevation and estimate the hydrotermal indices on each year in the series.
 #'
 #' Weather <- Tudela_DW %>%
-#'    select(Year, Month, Day, Tmax, Tmin, Prec, HRmax, HRmin, Rad, u2med)
+#'    select(Year, Month, Day, Tmax, Tmin, Prec, RHmax, RHmin, Rad, u2med)
 #' elevation <- 314
 #' latitude <- 42.13132
 #' Tudela_BHI <- bioclim_hydrotherm(Weather, latitude, elevation)

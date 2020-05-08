@@ -53,7 +53,7 @@ Dreq <- c(60,60)
 Freq <- c(1217,2547)
 Chardonnay_reqs <- as.data.frame(cbind(Dreq,Freq))
 # Obtain the predicted dates 
-Phenology_Chardonnay <- phenology_sequential(Tudela_GDD,Chardonnay_reqs)
+Phenology_Chardonnay <- phenology_thermal_time(Tudela_GDD,Chardonnay_reqs)
 }
 }
 \author{

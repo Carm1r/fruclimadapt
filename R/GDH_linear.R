@@ -39,7 +39,7 @@
 #' #Calculate GDH using default threshold temperatures
 #' GDH_default <- GDH_linear(Tudela_HT)
 #' #Calculate GDH using an optimal temperature threshold but not
-#' GDH_custom <- GDH_asymcur(Tudela_HT, 4.5, 22, 999)
+#' GDH_custom <- GDH_linear(Tudela_HT, 4.5, 22, 999)
 #' }
 #' @export GDH_linear
 #' @import data.table tidyverse zoo 
@@ -49,8 +49,8 @@ GDH_linear <- function(Hourdata,Tb=4,Topt=25,Tcrit=36)
 {
   Hourdata <- Hourdata %>%
     mutate(Date = make_date(Year,Month,Day),
-           GDH = ifelse(Temp-Tb<0 |Temp>=Tcrit,0,
-                        ifelse(Temp<Topt,Temp-Tb,Topt)))
+           GDH = ifelse(Temp<=Tb |Temp>=Tcrit,0,
+                        ifelse(Temp<Topt,Temp-Tb,Topt-Tb)))
   GDH_linear <- Hourdata %>%
     group_by(Date) %>%
     summarise_all(sum)

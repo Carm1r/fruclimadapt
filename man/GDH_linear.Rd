@@ -47,7 +47,7 @@ Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #Calculate GDH using default threshold temperatures
 GDH_default <- GDH_linear(Tudela_HT)
 #Calculate GDH using an optimal temperature threshold but not
-GDH_custom <- GDH_asymcur(Tudela_HT, 4.5, 22, 999)
+GDH_custom <- GDH_linear(Tudela_HT, 4.5, 22, 999)
 }
 }
 \references{

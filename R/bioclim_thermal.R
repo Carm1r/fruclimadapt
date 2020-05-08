@@ -77,7 +77,6 @@
 
 bioclim_thermal <- function(climdata, lat)
 {
-  if (abs(lat)>50){stop("latitude too high for grapevine")}
   if (lat > 0){
     start_m <- 4
     end_h <- 9
@@ -86,27 +85,30 @@ bioclim_thermal <- function(climdata, lat)
       end_h <- 3
       end_w <- 4
     }
-  ifelse(abs(lat)<=40, d<-1, 
-         ifelse(abs(lat)<=42, d<-1.02,
-                ifelse(abs(lat)<=44,d<-1.03,
-                       ifelse(abs(lat)<=46,d<-1.04,
-                              ifelse(abs(lat)<=48,d<-1.05,1.06)))))
-  k <- 1.1135*d-0.1352
-
+  rlat <- abs(lat)*pi/180
+  sdl <- 0
+  for (i in 101:283) {
+    m_lat <- 1-tan(rlat)*tan(0.409*cos(pi*i/182.625))
+    Day_L <- acos(1-m_lat)*24/pi
+    sdl<-sdl+Day_L
+  }
+  k_HI<-2.8311e-4*sdl + 0.30834
+  k_BEDD<-1.1135*k_HI - 0.13520
+  
+  
   climdata <- select(climdata,"Year","Month","Day","Tmax","Tmin") %>%
     mutate(Date = make_date(Year, Month, Day),
            DOY = yday(Date),
            Tmean = (Tmax+Tmin)/2,
            DTR = Tmax-Tmin,
-           H_day = ifelse(0.5*d*((Tmean-10)+(Tmax-10))<0,0,
-                          0.5*d*((Tmean-10)+(Tmax-10))),
+           H_day = ifelse(0.5*k_HI*((Tmean-10)+(Tmax-10))<0,0,
+                          0.5*k_HI*((Tmean-10)+(Tmax-10))),
            W_day = ifelse(Tmean<10,0,Tmean-10),
+           GDD_day = ifelse(Tmean-10<0,0,Tmean-10),
            DTR_adj = ifelse(DTR>13,0.25*(DTR-13), 
                             ifelse(DTR<10,0.25*(DTR-10),0)),
-           m_lat = 1-tan(lat)*tan(0.409*cos(pi*DOY/182.625)),
-           Day_L = acos(1-m_lat)*24/pi,
-           BEDD_day=ifelse(GDD_day*d+DTR_adj<=0,0,
-                           ifelse(GDD_day*d+DTR_adj<=9,GDD_day*d+DTR_adj,9)))
+           BEDD_day=ifelse(GDD_day*k_BEDD+DTR_adj<=0,0,
+                           ifelse(GDD_day*k_BEDD+DTR_adj<=9,GDD_day*k_BEDD+DTR_adj,9)))
   
   seasons <- unique(climdata$Year)
 
