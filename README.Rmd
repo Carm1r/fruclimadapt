@@ -60,9 +60,9 @@ devtools::install_github("Carm1r/fruclimadapt")
 <div id="P1" />
 
 ---------------------------------------------
-### Using fruclimadapt
+## Using fruclimadapt
 
-#### 1. Required packages
+### 1. Required packages
 
 > * **[data.table](https://CRAN.R-project.org/package=data.table)** 
 > * **[lubridate](https://CRAN.R-project.org/package=lubridate)** 
@@ -86,7 +86,7 @@ library(zoo)
 <div id="P2" />
 
 ---------------------------------------------
-#### 2. Example. Estimate the phenology of a peach cultivar
+### 2. Example. Estimate the phenology of a peach cultivar
 
 This example shows how to use the functions *hourly_temps*, *chill_portions*, *GDH_linear* and *phenology_sequential* to estimate the date of occurrence of the phenological stages for a nectarine cultivar, using daily weather data. 
 
@@ -114,7 +114,7 @@ Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
 <div id="P3" />
 
 ---------------------------------------------
-#### 3. Estimate the number and damage caused by spring frosts
+### 3. Estimate the number and damage caused by spring frosts
 
 This example shows how to use the function *spring_frost* to estimate the number and accumulated damage caused by spring frosts from budbreaking for the same nectarine cultivar used to estimate the phenology in the previous example. 
 
@@ -136,11 +136,11 @@ Phenology_frost <- Phenology_BT %>%
 ```
 [Menu](#menu)
 
-### Licenses
+## Licenses
 
 The R/fruclimadapt package as a whole is distributed under [GPL-3 (GNU General Public License version 3)](https://www.gnu.org/licenses/gpl-3.0).
 
-### Author
+## Author
 
 [Carlos Miranda](https://github.com/Carm1r)
 
