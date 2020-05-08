@@ -57,9 +57,9 @@ devtools::install_github("Carm1r/fruclimadapt")
 
 -----
 
-### Using fruclimadapt
+## Using fruclimadapt
 
-#### 1\. Required packages
+### 1\. Required packages
 
 >   - **[data.table](https://CRAN.R-project.org/package=data.table)**
 >   - **[lubridate](https://CRAN.R-project.org/package=lubridate)**
@@ -84,7 +84,7 @@ library(zoo)
 
 -----
 
-#### 2\. Example. Estimate the phenology of a peach cultivar
+### 2\. Example. Estimate the phenology of a peach cultivar
 
 This example shows how to use the functions *hourly\_temps*,
 *chill\_portions*, *GDH\_linear* and *phenology\_sequential* to estimate
@@ -117,7 +117,7 @@ Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
 
 -----
 
-#### 3\. Estimate the number and damage caused by spring frosts
+### 3\. Estimate the number and damage caused by spring frosts
 
 This example shows how to use the function *spring\_frost* to estimate
 the number and accumulated damage caused by spring frosts from
@@ -143,12 +143,12 @@ Phenology_frost <- Phenology_BT %>%
 
 [Menu](#menu)
 
-### Licenses
+## Licenses
 
 The R/fruclimadapt package as a whole is distributed under [GPL-3 (GNU
 General Public License
 version 3)](https://www.gnu.org/licenses/gpl-3.0).
 
-### Author
+## Author
 
 [Carlos Miranda](https://github.com/Carm1r)
