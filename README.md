@@ -4,7 +4,7 @@
 
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Travis (.com) branch](https://img.shields.io/travis/com/Carm1r/fruclimadapt/master)
+![Travis (.com) branch](https://img.shields.io/travis/com/Carm1r/fruclimadapt/master)
 
 This package is a compilation of functions for the assessment of climate
 adaptation and the identification of potential risks for grapevines and
