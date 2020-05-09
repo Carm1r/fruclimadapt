@@ -34,7 +34,6 @@
 #' @examples
 #'
 #' \dontrun{
-#'
 #' #Calculate ET by Penman-Monteith method in the Tudela_DW example dataset
 #' elevation <- 314
 #' latitude <- 42.13132

@@ -48,7 +48,6 @@
 #'     rename(GD=GDH)
 #' # Obtain the predicted dates using the example dataset with requirements
 #' Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
-#'
 #' }
 #' @export phenology_sequential
 #' @import data.table tidyverse zoo 

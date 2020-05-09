@@ -33,7 +33,6 @@
 #' @examples
 #'
 #' \dontrun{
-#'
 #' # Generate hourly temperatures for the example dataset
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' #Calculate GDH using default threshold temperatures

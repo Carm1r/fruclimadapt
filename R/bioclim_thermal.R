@@ -60,15 +60,12 @@
 #' @examples
 #'
 #' \dontrun{
-#'
 #' #select the appropiate columns from a larger dataset with date information
 #' #in Year, Month, Day format, and estimate indices on each year in the series.
-#'
 #' Weather <- Tudela_DW %>%
 #'    select(Year, Month, Day, Tmax, Tmin)
 #' latitude <- 42.13132
 #' Tudela_BTI <- bioclim_thermal(Weather, latitude)
-#'
 #'}
 #' @export bioclim_thermal
 #' @import data.table tidyverse zoo 

@@ -19,7 +19,6 @@
 #' @examples
 #'
 #' \dontrun{
-#'
 #' #Select the appropiate columns from the example dataset
 #' #Bloom_BT and rename column names to make the file compatible
 #' #with the function
