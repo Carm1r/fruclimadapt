@@ -41,7 +41,6 @@ proposed by Schrader et al (2003).
 \examples{
 
 \dontrun{
-
 Create one vector with start date (i.e. hand thinning) and a vector 
 with harvest dates to test the risk for several cultivars.
 Thinning_d <- 135

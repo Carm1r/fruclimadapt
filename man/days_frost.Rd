@@ -40,7 +40,6 @@ is DOY 181.
 #select the appropiate columns from a larger dataset with date information
 #in Year, Month, Day format, include date and DOY information and estimate
 #the #number of frost days for the year 2018
-
 Tmins_2018 <- Tempdata \%>\%
    select(Year, Month, Day, Tmin) \%>\%
    mutate(Date=make_date(Year,Month,Day),DOY=yday(Date)) \%>\%

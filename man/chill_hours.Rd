@@ -37,7 +37,6 @@ performance) and compatibility with older bibliography.
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 # Calculate chill as chill hours, starting on DOY 305
 Chill_h <- chill_hours(Tudela_HT,305)
-
 }
 }
 \references{

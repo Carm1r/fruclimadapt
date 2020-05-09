@@ -37,8 +37,6 @@ climate change.
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 # Calculate chill as chill portions, starting on DOY 305
 Chill_p <- chill_portions(Tudela_HT,305)
-
-
 }
 }
 \references{

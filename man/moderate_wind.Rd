@@ -30,11 +30,9 @@ daytime hours.
 \examples{
 
 \dontrun{
-
 # Estimate daily hours with wind speed above moderate speeds for the example
 # dataset
 Tudela_Mu2 <- moderate_wind(Tudela_DW)
-
 }
 }
 \references{

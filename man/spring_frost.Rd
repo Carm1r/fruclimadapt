@@ -90,7 +90,6 @@ Tmin_Tudela <- Tudela_DW \%>\%
 # the dataframe with the total results for each year
 Frost_BT <- spring_frost(Tmin_Tudela, Phenology_BT, Tcrits_peach, 181)
 Frost_results <- as.data.frame(Frost_BT[['Damage_frosts']]) 
-
 }
 }
 \references{

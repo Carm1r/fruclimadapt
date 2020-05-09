@@ -28,10 +28,8 @@ and relative humidity.
 \examples{
 
 \dontrun{
-
 # Generate hourly relative humidity
 Tudela_HRH <- hourly_RH(Tudela_DW, 42.13132)
-
 }
 }
 \references{
