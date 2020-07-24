@@ -15,7 +15,7 @@ Description: Climate is a critical component limiting growing range of plant spe
     trees. Procedures in the package allow to i) downscale daily meteorological variables
     to hourly values, ii) estimate chilling and forcing heat accumulation, iii) estimate 
     plant phenology, iv) calculate bioclimatic indices to evaluate fruit tree and grapevine
-    adaptation, v) estimate the indicence of weather-related disorders in fruits and vi)
+    adaptation, v) estimate the incidence of weather-related disorders in fruits and vi)
     estimate plant water requirements. 
 Depends: R (>= 3.5.0) 
 Imports: data.table, tidyverse, zoo, lubridate
