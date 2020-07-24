@@ -25,10 +25,10 @@ This function calculates the hydrotermic index of Branas, Bernon and
 Levandoux (BBLI, Branas et al 1946) and the Dryness index (Riou et al 1994).
 }
 \details{
-The BBLI takes  into  account  the influence  of  both  
+The BBLI takes into account  the influence  of  both  
 temperature  and  precipitation  on  grape yield  and  wine  quality.  
 This  index  is  the  sum of  the products of monthly mean temperature 
-(Tmean,in Celsius) and monthly  accumulated  precipitation  amount  (Prec,in mm)
+(Tmean, in Celsius) and monthly  accumulated  precipitation  amount  (Prec,in mm)
 during the April to September season (Northern Hemisphere) or October to 
 February (Southern Hemisphere).
 
@@ -38,7 +38,7 @@ the  potential  water  balance  of  the  soil index of Riou (Riou et al.,
 of the  water  component  of  the  climate  in  a  grape-growing  region,
 taking into account the climatic demand of a standard vineyard, evaporation
 from bare soil, rainfall without deduction for surface runoff or drainage. 
-It indicates the  potential  water  availability  in  the  soil,  related  
+It indicates the potential  water  availability  in  the  soil,  related  
 to the level of dryness in a region (Tonietto and Carbonneau, 2004). The
 index uses potential evapotranspiration calculated here with 
 the Penman Monteith method.
@@ -69,7 +69,8 @@ Tudela_BHI <- bioclim_hydrotherm(Weather, latitude, elevation)
 Allen RG, Pereira LS, Raes D, Smith M. 1998. Crop evapotranspiration. Guidelines
 for computing crop water requirements. FAO Irrigation and drainage paper 56. Food 
 and Agriculture Organization of the United Nations
-
+Branas J, Bernon G, Levadoux L. 1946. Elements de Viticulture Generale. 
+Imp. Dehan, Bordeaux
 Riou C, Carbonneau A, Becker N, Caló A, Costacurta A, Castro R, Pinto PA, 
 Carneiro LC, Lopes C, Climaco P, Panagiotou MM, Sotes V,Beaumond HC, Burril A, 
 Maes J, Vossen P. 1994. Le determinisme climatique de la maturation du raisin: 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hourly_temps.R
 \name{hourly_temps}
 \alias{hourly_temps}
-\title{Make hourly temperature record from daily data}
+\title{Estimation of hourly temperatures from daily data}
 \usage{
 hourly_temps(climdata, latitude)
 }

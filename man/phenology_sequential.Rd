@@ -35,7 +35,7 @@ with no overlap between both phases. The function is independent of the
 method used to calculate chill and forcing heat, so that chill can
 be supplied as chill hours, chill units or chill portions (recommended, 
 particularly for warm climates or in climate change studies), forcing heat 
-accummulation can be supplied either as GDD or GDH. The function allows
+accumulation can be supplied either as GDD or GDH. The function allows
 predicting several stages (or the same for different cultivars), by supplying
 a dataframe in which each row contains chill and heat requirements for a
 phenological stage.

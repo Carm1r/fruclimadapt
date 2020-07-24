@@ -45,7 +45,7 @@ temperatures (the lethal temperatures for 10\% (LT_10) and 90\% (LT_90)
 of the organs) for each phenological stage. The main difference of 
 spring_frost with DEST.xls is that the latter uses the same dates of 
 phenological ocurrence for all the years evaluated (up to 50 years of
-data), while spring_frost is able to use the expected dates of ocurrence 
+data), while spring_frost is able to use the expected dates of occurrence 
 for each year from historical records or estimations produced by the 
 functions phenology_thermal_time or phenology_sequential, included in 
 this package. There is no limit for the number of years evaluated.
@@ -55,7 +55,7 @@ The last day in the year for the evaluation can be defined by the user,
 and it is set by default set at DOY 181, to avoid computing autumn 
 and winter frosts.
 
-The function currently works only with phenological dates occuring
+The function currently works only with phenological dates occurring
 within the same year.
 }
 \examples{
