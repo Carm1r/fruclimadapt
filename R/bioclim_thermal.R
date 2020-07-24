@@ -14,9 +14,9 @@
 #' heliothermic potential, which calculates the temperature sum above 10ºC from 
 #' April until September (Northern hemisphere) or from October until March (Southern
 #'  hem.). The index takes into consideration daily maximum and average temperature, 
-#' and slighty modifies the calculated total using the latitude of the location.
+#' and slightly modifies the calculated total using the latitude of the location.
 #' 
-#' WI index (Amerine and Winkler, 1974), also known as growing degree days (GDD) 
+#' WI index (Amerine and Winkler, 1944), also known as growing degree days (GDD) 
 #' classifies regions based on the accumulation of heat summation units by adding up 
 #' hours above 10ºC during the growing season.
 #' 
@@ -26,7 +26,7 @@
 #' 
 #' CI index (Tonietto, 1999) takes into account the minimum temperature during 
 #' grape maturation, which is normally the average minimum air temperature in 
-#' September/March(Northern or Southern hemispheres, respectively). 
+#' September/March (Northern or Southern hemispheres, respectively). 
 #' 
 #'
 #' @param climdata a dataframe with daily maximum and minimum temperatures.

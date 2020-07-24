@@ -11,7 +11,7 @@
 #' an increase. The critical temperature (Tcrit) is the temperature
 #' above which growth ceases. The difference of ASYMCUR model with 
 #' the linear by Anderson and Seeley (1992)is that the former uses 
-#' an assymmetric curvilinear relationship to model GDH accumulation. 
+#' an asymmetric curvilinear relationship to model GDH accumulation. 
 #' The function allows the user to define Tb, Topt and Tcrit, and uses
 #' as default the values set by Anderson et al (1986) for fruit trees:
 #' Tb=4ºC, Topt=25ºC and Tcrit=36ºC. 

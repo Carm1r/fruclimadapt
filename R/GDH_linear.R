@@ -6,7 +6,7 @@
 #' model is defined by a base temperature, and the Anderson and Seeley 
 #' (1992) includes also optimum and critical temperatures. In both
 #' variants, heat accumulation begins when temperatures are above a 
-#' minimum (base temperature,Tb), and growth increases linearly with 
+#' minimum (base temperature, Tb), and growth increases linearly with 
 #' temperature. In the Anderson and Seeley (1992) variant, growth no
 #' longer increases once the optimum temperature (Topt) is reached, 
 #' meaning that GDH above it are constant. The critical temperature 

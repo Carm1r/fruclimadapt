@@ -1,4 +1,4 @@
-#' Make hourly temperature record from daily data
+#' Estimation of hourly temperatures from daily data
 #'
 #' This function generates hourly temperatures from daily maximum and
 #' minimum values, using the method proposed by Linvill (1990), which also

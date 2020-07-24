@@ -9,7 +9,7 @@
 #' Williams and Sims (1977), by accounting the number of favorable
 #' hours for pollination within a day. One hour is considered favorable
 #' if the temperature is above 12.5 C, the speed of the wind below
-#' 4.5 m s-1 and no rainfal occurs (Williams and Sims, 1977; Ramirez and
+#' 4.5 m s-1 and no rainfall occurs (Williams and Sims, 1977; Ramirez and
 #' Davenport, 2013). Hourly wind speeds from daily values are computed
 #' using the formulas proposed by Guo et al (2016), using mean daily
 #' values (u2med, required) and maximum ones (u2max, optional). If 
