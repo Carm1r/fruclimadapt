@@ -21,10 +21,5 @@ estimated using the functions included in this package.
     \item{\code{Harvest}}{a numeric vector, harvest date as DOY}
   }
 }
-\examples{
-\dontrun{
-data(Bloom_BT)
-Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
-}
-}
+
 

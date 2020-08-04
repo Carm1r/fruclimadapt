@@ -41,8 +41,8 @@ a dataframe in which each row contains chill and heat requirements for a
 phenological stage.
 }
 \examples{
-
-\dontrun{
+data(Tudela_DW)
+data(Bigtop_reqs)
 # Generate hourly temperatures from the example dataset
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 # Calculate chill as chill portions, starting on DOY 305
@@ -58,7 +58,7 @@ Tudela_CH <- merge(Chill,GDH) \%>\%
     rename(GD=GDH)
 # Obtain the predicted dates using the example dataset with requirements
 Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
-}
+
 }
 \author{
 Carlos Miranda, \email{carlos.miranda@unavarra.es}

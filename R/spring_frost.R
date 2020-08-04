@@ -51,7 +51,6 @@
 #' 
 #' @examples
 #'
-#' \dontrun{
 #' # Generate hourly temperatures from the example dataset Tudela_DW
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' # Calculate chill as chill portions, starting on DOY 305
@@ -81,7 +80,7 @@
 #' # the dataframe with the total results for each year
 #' Frost_BT <- spring_frost(Tmin_Tudela, Phenology_BT, Tcrits_peach, 181)
 #' Frost_results <- as.data.frame(Frost_BT[['Damage_frosts']]) 
-#' }
+#' 
 #' @export spring_frost
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date

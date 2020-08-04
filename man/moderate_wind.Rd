@@ -29,11 +29,10 @@ daytime hours.
 }
 \examples{
 
-\dontrun{
 # Estimate daily hours with wind speed above moderate speeds for the example
 # dataset
 Tudela_Mu2 <- moderate_wind(Tudela_DW)
-}
+
 }
 \references{
 Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind

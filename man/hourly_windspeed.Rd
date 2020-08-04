@@ -26,10 +26,9 @@ Guo formula, so that the maximum values are obtained in
 daytime hours.
 }
 \examples{
-\dontrun{
+
 # Generate hourly wind speed for the example dataset
 Tudela_Hu2 <- hourly_windspeed(Tudela_DW)
-}
 
 }
 \references{

@@ -24,18 +24,7 @@
 #' number of days in which Tmin is equal or below Tcrit.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @keywords internal
-#' @examples
-#'
-#' \dontrun{
-#' #select the appropiate columns from a larger dataset with date information
-#' #in Year, Month, Day format, include date and DOY information and estimate
-#' #the #number of frost days for the year 2018
-#' Tmins_2018 <- Tempdata %>%
-#'    select(Year, Month, Day, Tmin) %>%
-#'    mutate(Date=make_date(Year,Month,Day),DOY=yday(Date)) %>%
-#'    filter(Year==2018)
-#' Frostdays_2018 <-days_frost(Tmins_2018,Tcrit)
-#' }
+#' 
 #' @export days_frost
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date

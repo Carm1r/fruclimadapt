@@ -27,10 +27,9 @@ using the equations by Spencer (1971) and Almorox et al. (2005).
 }
 \examples{
 
-\dontrun{
 # Generate hourly temperatures
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
-}
+
 }
 \references{
 Almorox J, Hontoria C and Benito M, 2005. Statistical validation of

@@ -22,12 +22,11 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#' #Calculate ET by Penman method in the Tudela_DW example dataset
+#' # Calculate ET by Penman method in the Tudela_DW example dataset
 #' elevation <- 314
 #' latitude <- 42.13132
 #' ET_Penman <- ET_penman(Tudela_DW, latitude, elevation)
-#'}
+#'
 #' @export ET_penman
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date

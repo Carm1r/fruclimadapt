@@ -28,10 +28,9 @@
 #'
 #' @examples
 #'
-#' \dontrun{
 #' # Generate hourly temperatures
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
-#' }
+#' 
 #' @export hourly_temps
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date make_datetime date

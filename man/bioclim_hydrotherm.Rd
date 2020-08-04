@@ -54,16 +54,15 @@ constant value of 2 m s-1.
 }
 \examples{
 
-\dontrun{
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, define the values for the parameters latitude 
-#and elevation and estimate the hydrotermal indices on each year in the series.
+# Select the appropiate columns from a larger dataset with date information
+# in Year, Month, Day format, define the values for the parameters latitude 
+# and elevation and estimate the hydrotermal indices on each year in the series.
 Weather <- Tudela_DW \%>\%
    select(Year, Month, Day, Tmax, Tmin, Prec, RHmax, RHmin, Rad, u2med)
 elevation <- 314
 latitude <- 42.13132
 Tudela_BHI <- bioclim_hydrotherm(Weather, latitude, elevation)
-}
+
 }
 \references{
 Allen RG, Pereira LS, Raes D, Smith M. 1998. Crop evapotranspiration. Guidelines

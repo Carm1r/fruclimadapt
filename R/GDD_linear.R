@@ -24,14 +24,13 @@
 #'
 #' @examples
 #'
-#' \dontrun{
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and no 
 #' # upper threshold.
 #' GDD <- GDD_linear(Tudela_DW,4.5)
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and an 
 #' # upper threshold at 25ºC.
 #' GDD <- GDD_linear(Tudela_DW,4.5,25)
-#' }
+#' 
 #'
 #' @export GDD_linear
 #' @import data.table tidyverse zoo 

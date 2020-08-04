@@ -29,11 +29,10 @@
 #'
 #' @examples
 #'
-#' \dontrun{
 #' # Estimate daily hours with wind speed above moderate speeds for the example
 #' # dataset
 #' Tudela_Mu2 <- moderate_wind(Tudela_DW)
-#' }
+#' 
 #' @export moderate_wind
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date make_datetime
@@ -42,7 +41,7 @@ moderate_wind <- function(climdata)
 {
   if(!"u2max" %in% colnames(climdata))
   {
-    cat("Warning: No maximum windspeed data provided,\nhourly values will
+    message("Warning: No maximum windspeed data provided,\nhourly values will
         be estimated using u2med only\n");
     Viento <- select(climdata,"Year","Month","Day","u2med") %>%
       mutate(Datetime = make_datetime(Year, Month, Day, hour=0,min = 0),

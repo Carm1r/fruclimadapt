@@ -22,10 +22,9 @@
 #'
 #' @examples
 #'
-#' \dontrun{
 #' # Generate hourly relative humidity
 #' Tudela_HRH <- hourly_RH(Tudela_DW, 42.13132)
-#' }
+#' 
 #' @export hourly_RH
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date make_datetime date

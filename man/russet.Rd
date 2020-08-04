@@ -29,18 +29,17 @@ available, the function hourly_RH can be used to estimate them.
 }
 \examples{
 
-\dontrun{
-#Select the appropiate columns from the example dataset
-#Bloom_BT and rename column names to make the file compatible
-#with the function
-Bloom <- Bloom_BT \%>\%
+# Select the appropiate columns from the example dataset
+# Dates_BT and rename column names to make the file compatible
+# with the function
+Bloom <- Dates_BT \%>\%
    select(Year, sbloom) \%>\%
    rename(Fday=sbloom)
-#Obtain estimated hourly RH from the example dataset Tudela_DW
+# Obtain estimated hourly RH from the example dataset Tudela_DW
 RH_h <- hourly_RH(Tudela_DW, 42.13132)
-#Estimate the number of russet-inducing days for each season
+# Estimate the number of russet-inducing days for each season
 Russet_Risk <-russet(RH_h,Bloom)
-}
+
 }
 \author{
 Carlos Miranda, \email{carlos.miranda@unavarra.es}

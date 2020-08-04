@@ -33,12 +33,11 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#' #Calculate ET by Penman-Monteith method in the Tudela_DW example dataset
+#' # Calculate ET by Penman-Monteith method in the Tudela_DW example dataset
 #' elevation <- 314
 #' latitude <- 42.13132
 #' ET_PM <- ET_penman_monteith(Tudela_DW, latitude, elevation)
-#'}
+#'
 #' @export ET_penman_monteith
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date
@@ -60,7 +59,7 @@ ET_penman_monteith <- function(climdata, lat, elev){
   es <- (es_Tmax + es_Tmin)/2 
   if(!"RHmax" %in% colnames(climdata)|!"RHmin" %in% colnames(climdata))
   {
-    cat("Warning: No relative humidity data provided,\nreal vapor pressure (ea) will be estimated using Tmin\n");
+    message("Warning: No relative humidity data provided,\nreal vapor pressure (ea) will be estimated using Tmin\n");
     ea <- 0.611 * exp(17.27*climdata$Tmin/(climdata$Tmin+237.3))
   }else{
     ea <- (es_Tmin * climdata$RHmax/100 + es_Tmax * climdata$RHmin/100)/2 
@@ -74,7 +73,7 @@ ET_penman_monteith <- function(climdata, lat, elev){
   R_so <- (0.75 + (2*10^-5)* elev) * R_a 
   if(!"Rad" %in% colnames(climdata))
   {
-    cat("Warning: No radiation data provided,\nsolar radiation (Rs) will be derived from daily thermal difference\n");
+    message("Warning: No radiation data provided,\nsolar radiation (Rs) will be derived from daily thermal difference\n");
     R_s <- 0.16*sqrt(climdata$Tmax-climdata$Tmin)*R_a
     R_ns <- (1-0.23)*R_s
     R_nl <- sigma * ((climdata$Tmax+273.2)^4 + (climdata$Tmin+273.2)^4)/2 * 
@@ -88,7 +87,7 @@ ET_penman_monteith <- function(climdata, lat, elev){
   R_n <- R_ns - R_nl
   if(!"u2med" %in% colnames(climdata))
   {
-    cat("Warning: No windspeed data provided,\na constant windspeed of 2 ms-1 will be asumed\n");
+    message("Warning: No windspeed data provided,\na constant windspeed of 2 ms-1 will be asumed\n");
     climdata <- climdata %>% mutate(u2med=2)
   }
   ET_os.Daily <- (0.408 * delta * (R_n - G) + gamma * 900 * climdata$u2med * (es - ea)/(Tmean + 273)) / 

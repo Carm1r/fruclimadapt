@@ -26,12 +26,11 @@ Code adapted from the function \code{\link[chillR]{daylength}}, of the \href{htt
 }
 \examples{
 
-\dontrun{
-#create a vector with 365 days in sequence and calculate sunrise and
-#sunset hours for that year in a site placed a 45.5 N
+# Create a vector with 365 days in sequence and calculate sunrise and
+# sunset hours for that year in a site placed a 45.5 N
 Days <- seq(1:365)
 Sunrise_Sunset <- solar_times(41.5,Days)
-}
+
 }
 \references{
 Almorox J, Hontoria C and Benito M, 2005. Statistical validation of

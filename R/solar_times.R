@@ -23,12 +23,11 @@
 #' Search 2(5), 172.
 #' @examples
 #'
-#' \dontrun{
-#' #create a vector with 365 days in sequence and calculate sunrise and
-#' #sunset hours for that year in a site placed a 45.5 N
+#' # Create a vector with 365 days in sequence and calculate sunrise and
+#' # sunset hours for that year in a site placed a 45.5 N
 #' Days <- seq(1:365)
 #' Sunrise_Sunset <- solar_times(41.5,Days)
-#' }
+#' 
 #' @export solar_times
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date

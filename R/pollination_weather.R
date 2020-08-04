@@ -51,12 +51,11 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#' #Estimate weather conditions during blooming season using the example
-#' #datasets included in the package
+#' # Estimate weather conditions during blooming season using the example
+#' # datasets included in the package
 #' Bloom_BT <- Dates_BT %>% select(Year, sbloom, ebloom)
 #' Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
-#' }
+#' 
 #' @export pollination_weather
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date make_datetime

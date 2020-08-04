@@ -35,15 +35,14 @@ dates.
 }
 \examples{
 
-\dontrun{
-#select the appropiate columns from Tudela_DW example dataset, create
-#a vector or harvest dates and estimate the number favorable and 
-#unfavorable days on each year in the dataset.
+# Select the appropiate columns from Tudela_DW example dataset, create
+# a vector or harvest dates and estimate the number favorable and 
+# unfavorable days on each year in the dataset.
 Weather <- Tudela_DW \%>\%
    select(Year, Month, Day, Tmax, Tmin)
 harvest <- c(225, 250, 275)
 Color_assess <- color_potential(Weather, harvest)
-}
+
 }
 \references{
 Lin-Wang K, Micheletti D et al, 2011. High temperature reduces apple fruit

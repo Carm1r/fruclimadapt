@@ -24,15 +24,14 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#' #select the appropiate columns from the Tudela_DW example dataset,
-#' #create a vector or harvest dates and estimate the coolness index 
-#' #for each year in the dataset.
+#' # Select the appropiate columns from the Tudela_DW example dataset,
+#' # create a vector or harvest dates and estimate the coolness index 
+#' # for each year in the dataset.
 #' Weather <- Tudela_DW %>%
 #'    select(Year, Month, Day, Tmax, Tmin)
 #' harvest <- c(225, 250, 275)
 #' coolness <- coolness_index(Weather, harvest)
-#'}
+#'
 #' @export coolness_index
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date

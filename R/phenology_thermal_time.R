@@ -27,7 +27,6 @@
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @examples
 #'
-#' \dontrun{
 #' # Calculate GDD values from a climate dataset with daily temperature data,
 #' # using a base temperature of 0 C and format it to be compatible with 
 #' # phenology_thermal_time
@@ -41,7 +40,7 @@
 #' Chardonnay_reqs <- as.data.frame(cbind(Dreq,Freq))
 #' # Obtain the predicted dates 
 #' Phenology_Chardonnay <- phenology_thermal_time(Tudela_GDD,Chardonnay_reqs)
-#' }
+#' 
 #' @export phenology_thermal_time
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date
@@ -51,6 +50,7 @@ phenology_thermal_time <- function(GD_day,Reqs){
   Phendates_cols <- c("Dreq","Freq","Season","Dreq_Year","Dreq_DOY","Freq_Year","Freq_DOY")
   Phendates_pred <-data.frame(matrix(ncol=7, nrow=0, byrow=FALSE))
   colnames(Phendates_pred) <- Phendates_cols
+  Phendates_pred<-Phendates_pred%>% mutate(Season = as.character(Season))
   for(i in 1:nrow(Reqs)) {
     Sel_reqs <- slice(Reqs, i)
     Dreq <- as.numeric(Sel_reqs[1])

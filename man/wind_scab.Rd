@@ -51,13 +51,12 @@ allows to set both periods or only one of them.
 }
 \examples{
 
-\dontrun{
-#Select the appropiate columns from the example Dates_BT dataset
-#and estimate wind scab risk for Big Top nectarine in Tudela using
-#the example weather dataset Tudela_DW
+# Select the appropiate columns from the example Dates_BT dataset
+# and estimate wind scab risk for Big Top nectarine in Tudela using
+# the example weather dataset Tudela_DW
 Growth_BT <- Dates_BT \%>\% select(Year, Start_ing, End_ing, Harvest)
 WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
-}
+
 }
 \references{
 Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind

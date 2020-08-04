@@ -31,8 +31,8 @@
 #' 
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @examples
-#'
-#' \dontrun{
+#' data(Tudela_DW)
+#' data(Bigtop_reqs)
 #' # Generate hourly temperatures from the example dataset
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' # Calculate chill as chill portions, starting on DOY 305
@@ -48,7 +48,7 @@
 #'     rename(GD=GDH)
 #' # Obtain the predicted dates using the example dataset with requirements
 #' Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
-#' }
+#' 
 #' @export phenology_sequential
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date
@@ -56,8 +56,9 @@
 phenology_sequential <- function(GDH_day,Reqs,Start_chill){
   Seasons <- unique(GDH_day$Year)
   Phendates_cols <- c("Creq","Freq","Season","Creq_Year","Creq_DOY","Freq_Year","Freq_DOY")
-  Phendates_pred <-data.frame(matrix(ncol=7, nrow=0, byrow=FALSE))
+  Phendates_pred <-data.frame(matrix(ncol=7, nrow=0, byrow=FALSE)) 
   colnames(Phendates_pred) <- Phendates_cols
+  Phendates_pred<-Phendates_pred%>% mutate(Season = as.character(Season))
   for(i in 1:nrow(Reqs)) {
     Sel_reqs <- slice(Reqs, i)
     Creq <- as.numeric(Sel_reqs[1])
@@ -87,7 +88,7 @@ phenology_sequential <- function(GDH_day,Reqs,Start_chill){
       }
       Sel_case <- bind_cols(Sel_reqs, Sel_Creq, Sel_Freq) %>%
         mutate(Season=paste(Anno-1,"-",Anno)) %>%
-        select(Creq, everything())
+        select(Creq, Freq, Season, everything())
       Phendates_pred <- bind_rows(Phendates_pred, Sel_case)
     }
   }

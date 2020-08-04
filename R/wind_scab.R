@@ -57,13 +57,12 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-#' #Select the appropiate columns from the example Dates_BT dataset
-#' #and estimate wind scab risk for Big Top nectarine in Tudela using
-#' #the example weather dataset Tudela_DW
+#' # Select the appropiate columns from the example Dates_BT dataset
+#' # and estimate wind scab risk for Big Top nectarine in Tudela using
+#' # the example weather dataset Tudela_DW
 #' Growth_BT <- Dates_BT %>% select(Year, Start_ing, End_ing, Harvest)
 #' WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
-#' }
+#' 
 #' @export wind_scab
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date make_datetime
@@ -72,7 +71,7 @@ wind_scab <- function(climdata,fendata)
 {
   if(!"u2max" %in% colnames(climdata))
   {
-    cat("Warning: No maximum windspeed data provided,\nhourly values will
+    message("Warning: No maximum windspeed data provided,\nhourly values will
         be estimated using u2med only\n");
     Viento <- select(climdata,"Year","Month","Day","u2med") %>%
       mutate(Datetime = make_datetime(Year, Month, Day, hour=0,min = 0),
@@ -112,7 +111,7 @@ wind_scab <- function(climdata,fendata)
 
   if(("Start_ing" %in% colnames(fendata) & "End_ing" %in% colnames(fendata))==FALSE)
   {
-    cat("No valid columns for initial fruit growth dates supplied");
+    message("No valid columns for initial fruit growth dates supplied");
   } else{
     earlyw_cn <- c("Year","Start_ing","End_ing","WA_efg")
     earlyw.df <-data.frame(matrix(ncol=4, nrow=0, byrow=FALSE))
@@ -137,7 +136,7 @@ wind_scab <- function(climdata,fendata)
     }
   if(("Harvest" %in% colnames(fendata))==FALSE)
   {
-    cat("No valid harvest date columns supplied");
+    message("No valid harvest date columns supplied");
   } else{
     latew_cn <- c("Year","Harvest","WA_bh")
     latew.df <-data.frame(matrix(ncol=3, nrow=0, byrow=FALSE))
@@ -169,7 +168,7 @@ wind_scab <- function(climdata,fendata)
     windrisk.df <- latew.df %>%
       rename(Year=Anno)
   } else {
-    cat("No results")
+    message("No results")
   }
  return(windrisk.df)
 }

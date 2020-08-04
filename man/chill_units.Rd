@@ -37,12 +37,11 @@ studies on climate change.
 }
 \examples{
 
-\dontrun{
 # Generate hourly temperatures
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 # Calculate chill as chill units, starting on DOY 305
 Chill_u <- chill_units(Tudela_HT,305)
-}
+
 }
 \references{
 Richardson EA, Seeley SD and Walker DR, 1974. A model for estimating the

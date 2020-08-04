@@ -30,12 +30,11 @@ solar radiation (Rad in MJ m-2 day-1) and mean wind speed at 2m height
 }
 \examples{
 
-\dontrun{
-#Calculate ET by Penman method in the Tudela_DW example dataset
+# Calculate ET by Penman method in the Tudela_DW example dataset
 elevation <- 314
 latitude <- 42.13132
 ET_Penman <- ET_penman(Tudela_DW, latitude, elevation)
-}
+
 }
 \references{
 Penman HL 1948.Natural evaporation from open water, bare soil and grass.

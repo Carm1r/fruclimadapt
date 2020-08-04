@@ -37,7 +37,6 @@ and heat requirements for a phenological stage.
 }
 \examples{
 
-\dontrun{
 # Calculate GDD values from a climate dataset with daily temperature data,
 # using a base temperature of 0 C and format it to be compatible with 
 # phenology_thermal_time
@@ -51,7 +50,7 @@ Freq <- c(1217,2547)
 Chardonnay_reqs <- as.data.frame(cbind(Dreq,Freq))
 # Obtain the predicted dates 
 Phenology_Chardonnay <- phenology_thermal_time(Tudela_GDD,Chardonnay_reqs)
-}
+
 }
 \author{
 Carlos Miranda, \email{carlos.miranda@unavarra.es}

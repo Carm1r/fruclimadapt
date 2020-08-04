@@ -48,12 +48,11 @@ is favorable for pollination or not.
 }
 \examples{
 
-\dontrun{
-#Estimate weather conditions during blooming season using the example
-#datasets included in the package
+# Estimate weather conditions during blooming season using the example
+# datasets included in the package
 Bloom_BT <- Dates_BT \%>\% select(Year, sbloom, ebloom)
 Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
-}
+
 }
 \references{
 Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind

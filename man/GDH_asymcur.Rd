@@ -40,15 +40,14 @@ Tb=4ºC, Topt=25ºC and Tcrit=36ºC.
 }
 \examples{
 
-\dontrun{
 # Generate hourly temperatures for the example dataset
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
-#Calculate GDH using default threshold temperatures
+# Calculate GDH using default threshold temperatures
 GDH_default <- GDH_asymcur(Tudela_HT)
-#Calculate GDH using as custom set temperature thresholds
-#Tb=4.5, Topt=22 and Tcrit=32
+# Calculate GDH using as custom set temperature thresholds
+# Tb=4.5, Topt=22 and Tcrit=32
 GDH_custom <- GDH_asymcur(Tudela_HT, 4.5, 22, 32)
-}
+
 
 }
 \references{

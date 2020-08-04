@@ -27,10 +27,9 @@
 #'
 #'
 #' @examples
-#'\dontrun{
+#'
 #' # Generate hourly wind speed for the example dataset
 #' Tudela_Hu2 <- hourly_windspeed(Tudela_DW)
-#'}
 #'
 #' @export hourly_windspeed
 #' @import data.table tidyverse zoo 
@@ -40,7 +39,7 @@ hourly_windspeed <- function(climdata)
 {
   if(!"u2max" %in% colnames(climdata))
   {
-    cat("Warning: No maximum windspeed data provided,\nhourly values will
+    message("Warning: No maximum windspeed data provided,\nhourly values will
         be estimated using u2med only\n");
     Viento <- select(climdata,"Year","Month","Day","u2med") %>%
       mutate(Datetime = make_datetime(Year, Month, Day, hour=0,min = 0),

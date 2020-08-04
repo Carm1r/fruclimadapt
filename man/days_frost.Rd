@@ -34,19 +34,6 @@ The function checks each day between the first date if Tmin is below Tcrit
 and, if so, that day is considered as a frost day (Fday). The last day evaluated
 is DOY 181.
 }
-\examples{
-
-\dontrun{
-#select the appropiate columns from a larger dataset with date information
-#in Year, Month, Day format, include date and DOY information and estimate
-#the #number of frost days for the year 2018
-Tmins_2018 <- Tempdata \%>\%
-   select(Year, Month, Day, Tmin) \%>\%
-   mutate(Date=make_date(Year,Month,Day),DOY=yday(Date)) \%>\%
-   filter(Year==2018)
-Frostdays_2018 <-days_frost(Tmins_2018,Tcrit)
-}
-}
 \author{
 Carlos Miranda, \email{carlos.miranda@unavarra.es}
 }

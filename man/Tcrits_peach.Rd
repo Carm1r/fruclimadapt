@@ -29,10 +29,5 @@ Miranda C, Santesteban LG, Royo JB. 2005. Variability in the relationship betwee
 frost temperature and injury level for some cultivated Prunus species. HortScience
 40:357-361.
 }
-\examples{
-\dontrun{
-data(Tcrits_peach)
-Frost_peach <- spring_frost(Tudela_tmin, Dates_BT, Tcrits_peach)
-}
-}
+
 
