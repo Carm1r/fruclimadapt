@@ -5,7 +5,7 @@ This is a resubmission. In this version I have:
 * Put notes in examples in comments
 * Unwrapped the executable examples 
 * Replaced cat() by message() to write information messages to the console
-* Include a call of on.exit() in GDH_asymcur to reset settings when the function is exited
+* Include a call of on.exit() in GDH_asymcur() to reset settings when the function is exited
 
 ## Test environments
 * local OS X install, R 4.0.0
