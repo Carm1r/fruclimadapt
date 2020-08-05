@@ -13,10 +13,14 @@ Description: Climate is a critical component limiting growing range of plant spe
     regarding ongoing and future changes. 'fruclimadapt' streamlines the assessment of 
     climate adaptation and the identification of potential risks for grapevines and fruit 
     trees. Procedures in the package allow to i) downscale daily meteorological variables
-    to hourly values, ii) estimate chilling and forcing heat accumulation, iii) estimate 
-    plant phenology, iv) calculate bioclimatic indices to evaluate fruit tree and grapevine
-    adaptation, v) estimate the incidence of weather-related disorders in fruits and vi)
-    estimate plant water requirements. 
+    to hourly values (Waichler and Wigmosta (2003) <doi:10.1175/1525-7541(2003)4<251:DOHMVF>2.0.CO;2),
+    ii) estimate chilling and forcing heat accumulation (Miranda et al (2019)
+    <https://ec.europa.eu/eip/agriculture/sites/agri-eip/files/fg30_mp5_phenology_critical_temperatures.pdf>),
+    iii) estimate plant phenology (Schwartz (2012) <doi:10.1007/978-94-007-6925-0>), iv) 
+    calculate bioclimatic indices to evaluate fruit tree and grapevine adaptation (e.g. Badr 
+    et al (2017) <doi:10.3354/cr01532>), v) estimate the incidence of weather-related disorders 
+    in fruits (e.g. Snyder and de Melo-Abreu (2005, ISBN:92-5-105328-6) and vi)
+    estimate plant water requirements (Allen et al (1998, ISBN:92-5-104219-5)). 
 Depends: R (>= 3.5.0) 
 Imports: data.table, tidyverse, zoo, lubridate
 License: GPL-3
