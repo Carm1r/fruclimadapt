@@ -28,6 +28,8 @@ and relative humidity.
 \examples{
 
 # Generate hourly relative humidity
+library(tidyverse)
+library(lubridate)
 Tudela_HRH <- hourly_RH(Tudela_DW, 42.13132)
 
 }

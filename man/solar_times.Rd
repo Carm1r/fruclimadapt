@@ -22,7 +22,8 @@ day of the year (DOY). The function uses the equations by
 Spencer (1971) and Almorox et al. (2005).
 }
 \note{
-Code adapted from the function \code{\link[chillR]{daylength}}, of the \href{https://CRAN.R-project.org/package=chillR}{chillR} Package
+Code adapted from the function \code{\link[chillR]{daylength}}, 
+of the \href{https://CRAN.R-project.org/package=chillR}{chillR} Package
 }
 \examples{
 

@@ -57,6 +57,7 @@ constant value of 2 m s-1.
 # Select the appropiate columns from a larger dataset with date information
 # in Year, Month, Day format, define the values for the parameters latitude 
 # and elevation and estimate the hydrotermal indices on each year in the series.
+library(tidyverse)
 Weather <- Tudela_DW \%>\%
    select(Year, Month, Day, Tmax, Tmin, Prec, RHmax, RHmin, Rad, u2med)
 elevation <- 314

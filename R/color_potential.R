@@ -33,6 +33,7 @@
 #' # Select the appropiate columns from Tudela_DW example dataset, create
 #' # a vector or harvest dates and estimate the number favorable and 
 #' # unfavorable days on each year in the dataset.
+#' library(tidyverse)
 #' Weather <- Tudela_DW %>%
 #'    select(Year, Month, Day, Tmax, Tmin)
 #' harvest <- c(225, 250, 275)

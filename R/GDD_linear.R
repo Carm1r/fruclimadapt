@@ -26,6 +26,7 @@
 #'
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and no 
 #' # upper threshold.
+#' library(tidyverse)
 #' GDD <- GDD_linear(Tudela_DW,4.5)
 #' # Calculate GDD in the example dataset using 4.5ºC as base temperature and an 
 #' # upper threshold at 25ºC.

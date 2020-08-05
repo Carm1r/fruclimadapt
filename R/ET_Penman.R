@@ -21,14 +21,15 @@
 #' Proc. R. Soc. Lond. 193:120–145.
 #'
 #' @examples
-#'
-#' # Calculate ET by Penman method in the Tudela_DW example dataset
+#'  # Calculate ET by Penman method in the Tudela_DW example dataset
+#' data(Tudela_DW)
+#' library(tidyverse)
 #' elevation <- 314
 #' latitude <- 42.13132
-#' ET_Penman <- ET_penman(Tudela_DW, latitude, elevation)
+#' ET_Penman <- ET_penman(Tudela_DW, elevation, latitude) 
 #'
 #' @export ET_penman
-#' @import data.table tidyverse zoo 
+#' @import data.table tidyverse zoo
 #' @importFrom lubridate make_date
 #'
 
@@ -38,8 +39,7 @@ ET_penman <- function(climdata, lat, elev){
   gamma <- (0.000665)*P
   Gsc <-0.082
   sigma <-4.903*10^-9
-  climdata <- climdata %>%
-    mutate(Date = make_date(Year, Month, Day))
+  climdata <- climdata %>% mutate(Date = make_date(Year, Month, Day))
   DOY <- yday(climdata$Date)
   Tmean <- (climdata$Tmax + climdata$Tmin)/2
   delta <- 4098*(0.6108*exp(17.27*Tmean/(Tmean+237.3)))/(Tmean+237.3)^2

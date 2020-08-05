@@ -28,7 +28,7 @@ vary in effectiveness in accumulating chill as well as a negative
 influence of high temperatures on previously accumulated chill.
 Chill Units (Utah or Anderson model) perform better than chill hours
 for a wider range of climates, and it could be considered as the
-‘reference’ method nowadays, but it is ill-suited for warm or
+'reference' method nowadays, but it is ill-suited for warm or
 Mediterranean conditions. To date, Chill portions is the best
 existing model for most growing regions, so chill fulfilment
 should preferably be calculated using that method, especially
@@ -38,6 +38,8 @@ studies on climate change.
 \examples{
 
 # Generate hourly temperatures
+library(tidyverse)
+library(lubridate)
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 # Calculate chill as chill units, starting on DOY 305
 Chill_u <- chill_units(Tudela_HT,305)

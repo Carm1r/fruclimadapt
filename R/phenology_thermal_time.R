@@ -30,6 +30,8 @@
 #' # Calculate GDD values from a climate dataset with daily temperature data,
 #' # using a base temperature of 0 C and format it to be compatible with 
 #' # phenology_thermal_time
+#' library(tidyverse)
+#' library(lubridate)
 #' Tudela_GDD <- GDD_linear(Tudela_DW,0) %>% rename(GD=GDD)
 #' # Create a dataframe with start dates and forcing requirements for
 #' # bloom and veraison in the GFV model for 'Chardonnay' (Parker et al, 

@@ -27,7 +27,4 @@ automatic weather station by Gobierno de Navarra.
 \source{
 http://meteo.navarra.es/estaciones/descargardatos_estacion.cfm?IDEstacion=36
 }
-\examples{
-data(Tudela_DW)
-Tudela_ET <- ET_penman_monteith(Tudela_DW,42.13132,314)
-}
+

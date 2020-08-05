@@ -21,6 +21,8 @@
 #' # Select the appropiate columns from the example dataset
 #' # Dates_BT and rename column names to make the file compatible
 #' # with the function
+#' library(tidyverse)
+#' library(lubridate)
 #' Bloom <- Dates_BT %>%
 #'    select(Year, sbloom) %>%
 #'    rename(Fday=sbloom)

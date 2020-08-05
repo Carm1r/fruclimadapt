@@ -9,7 +9,8 @@
 #' @param DOY numeric value or vector specifying the
 #' day of the year for which calculations should be done.
 #' @return list with Sunrise and Sunset times and Daylength.
-#' @note Code adapted from the function \code{\link[chillR]{daylength}}, of the \href{https://CRAN.R-project.org/package=chillR}{chillR} Package
+#' @note Code adapted from the function \code{\link[chillR]{daylength}}, 
+#' of the \href{https://CRAN.R-project.org/package=chillR}{chillR} Package
 #' @references
 #'
 #' Almorox J, Hontoria C and Benito M, 2005. Statistical validation of

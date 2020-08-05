@@ -29,6 +29,8 @@
 #' @examples
 #'
 #' # Generate hourly wind speed for the example dataset
+#' library(tidyverse)
+#' library(lubridate)
 #' Tudela_Hu2 <- hourly_windspeed(Tudela_DW)
 #'
 #' @export hourly_windspeed

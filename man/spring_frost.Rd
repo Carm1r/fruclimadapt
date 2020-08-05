@@ -61,6 +61,8 @@ within the same year.
 \examples{
 
 # Generate hourly temperatures from the example dataset Tudela_DW
+library(tidyverse)
+library(lubridate)
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 # Calculate chill as chill portions, starting on DOY 305
 Chill <- chill_portions(Tudela_HT,305)

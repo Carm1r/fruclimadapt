@@ -33,6 +33,8 @@
 #' @examples
 #' data(Tudela_DW)
 #' data(Bigtop_reqs)
+#' library(tidyverse)
+#' library(lubridate)
 #' # Generate hourly temperatures from the example dataset
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' # Calculate chill as chill portions, starting on DOY 305

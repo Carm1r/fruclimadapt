@@ -43,8 +43,8 @@ Sensitive periods for wind scab in plums or nectarines
 correspond to the early stages of fruit growth, usually the
 first three weeks after full bloom (Michailides et al 1992, 
 Michailides and Morgan 1992), mainly due to persistent leaf
-brushing on fruit skin between the stages "8mm-fruit" and 
-"20mm-fruit". A second sensitive period for cherries, plums, 
+brushing on fruit skin between the stages '8-mm fruit' and 
+'20-mm fruit'. A second sensitive period for cherries, plums, 
 peaches and nectarines is pre-harvest (30 days prior to that), 
 due to persistent friction against branches. The function 
 allows to set both periods or only one of them.
@@ -54,6 +54,8 @@ allows to set both periods or only one of them.
 # Select the appropiate columns from the example Dates_BT dataset
 # and estimate wind scab risk for Big Top nectarine in Tudela using
 # the example weather dataset Tudela_DW
+library(tidyverse)
+library(lubridate)
 Growth_BT <- Dates_BT \%>\% select(Year, Start_ing, End_ing, Harvest)
 WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
 

@@ -41,6 +41,8 @@ upper thresholds, use Topt = 999 and Tcrit = 999.
 \examples{
 
 # Generate hourly temperatures for the example dataset
+library(tidyverse)
+library(lubridate)
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 # Calculate GDH using default threshold temperatures
 GDH_default <- GDH_linear(Tudela_HT)

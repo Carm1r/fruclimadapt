@@ -29,11 +29,12 @@ solar radiation (Rad in MJ m-2 day-1) and mean wind speed at 2m height
 (u2med in m s-1).
 }
 \examples{
-
-# Calculate ET by Penman method in the Tudela_DW example dataset
+ # Calculate ET by Penman method in the Tudela_DW example dataset
+data(Tudela_DW)
+library(tidyverse)
 elevation <- 314
 latitude <- 42.13132
-ET_Penman <- ET_penman(Tudela_DW, latitude, elevation)
+ET_Penman <- ET_penman(Tudela_DW, elevation, latitude) 
 
 }
 \references{

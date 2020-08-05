@@ -29,6 +29,8 @@
 #' @examples
 #'
 #' # Generate hourly temperatures
+#' library(tidyverse)
+#' library(lubridate)
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' 
 #' @export hourly_temps

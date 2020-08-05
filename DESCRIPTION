@@ -10,7 +10,7 @@ Description: Climate is a critical component limiting growing range of plant spe
     vineyards and in the evaluation of the potential consequences of future climate. Bio-
     climatic indices and plant phenology are commonly used to describe the suitability of 
     climate for growing quality fruit and to provide temporal and spatial information about 
-    regarding ongoing and future changes.  ‘fruclimadapt’ streamlines the assessment of 
+    regarding ongoing and future changes. 'fruclimadapt' streamlines the assessment of 
     climate adaptation and the identification of potential risks for grapevines and fruit 
     trees. Procedures in the package allow to i) downscale daily meteorological variables
     to hourly values, ii) estimate chilling and forcing heat accumulation, iii) estimate 
