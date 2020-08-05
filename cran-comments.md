@@ -14,10 +14,7 @@ This is a resubmission. In this version I have:
 
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
-
-There was 1 NOTE:
-
-
+There were no NOTEs.
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package
