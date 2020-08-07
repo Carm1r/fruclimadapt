@@ -59,11 +59,12 @@ The function currently works only with phenological dates occurring
 within the same year.
 }
 \examples{
-
-# Generate hourly temperatures from the example dataset Tudela_DW
+# Generate hourly temperatures from the first five seasons from
+# the example dataset Tudela_DW
 library(tidyverse)
 library(lubridate)
-Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+Tudela_Sel <- Tudela_DW \%>\% filter (Tudela_DW$Year<=2005)
+Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
 # Calculate chill as chill portions, starting on DOY 305
 Chill <- chill_portions(Tudela_HT,305)
 # Calculate forcing heat as growing degree hours (GDH) with the linear model,
@@ -83,7 +84,7 @@ Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305) \%>\%
    rename(Year=Freq_Year,Pheno_date=Freq_DOY)
 # Create a dataframe with daily minimum temperatures with the 
 # format required by spring_frost
-Tmin_Tudela <- Tudela_DW \%>\% 
+Tmin_Tudela <- Tudela_Sel \%>\% 
   mutate(Date=make_date(Year,Month,Day), DOY=yday(Date)) \%>\%
   select(Year, DOY, Tmin) 
 # Predict the number and accumulated damage of the spring frosts using the

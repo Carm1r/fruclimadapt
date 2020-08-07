@@ -1,7 +1,8 @@
-# fruclimadapt 0.4.1
+# fruclimadapt 0.4.2
 ## Bug fixes 
 * Included a closing angle bracket missing in a doi reference in DESCRIPTION
 * Inner angle brackets have been URLencoded in doi reference in DESCRIPTION
+* Modified the examples in functions phenology_sequential() and spring_frost to be  executed in <5s.
 
 # fruclimadapt 0.4.1
 ## Bug fixes 
