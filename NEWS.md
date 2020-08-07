@@ -1,5 +1,10 @@
 # fruclimadapt 0.4.1
 ## Bug fixes 
+* Included a closing angle bracket missing in a doi reference in DESCRIPTION
+* Inner angle brackets have been URLencoded in doi reference in DESCRIPTION
+
+# fruclimadapt 0.4.1
+## Bug fixes 
 * Used undirected quotation marks in the description text
 * Added references describing the methods in the description field of DESCRIPTION
 * Put notes in examples in comments
