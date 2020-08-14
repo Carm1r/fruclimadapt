@@ -1,7 +1,7 @@
 Package: fruclimadapt
 Type: Package
 Title: Evaluation Tools for Assessing Climate Adaptation of Fruit Tree Species
-Version: 0.4.2
+Version: 0.4.3
 Author: Carlos Miranda
 Maintainer: Carlos Miranda <carlos.miranda@unavarra.es>
 Description: Climate is a critical component limiting growing range of plant species, which
@@ -13,7 +13,7 @@ Description: Climate is a critical component limiting growing range of plant spe
     regarding ongoing and future changes. 'fruclimadapt' streamlines the assessment of 
     climate adaptation and the identification of potential risks for grapevines and fruit 
     trees. Procedures in the package allow to i) downscale daily meteorological variables
-    to hourly values (Waichler and Wigmosta (2003) <doi:10.1175/1525-7541(2003)4%3C251:DOHMVF%3E2.0.CO;2>),
+    to hourly values (Forster et al (2016) <doi:10.5194/gmd-9-2315-2016>),
     ii) estimate chilling and forcing heat accumulation (Miranda et al (2019)
     <https://ec.europa.eu/eip/agriculture/sites/agri-eip/files/fg30_mp5_phenology_critical_temperatures.pdf>),
     iii) estimate plant phenology (Schwartz (2012) <doi:10.1007/978-94-007-6925-0>), iv) 

@@ -1,3 +1,7 @@
+# fruclimadapt 0.4.3
+## Bug fixes 
+* Changed a reference in DESCRIPTION with a wrong doi for other referencing the same method.
+
 # fruclimadapt 0.4.2
 ## Bug fixes 
 * Included a closing angle bracket missing in a doi reference in DESCRIPTION

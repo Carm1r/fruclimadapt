@@ -1,8 +1,6 @@
 ## Resubmission
 This is a resubmission. In this version I have:
-* Included a closing angle bracket missing in a doi reference in DESCRIPTION
-* Inner angle brackets have been URLencoded in doi reference in DESCRIPTION
-* Modified the examples in functions phenology_sequential() and spring_frost to be  executed in <5s. 
+* Modified a reference with a problematic DOI encoding for other containing the same information.
 ## Test environments
 * local OS X install, R 4.0.0
 * ubuntu 16.04 (on travis-ci, devel and release), R 4.0.0
