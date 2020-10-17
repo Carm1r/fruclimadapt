@@ -3,19 +3,21 @@
 #'
 #' This function estimates the number of days that can be 
 #' considered as highly favorable or unfavorable for anthocyanin 
-#' accumulation in the skin of red apple cultivars during the 
-#' month (30 days) before harvest. A highly favorable day (Cool
-#' day) is considered when the daily maximum temperature is below
-#' 26ºC, a highly unfavorable day (Hot day) when the minimum 
-#' temperature is above 20ºC (Lin-Wang et al, 2011). The average
-#' of maximum and minimum temperatures during the same period is 
-#' also provided. The function allows testing for several harvest 
-#' dates.
+#' accumulation in the skin of red apple cultivars during a
+#' user defined pre-harvest period (30 days  by default). 
+#' A highly favorable day (Cool day) is considered when the daily 
+#' maximum temperature is below 26ºC, a highly unfavorable day (Hot day)
+#' when the minimum temperature is above 20ºC (Lin-Wang et al, 2011). 
+#' The average of maximum and minimum temperatures during the same 
+#' period is also provided. The function allows testing for several 
+#' harvest dates.
 #'
 #' @param climdata a dataframe with daily maximum and minimum temperatures.
 #'  Must contain the columns Year, Month, Day, Tmax, Tmin.
 #' @param harvest a vector with expected harvest days
 #' (expressed as day of the year)
+#' @param span the period (in days) before harvest that will be analyzed. By 
+#' default, this parameter is set in 30 days.
 #' @return dataframe with the number of highly favorable (Cool_d) 
 #' and unfavorable (Hot_d) days for apple red color, as well as the 
 #' average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
@@ -43,7 +45,7 @@
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date
 
-color_potential <- function(climdata, harvest)
+color_potential <- function(climdata, harvest, span=30)
 {
   climdata <- select(climdata,"Year","Month","Day","Tmax","Tmin") %>%
     mutate(Date = make_date(Year, Month, Day),
@@ -63,7 +65,7 @@ color_potential <- function(climdata, harvest)
     for (nharv in 1:length(harvest)){
       Day_h <- as.numeric(harvest[nharv])
       evacol_fil <- climdata_fil %>%
-        filter(climdata_fil$DOY>(Day_h-30) & climdata_fil$DOY<=Day_h) %>%
+        filter(climdata_fil$DOY>(Day_h-span) & climdata_fil$DOY<=Day_h) %>%
         summarise(Cool_d=sum(Cool),Hot_d=sum(Hot),Tmax_avg=mean(Tmax),Tmin_avg=mean(Tmin)) %>%
         select(Cool_d,Hot_d,Tmax_avg,Tmin_avg)
       new.row.df <- data.frame(Anno,Day_h) %>%

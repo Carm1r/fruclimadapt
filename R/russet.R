@@ -1,11 +1,15 @@
 #' Estimation of the russet risk for apple and pear fruits
 #'
-#' This function assesses the risk of russet in apple and pear 
-#' fruits by estimating the number of hours with relative 
-#' humidity above 75\% in the critical period (between 12 
-#' and 30 days after full bloom, DAFB). The function requires
-#' hourly temperatures and humidity, if only daily data is 
-#' available, the function hourly_RH can be used to estimate them.
+#' This function assesses the risk of russet in fruit skins. The
+#' risk is defined by the number of hours with the relative humidity (RH)
+#' above a threshold during a given period. For reference, in 'Conference' 
+#' pear the risk is defined by the number of hours with RH> 75\% from 
+#' 12 to 30 days after full bloom (Alegre, 2013). In 'Golden' apple, 
+#' the risk is defined by the number of hours with RH> 55\% from 
+#' 30 to 34 days after full bloom (Barcelo-Vidal et al., 2013). 
+#' The function requires hourly temperatures and humidity, 
+#' if only daily data is available, the function hourly_RH can be 
+#' used to estimate them.
 #'
 #' @param climdata a dataframe with hourly temperature and RH
 #' data. Required columns are Date, Year, Month, Day, DOY (julian day),
@@ -13,9 +17,21 @@
 #' @param fendata a dataframe with julian day of occurrence of the full
 #' bloom (F2) phenological stage.
 #' Must contain the columns Year and Fday in that order.
-#' @return data frame with the number of hours with RH>75\%
-#' between 12 and 30 DAFB (Russet_h) each year in the series.
+#' @param RH_crit the relative humidity threshold
+#' @param init_d the initial date (as days after full bloom) of the sensitive period
+#' @param end_d the end date (as days after full bloom) of the sensitive period
+#' @return data frame with the number of risk hours (Russet_hours)
+#' in the sensitive period for each year in the series.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
+#' @references
+#'
+#' Alegre S. 2013. Tecnicas de cultivo. In. VII Foro INIA "adaptacion a 
+#' cambio climatico en la produccion fruticola de hueso y pepita". Madrid, 
+#' Spain, pp 1-18
+#' Barcelo-Vidal C, Bonany J, Martin-Fernandez JA and Carbo J. 2013. 
+#' Modelling of weather parameters to predict russet on 'Golden Delicious'
+#' apple. J. Hort. Sci. Biotech. 88: 624-630.
+#'
 #' @examples
 #'
 #' # Select the appropiate columns from the example dataset
@@ -28,22 +44,23 @@
 #'    rename(Fday=sbloom)
 #' # Obtain estimated hourly RH from the example dataset Tudela_DW
 #' RH_h <- hourly_RH(Tudela_DW, 42.13132)
-#' # Estimate the number of russet-inducing days for each season
-#' Russet_Risk <-russet(RH_h,Bloom)
+#' # Estimate the number of russet-inducing days for a RH>55\% 
+#' # between 30 to 34 days after full bloom for each season
+#' Russet_Risk <-russet(RH_h,Bloom,55,30,34)
 #' 
 #' @export russet
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date
 
-russet <- function(climdata, fendata)
+russet <- function(climdata, fendata, RH_crit, init_d, end_d)
 {
   climdata <- climdata %>%
     group_by(Date) %>%
-    summarise(h_russ= sum(RH>=75)) %>%
+    summarise(h_russ= sum(RH>=RH_crit)) %>%
     mutate(Year=year(Date),Month=month(Date),Day=day(Date), DOY=yday(Date)) %>%
     select(-h_russ,h_russ)
   Seasons <- unique(fendata$Year)
-  russrisks_cn <- c("Year","Russ_h")
+  russrisks_cn <- c("Year","Russ_hours")
   russrisk.df <-data.frame(matrix(ncol=2, nrow=0, byrow=FALSE))
   colnames(russrisk.df) <- russrisks_cn
   for (sea in 1:(length(Seasons))){
@@ -52,14 +69,14 @@ russet <- function(climdata, fendata)
     Fday <- as.numeric(Fdate[2])
     fendata_fil <- fendata %>% filter(fendata$Year==Anno)
     russhours_fil <- climdata %>%
-      filter(climdata$Year==Anno & climdata$DOY>=Fday+12 & climdata$DOY<=Fday+30)
+      filter(climdata$Year==Anno & climdata$DOY>=Fday+init_d & climdata$DOY<=Fday+end_d)
     russhours_fil <- select(russhours_fil, h_russ)
     russhours<- sum(unlist(russhours_fil, use.names=FALSE))
     new.row.df <- data.frame(Anno,russhours)
     russrisk.df <-rbind(russrisk.df,new.row.df)
   }
   russrisk.df <- russrisk.df %>%
-    rename(Year=Anno, Russet_h=russhours)
+    rename(Year=Anno, Russet_hours=russhours)
   return(russrisk.df)
 }
 

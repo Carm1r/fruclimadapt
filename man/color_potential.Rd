@@ -5,7 +5,7 @@
 \title{Evaluation of weather conditions for anthocyanin formation
 in apple skin}
 \usage{
-color_potential(climdata, harvest)
+color_potential(climdata, harvest, span = 30)
 }
 \arguments{
 \item{climdata}{a dataframe with daily maximum and minimum temperatures.
@@ -13,6 +13,9 @@ Must contain the columns Year, Month, Day, Tmax, Tmin.}
 
 \item{harvest}{a vector with expected harvest days
 (expressed as day of the year)}
+
+\item{span}{the period (in days) before harvest that will be analyzed. By 
+default, this parameter is set in 30 days.}
 }
 \value{
 dataframe with the number of highly favorable (Cool_d) 
@@ -24,14 +27,14 @@ temperatures for each year (Year) in the series during the
 \description{
 This function estimates the number of days that can be 
 considered as highly favorable or unfavorable for anthocyanin 
-accumulation in the skin of red apple cultivars during the 
-month (30 days) before harvest. A highly favorable day (Cool
-day) is considered when the daily maximum temperature is below
-26ºC, a highly unfavorable day (Hot day) when the minimum 
-temperature is above 20ºC (Lin-Wang et al, 2011). The average
-of maximum and minimum temperatures during the same period is 
-also provided. The function allows testing for several harvest 
-dates.
+accumulation in the skin of red apple cultivars during a
+user defined pre-harvest period (30 days  by default). 
+A highly favorable day (Cool day) is considered when the daily 
+maximum temperature is below 26ºC, a highly unfavorable day (Hot day)
+when the minimum temperature is above 20ºC (Lin-Wang et al, 2011). 
+The average of maximum and minimum temperatures during the same 
+period is also provided. The function allows testing for several 
+harvest dates.
 }
 \examples{
 

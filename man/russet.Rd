@@ -4,7 +4,7 @@
 \alias{russet}
 \title{Estimation of the russet risk for apple and pear fruits}
 \usage{
-russet(climdata, fendata)
+russet(climdata, fendata, RH_crit, init_d, end_d)
 }
 \arguments{
 \item{climdata}{a dataframe with hourly temperature and RH
@@ -14,18 +14,28 @@ Hour and RH.}
 \item{fendata}{a dataframe with julian day of occurrence of the full
 bloom (F2) phenological stage.
 Must contain the columns Year and Fday in that order.}
+
+\item{RH_crit}{the relative humidity threshold}
+
+\item{init_d}{the initial date (as days after full bloom) of the sensitive period}
+
+\item{end_d}{the end date (as days after full bloom) of the sensitive period}
 }
 \value{
-data frame with the number of hours with RH>75\%
-between 12 and 30 DAFB (Russet_h) each year in the series.
+data frame with the number of risk hours (Russet_hours)
+in the sensitive period for each year in the series.
 }
 \description{
-This function assesses the risk of russet in apple and pear 
-fruits by estimating the number of hours with relative 
-humidity above 75\% in the critical period (between 12 
-and 30 days after full bloom, DAFB). The function requires
-hourly temperatures and humidity, if only daily data is 
-available, the function hourly_RH can be used to estimate them.
+This function assesses the risk of russet in fruit skins. The
+risk is defined by the number of hours with the relative humidity (RH)
+above a threshold during a given period. For reference, in 'Conference' 
+pear the risk is defined by the number of hours with RH> 75\% from 
+12 to 30 days after full bloom (Alegre, 2013). In 'Golden' apple, 
+the risk is defined by the number of hours with RH> 55\% from 
+30 to 34 days after full bloom (Barcelo-Vidal et al., 2013). 
+The function requires hourly temperatures and humidity, 
+if only daily data is available, the function hourly_RH can be 
+used to estimate them.
 }
 \examples{
 
@@ -39,9 +49,18 @@ Bloom <- Dates_BT \%>\%
    rename(Fday=sbloom)
 # Obtain estimated hourly RH from the example dataset Tudela_DW
 RH_h <- hourly_RH(Tudela_DW, 42.13132)
-# Estimate the number of russet-inducing days for each season
-Russet_Risk <-russet(RH_h,Bloom)
+# Estimate the number of russet-inducing days for a RH>55\\% 
+# between 30 to 34 days after full bloom for each season
+Russet_Risk <-russet(RH_h,Bloom,55,30,34)
 
+}
+\references{
+Alegre S. 2013. Tecnicas de cultivo. In. VII Foro INIA "adaptacion a 
+cambio climatico en la produccion fruticola de hueso y pepita". Madrid, 
+Spain, pp 1-18
+Barcelo-Vidal C, Bonany J, Martin-Fernandez JA and Carbo J. 2013. 
+Modelling of weather parameters to predict russet on 'Golden Delicious'
+apple. J. Hort. Sci. Biotech. 88: 624-630.
 }
 \author{
 Carlos Miranda, \email{carlos.miranda@unavarra.es}

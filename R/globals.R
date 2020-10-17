@@ -10,4 +10,4 @@ globalVariables(c("%>%","BEDD_day","Chill","Cool","Cool_d","Cool_n","DOY","DTR",
                          "bind_cols","bind_rows","day","delt","everything","filter",
                          "ftmprt","group_by","h_russ","h_wind","h_wpol","if_else","m_lat",
                          "make_datetime","mutate","rename","right_join","select","slice",
-                         "sr","summarise","summarise_all","tail","windh","wpol","case_when"))
+                         "sr","summarise","summarise_all","tail","windh","wpol","case_when","DTR_a","DTR_d"))

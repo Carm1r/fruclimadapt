@@ -1,3 +1,10 @@
+# fruclimadapt 0.4.4
+## New features
+* New function (DTR) to calculate the mean diurnal temperature range
+* color_potential now allows to define the evaluation period
+* russet now allows to define the critical relative humidity and the evaluation period
+* coolness_index now allows to define the evaluation period
+
 # fruclimadapt 0.4.3
 ## Bug fixes 
 * Changed a reference in DESCRIPTION with a wrong doi for other referencing the same method.
