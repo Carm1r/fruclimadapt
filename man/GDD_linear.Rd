@@ -30,12 +30,12 @@ have equal value in GDD summation.
 }
 \examples{
 
-# Calculate GDD in the example dataset using 4.5ÂºC as base temperature and no 
+# Calculate GDD in the example dataset using 4.5ºC as base temperature and no 
 # upper threshold.
 library(tidyverse)
 GDD <- GDD_linear(Tudela_DW,4.5)
-# Calculate GDD in the example dataset using 4.5ÂºC as base temperature and an 
-# upper threshold at 25ÂºC.
+# Calculate GDD in the example dataset using 4.5ºC as base temperature and an 
+# upper threshold at 25ºC.
 GDD <- GDD_linear(Tudela_DW,4.5,25)
 
 

@@ -19,10 +19,11 @@ default, this parameter is set in 30 days.}
 }
 \value{
 dataframe with the number of highly favorable (Cool_d) 
-and unfavorable (Hot_d) days for apple red color, as well as the 
-average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
+and unfavorable (Hot_d) days for apple red color, as well as the sums of
+the observed (TA_obs) and effective (TA_cef) daily thermal amplitudes.
+The average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
 temperatures for each year (Year) in the series during the 
-30 days previous to each harvest date (Day_h) provided.
+30 days previous to each harvest date (Day_h) is also provided.
 }
 \description{
 This function estimates the number of days that can be 
@@ -31,7 +32,15 @@ accumulation in the skin of red apple cultivars during a
 user defined pre-harvest period (30 days  by default). 
 A highly favorable day (Cool day) is considered when the daily 
 maximum temperature is below 26ºC, a highly unfavorable day (Hot day)
-when the minimum temperature is above 20ºC (Lin-Wang et al, 2011). 
+when the minimum temperature is above 20ºC (Lin-Wang et al, 2011). It
+also calculates an empirical index in which daily thermal amplitude 
+is corrected to account for the effective range of temperatures for
+anthocyanin accumulation in the skin (TA_cef). The index considers that
+daily temperatures above 26ºC are increasingly less favorable for 
+anthocyanin formation, and thus calculates a corrected maximum 
+temperature using a linear function up to 35ºC, where it is left 
+constant at a value of 16, so that the adjusted daily thermal amplitude 
+for Tmax>26ºC is smaller than the observed. 
 The average of maximum and minimum temperatures during the same 
 period is also provided. The function allows testing for several 
 harvest dates.
