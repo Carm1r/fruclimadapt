@@ -1,3 +1,7 @@
+# fruclimadapt 0.4.5
+## Bug fixes 
+* Fixed a conflicting argument in right_join() used in pollination_weather().
+
 # fruclimadapt 0.4.4
 ## New features
 * New function (DTR) to calculate the mean diurnal temperature range

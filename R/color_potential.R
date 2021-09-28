@@ -62,8 +62,8 @@ color_potential <- function(climdata, harvest, span=30)
            Cool=if_else(Tmax<=26,1,0),
            Hot=ifelse(Tmin>=20,1,0),
            TA=Tmax-Tmin,
-           TA_adj=ifelse(Tmax<26,Tmax-Tmin,
-                        ifelse(Tmax>35,16, (51-Tmax)-Tmin)))
+           TA_adj=ifelse(Tmax<=26,Tmax-Tmin,
+                        ifelse(Tmax>35,16-Tmin, (51-Tmax)-Tmin)))
   seasons <- unique(climdata$Year)
 
   colorpot_cn <- c("Year","Harvest_d","Cool_d","Hot_d","TA_obs","TA_cef","Tmax_avg","Tmin_avg")

@@ -1,7 +1,7 @@
 Package: fruclimadapt
 Type: Package
 Title: Evaluation Tools for Assessing Climate Adaptation of Fruit Tree Species
-Version: 0.4.4.9000
+Version: 0.4.5
 Author: Carlos Miranda
 Maintainer: Carlos Miranda <carlos.miranda@unavarra.es>
 Description: Climate is a critical component limiting growing range of plant species, which
