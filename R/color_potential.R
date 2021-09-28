@@ -7,7 +7,15 @@
 #' user defined pre-harvest period (30 days  by default). 
 #' A highly favorable day (Cool day) is considered when the daily 
 #' maximum temperature is below 26ºC, a highly unfavorable day (Hot day)
-#' when the minimum temperature is above 20ºC (Lin-Wang et al, 2011). 
+#' when the minimum temperature is above 20ºC (Lin-Wang et al, 2011). It
+#' also calculates an empirical index in which daily thermal amplitude 
+#' is corrected to account for the effective range of temperatures for
+#' anthocyanin accumulation in the skin (TA_cef). The index considers that
+#' daily temperatures above 26ºC are increasingly less favorable for 
+#' anthocyanin formation, and thus calculates a corrected maximum 
+#' temperature using a linear function up to 35ºC, where it is left 
+#' constant at a value of 16, so that the adjusted daily thermal amplitude 
+#' for Tmax>26ºC is smaller than the observed. 
 #' The average of maximum and minimum temperatures during the same 
 #' period is also provided. The function allows testing for several 
 #' harvest dates.
@@ -19,10 +27,11 @@
 #' @param span the period (in days) before harvest that will be analyzed. By 
 #' default, this parameter is set in 30 days.
 #' @return dataframe with the number of highly favorable (Cool_d) 
-#' and unfavorable (Hot_d) days for apple red color, as well as the 
-#' average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
+#' and unfavorable (Hot_d) days for apple red color, as well as the sums of
+#' the observed (TA_obs) and effective (TA_cef) daily thermal amplitudes.
+#' The average of the maximum (Tmax_avg) and minimum (Tmin_avg) 
 #' temperatures for each year (Year) in the series during the 
-#' 30 days previous to each harvest date (Day_h) provided.
+#' 30 days previous to each harvest date (Day_h) is also provided.
 #' @author Carlos Miranda, \email{carlos.miranda@@unavarra.es}
 #' @references
 #'
@@ -51,11 +60,14 @@ color_potential <- function(climdata, harvest, span=30)
     mutate(Date = make_date(Year, Month, Day),
            DOY = yday(Date),
            Cool=if_else(Tmax<=26,1,0),
-           Hot=ifelse(Tmin>=20,1,0))
+           Hot=ifelse(Tmin>=20,1,0),
+           TA=Tmax-Tmin,
+           TA_adj=ifelse(Tmax<26,Tmax-Tmin,
+                        ifelse(Tmax>35,16, 51-Tmin)))
   seasons <- unique(climdata$Year)
 
-  colorpot_cn <- c("Year","Harvest_d","Cool_d","Hot_d","Tmax_avg","Tmin_avg")
-  colorpot.df <-data.frame(matrix(ncol=6, nrow=0, byrow=FALSE))
+  colorpot_cn <- c("Year","Harvest_d","Cool_d","Hot_d","TA_obs","TA_cef","Tmax_avg","Tmin_avg")
+  colorpot.df <-data.frame(matrix(ncol=8, nrow=0, byrow=FALSE))
   colnames(colorpot.df) <- colorpot_cn
 
   for (sea in 1:length(seasons)){
@@ -66,8 +78,9 @@ color_potential <- function(climdata, harvest, span=30)
       Day_h <- as.numeric(harvest[nharv])
       evacol_fil <- climdata_fil %>%
         filter(climdata_fil$DOY>(Day_h-span) & climdata_fil$DOY<=Day_h) %>%
-        summarise(Cool_d=sum(Cool),Hot_d=sum(Hot),Tmax_avg=mean(Tmax),Tmin_avg=mean(Tmin)) %>%
-        select(Cool_d,Hot_d,Tmax_avg,Tmin_avg)
+        summarise(Cool_d=sum(Cool),Hot_d=sum(Hot),TA_obs=sum(TA),
+                  TA_cef=sum(TA_adj),Tmax_avg=mean(Tmax),Tmin_avg=mean(Tmin)) %>%
+        select(Cool_d,Hot_d,TA_obs,TA_cef,Tmax_avg,Tmin_avg)
       new.row.df <- data.frame(Anno,Day_h) %>%
         cbind(evacol_fil)
       colorpot.df <-rbind(colorpot.df,new.row.df)
