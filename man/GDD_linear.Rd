@@ -32,7 +32,8 @@ have equal value in GDD summation.
 
 # Calculate GDD in the example dataset using 4.5ºC as base temperature and no 
 # upper threshold.
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 GDD <- GDD_linear(Tudela_DW,4.5)
 # Calculate GDD in the example dataset using 4.5ºC as base temperature and an 
 # upper threshold at 25ºC.

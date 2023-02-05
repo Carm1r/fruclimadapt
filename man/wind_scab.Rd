@@ -54,7 +54,8 @@ allows to set both periods or only one of them.
 # Select the appropiate columns from the example Dates_BT dataset
 # and estimate wind scab risk for Big Top nectarine in Tudela using
 # the example weather dataset Tudela_DW
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
 Growth_BT <- Dates_BT \%>\% select(Year, Start_ing, End_ing, Harvest)
 WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)

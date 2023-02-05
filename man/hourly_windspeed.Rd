@@ -28,7 +28,8 @@ daytime hours.
 \examples{
 
 # Generate hourly wind speed for the example dataset
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
 Tudela_Hu2 <- hourly_windspeed(Tudela_DW)
 

@@ -37,7 +37,8 @@ assumes a constant value of 2 m s-1.
 \examples{
 
 # Calculate ET by Penman-Monteith method in the Tudela_DW example dataset
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 elevation <- 314
 latitude <- 42.13132
 ET_PM <- ET_penman_monteith(Tudela_DW, latitude, elevation)
