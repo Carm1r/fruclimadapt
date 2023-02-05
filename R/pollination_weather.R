@@ -56,7 +56,7 @@
 #' library(magrittr)
 #' library(dplyr)
 #' library(lubridate)
-#' Bloom_BT <- Dates_BT %>% select(Year, sbloom, ebloom) %>% filter(Dates_BT$Year<=2005)
+#' Bloom_BT <- Dates_BT %>% select(Year, sbloom, ebloom) %>% filter(Dates_BT$Year<=2002)
 #' Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
 #' 
 #' @export pollination_weather

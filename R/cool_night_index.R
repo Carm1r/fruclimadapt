@@ -33,7 +33,8 @@
 #' library(magrittr)
 #' library(dplyr)
 #' Weather <- Tudela_DW %>%
-#'    select(Year, Month, Day, Tmax, Tmin)
+#'    select(Year, Month, Day, Tmax, Tmin) %>% 
+#'    filter (Tudela_DW$Year<=2002)
 #' harvest <- c(225, 250, 275)
 #' coolness <- coolness_index(Weather, harvest)
 #'
