@@ -43,10 +43,11 @@ phenological stage.
 \examples{
 data(Tudela_DW)
 data(Bigtop_reqs)
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
 # Select the first five seasons in Tudela_DW example dataset
-Tudela_Sel <- Tudela_DW \%>\% filter (Tudela_DW$Year<=2005)
+Tudela_Sel <- Tudela_DW \%>\% filter (Tudela_DW$Year<=2003)
 # Generate hourly temperatures from the example dataset
 Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
 # Calculate chill as chill portions, starting on DOY 305

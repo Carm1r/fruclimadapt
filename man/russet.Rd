@@ -42,11 +42,13 @@ used to estimate them.
 # Select the appropiate columns from the example dataset
 # Dates_BT and rename column names to make the file compatible
 # with the function
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
 Bloom <- Dates_BT \%>\%
    select(Year, sbloom) \%>\%
-   rename(Fday=sbloom)
+   rename(Fday=sbloom) \%>\%
+   filter(Year<=2003)
 # Obtain estimated hourly RH from the example dataset Tudela_DW
 RH_h <- hourly_RH(Tudela_DW, 42.13132)
 # Estimate the number of russet-inducing days for a RH>55\\% 

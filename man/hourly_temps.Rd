@@ -28,7 +28,8 @@ using the equations by Spencer (1971) and Almorox et al. (2005).
 \examples{
 
 # Generate hourly temperatures
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
 Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 

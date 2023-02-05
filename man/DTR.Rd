@@ -30,7 +30,8 @@ requires the initial and end dates to be in the same year.
 
 # Select the appropiate columns from the Tudela_DW example dataset,
 # and estimate the mean DTR for July on each year in the dataset.
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 Weather <- Tudela_DW \%>\%
    select(Year, Month, Day, Tmax, Tmin)
 DTR_July <- DTR(Weather, 182, 212)

@@ -61,9 +61,10 @@ within the same year.
 \examples{
 # Generate hourly temperatures from the first five seasons from
 # the example dataset Tudela_DW
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(lubridate)
-Tudela_Sel <- Tudela_DW \%>\% filter (Tudela_DW$Year<=2005)
+Tudela_Sel <- Tudela_DW \%>\% filter (Tudela_DW$Year<=2003)
 Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
 # Calculate chill as chill portions, starting on DOY 305
 Chill <- chill_portions(Tudela_HT,305)

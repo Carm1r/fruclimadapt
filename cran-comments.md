@@ -2,6 +2,7 @@
 This is a resubmission. In this version I have fixed some problems with dependencies. 
 * data.table and zoo are now called exclusively for the functions used
 * fixed a syntax error in a functionin in pollination_weather
+* examples with lower execution time have been included
 
 ## Test environments
 * local OS X install, R 4.2.2
