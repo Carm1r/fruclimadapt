@@ -39,7 +39,9 @@
 #' library(magrittr)
 #' library(dplyr)
 #' library(lubridate)
-#' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+#' Weather <- Tudela_DW %>%
+#'    filter (Tudela_DW$Year==2003)
+#' Tudela_HT <- hourly_temps(Weather,42.13132)
 #' # Calculate GDH using default threshold temperatures
 #' GDH_default <- GDH_asymcur(Tudela_HT)
 #' # Calculate GDH using as custom set temperature thresholds
