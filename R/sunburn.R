@@ -38,7 +38,8 @@
 #'
 #' # Create one vector with start date (i.e. hand thinning) and a vector 
 #' # with harvest dates to test sunburn risk for several cultivars using.
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
 #' Thinning_d <- 135
 #' Harvest_d <- c(225,245,260)

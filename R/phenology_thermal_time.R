@@ -30,7 +30,8 @@
 #' # Calculate GDD values from a climate dataset with daily temperature data,
 #' # using a base temperature of 0 C and format it to be compatible with 
 #' # phenology_thermal_time
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
 #' Tudela_GDD <- GDD_linear(Tudela_DW,0) %>% rename(GD=GDD)
 #' # Create a dataframe with start dates and forcing requirements for

@@ -33,7 +33,8 @@
 #' @examples
 #'
 #' # Generate hourly temperatures
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' # Calculate chill as chill units, starting on DOY 305

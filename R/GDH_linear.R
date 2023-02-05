@@ -33,7 +33,8 @@
 #' @examples
 #'
 #' # Generate hourly temperatures for the example dataset
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' library(lubridate)
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' # Calculate GDH using default threshold temperatures
