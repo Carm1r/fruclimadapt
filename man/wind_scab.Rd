@@ -57,8 +57,16 @@ allows to set both periods or only one of them.
 library(magrittr)
 library(dplyr)
 library(lubridate)
-Growth_BT <- Dates_BT \%>\% select(Year, Start_ing, End_ing, Harvest)
-WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
+Bloom <- Dates_BT \%>\%
+   select(Year, sbloom) \%>\%
+   rename(Fday=sbloom) \%>\%
+   filter(Year==2003)
+
+Growth_BT <- Dates_BT \%>\% select(Year, Start_ing, End_ing, Harvest) \%>\% 
+   filter(Year==2003)
+Weather <- Tudela_DW \%>\%
+   filter (Tudela_DW$Year==2003)
+WindRisk_BT <- wind_scab(Weather, Growth_BT)
 
 }
 \references{

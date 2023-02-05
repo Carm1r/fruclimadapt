@@ -6,8 +6,10 @@ This is a resubmission. In this version I have fixed some problems with dependen
 
 ## Test environments
 * local OS X install, R 4.2.2
-* ubuntu 16.04 (on travis-ci, devel and release), R 4.0.0
 * local Win10 install, R 4.2.2
+* Ubuntu Linux 20.04.1 LTS, R-release, GCC (on R-hub), R 4.2.2
+* Fedora Fedora Linux, R-devel, clang, gfortran (on R-hub)
+
 
 ## R CMD check results
 There were no ERRORs or WARNINGs. 

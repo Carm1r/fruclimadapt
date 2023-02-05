@@ -1,0 +1,2007 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8]{inputenc} % @SET ENCODING@
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `fruclimadapt'}}
+\par\bigskip{\large \today}
+\end{center}
+\inputencoding{utf8}
+\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdftitle = {fruclimadapt: Evaluation Tools for Assessing Climate Adaptation of Fruit Tree Species}}}{}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Evaluation Tools for Assessing Climate Adaptation of Fruit Tree Species}
+\item[Version]\AsIs{0.4.5}
+\item[Author]\AsIs{Carlos Miranda}
+\item[Maintainer]\AsIs{Carlos Miranda }\email{carlos.miranda@unavarra.es}\AsIs{}
+\item[Description]\AsIs{Climate is a critical component limiting growing range of plant species, which
+also determines cultivar adaptation to a region. The evaluation of climate influence on
+fruit production is critical for decision-making in the design stage of orchards and 
+vineyards and in the evaluation of the potential consequences of future climate. Bio-
+climatic indices and plant phenology are commonly used to describe the suitability of 
+climate for growing quality fruit and to provide temporal and spatial information about 
+regarding ongoing and future changes. 'fruclimadapt' streamlines the assessment of 
+climate adaptation and the identification of potential risks for grapevines and fruit 
+trees. Procedures in the package allow to i) downscale daily meteorological variables
+to hourly values (Forster et al (2016) <}\Rhref{https://doi.org/10.5194/gmd-9-2315-2016}{doi:10.5194/gmd-9-2315-2016}\AsIs{>),
+ii) estimate chilling and forcing heat accumulation (Miranda et al (2019)
+<}\url{https://ec.europa.eu/eip/agriculture/sites/default/files/fg30_mp5_phenology_critical_temperatures.pdf}\AsIs{>),
+iii) estimate plant phenology (Schwartz (2012) <}\Rhref{https://doi.org/10.1007/978-94-007-6925-0}{doi:10.1007/978-94-007-6925-0}\AsIs{>), iv) 
+calculate bioclimatic indices to evaluate fruit tree and grapevine adaptation (e.g. Badr 
+et al (2017) <}\Rhref{https://doi.org/10.3354/cr01532}{doi:10.3354/cr01532}\AsIs{>), v) estimate the incidence of weather-related disorders 
+in fruits (e.g. Snyder and de Melo-Abreu (2005, ISBN:92-5-105328-6) and vi)
+estimate plant water requirements (Allen et al (1998, ISBN:92-5-104219-5)). }
+\item[Depends]\AsIs{R (>= 3.5.0)}
+\item[Imports]\AsIs{data.table, magrittr, dplyr, zoo, lubridate}
+\item[License]\AsIs{GPL (>= 3)}
+\item[Encoding]\AsIs{UTF-8}
+\item[LazyData]\AsIs{true}
+\item[RoxygenNote]\AsIs{7.2.3}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{Bigtop\_reqs}{Chill and heat requirements for Big Top nectarine}{Bigtop.Rul.reqs}
+%
+\begin{Description}\relax
+Chill and forcing heat requirements for the phenological stages between
+'bud swelling' (B, 51 in Baggliolini and BBCH scales, respectively) and 'ovary 
+surrounded by dying sepal crown' (I, 72) in Big Top nectarine. For use in 
+combination with the example dataset Tudela\_DW.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data("Bigtop_reqs")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data frame with 7 observations on the following 2 variables.
+\begin{description}
+
+\item[\code{Creq}] a numeric vector, chill portions
+\item[\code{Freq}] a numeric vector, forcing heat as growing degree hours
+
+\end{description}
+
+\end{Format}
+%
+\begin{Details}\relax
+Chill requirements are in chill portions, starting chill accummulation on 1 november
+(day of year 305), forcing heat is as growing degree hours calculated with linear 
+method with a base temperature of 4.7 C and no optimal and upper critical thresholds.
+\end{Details}
+%
+\begin{Source}\relax
+Miranda C, Santesteban LG and Royo JB. 2013. Evaluation and fitting of models for
+determining peach phenological stages at a regional scale. Agric Forest Meteorol 
+178-179: 129-139.
+\end{Source}
+\inputencoding{utf8}
+\HeaderA{bioclim\_hydrotherm}{Calculation of hydrothermal viticultural indices (Branas, Dryness Index)}{bioclim.Rul.hydrotherm}
+%
+\begin{Description}\relax
+This function calculates the hydrotermic index of Branas, Bernon and 
+Levandoux (BBLI, Branas et al 1946) and the Dryness index (Riou et al 1994).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+bioclim_hydrotherm(climdata, lat, elev)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily weather data, including temperature
+Required columns are Year, Month, Day, Tmax, Tmin and Prec. Optional columns 
+are RHmax, RHmin, Rad and u2med.
+
+\item[\code{lat}] the latitude of the site, in decimal degrees. Use positive values
+for Northern latitudes and negatives for Southern.
+
+\item[\code{elev}] the elevation of the site, in meters above sea level.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+The BBLI takes into account  the influence  of  both  
+temperature  and  precipitation  on  grape yield  and  wine  quality.  
+This  index  is  the  sum of  the products of monthly mean temperature 
+(Tmean, in Celsius) and monthly  accumulated  precipitation  amount  (Prec,in mm)
+during the April to September season (Northern Hemisphere) or October to 
+February (Southern Hemisphere).
+
+The  Dryness  index  (DI)  is  measured  based  on  an adaptation  of  
+the  potential  water  balance  of  the  soil index of Riou (Riou et al., 
+1994), developed specially for vineyard use. It  enables  the  characterization
+of the  water  component  of  the  climate  in  a  grape-growing  region,
+taking into account the climatic demand of a standard vineyard, evaporation
+from bare soil, rainfall without deduction for surface runoff or drainage. 
+It indicates the potential  water  availability  in  the  soil,  related  
+to the level of dryness in a region (Tonietto and Carbonneau, 2004). The
+index uses potential evapotranspiration calculated here with 
+the Penman Monteith method.
+
+Minimum data requirements to calculate the indices are daily temperatures 
+(maximum and minimum temperatures, Tmax and Tmin) and rainfall (l m-2), 
+whereas relative humidity (RHmax and RHmin, \%), solar radiation 
+(Rad, MJ m-2 day-1) and mean wind speed at 2m height (u2med,m s-1) are optional. 
+If missing, the function integrates FAO56 (Allen et al 1998) estimations 
+for solar radiation and vapor pressure (air humidity) from daily temperatures. 
+If there is no information available on wind speed, the function assumes a 
+constant value of 2 m s-1.
+\end{Details}
+%
+\begin{Value}
+dataframe with the values of the indices for each season in the
+climdata file.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Allen RG, Pereira LS, Raes D, Smith M. 1998. Crop evapotranspiration. Guidelines
+for computing crop water requirements. FAO Irrigation and drainage paper 56. Food 
+and Agriculture Organization of the United Nations
+Branas J, Bernon G, Levadoux L. 1946. Elements de Viticulture Generale. 
+Imp. Dehan, Bordeaux
+Riou C, Carbonneau A, Becker N, Caló A, Costacurta A, Castro R, Pinto PA, 
+Carneiro LC, Lopes C, Climaco P, Panagiotou MM, Sotes V,Beaumond HC, Burril A, 
+Maes J, Vossen P. 1994. Le determinisme climatique de la maturation du raisin: 
+application au zonage de la teneur em sucre dans la communaute europenne. 
+Office des Publications Officielles des Communautes Europennes: Luxembourg, 322pp.
+
+Tonietto J, Carbonneau A. 2004. A multicriteria climatic classification system 
+for grape-growing regions worldwide. Agricultural and Forest Meteorology, 124:81-97.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Select the appropiate columns from a larger dataset with date information
+# in Year, Month, Day format, define the values for the parameters latitude 
+# and elevation and estimate the hydrotermal indices on each year in the series.
+library(magrittr)
+library(dplyr)
+Weather <- Tudela_DW %>%
+   select(Year, Month, Day, Tmax, Tmin, Prec, RHmax, RHmin, Rad, u2med)
+elevation <- 314
+latitude <- 42.13132
+Tudela_BHI <- bioclim_hydrotherm(Weather, latitude, elevation)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{bioclim\_thermal}{Calculation of bioclimatic viticultural indices focusing on temperature}{bioclim.Rul.thermal}
+%
+\begin{Description}\relax
+This function calculates the Growing Season Average Temperature (GST), the
+Heliothermal Index (HI) of Huglin, the Winkler (WI) index, the Biologically
+Effective Degree Day (BEDD) index and the Cool Night (CI) index.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+bioclim_thermal(climdata, lat)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily maximum and minimum temperatures.
+Must contain the columns Year, Month, Day, Tmax, Tmin.
+
+\item[\code{lat}] the latitude of the site, in decimal degrees. Use positive values
+for Northern latitudes and negatives for Southern.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+GST index correlates broadly to the maturity potential for grape cultivars 
+grown across many wine regions and provides the basis for zoning viticultural
+areas in both hemispheres (Hall and Jones, 2009). It is calculated by taking
+the average of the growing season (April-October in Northern hemisphere, October
+-April in Southern hemisphere).
+
+HI (Huglin, 1978) is a bioclimatic heat index for viticulture regions using 
+heliothermic potential, which calculates the temperature sum above 10ºC from 
+April until September (Northern hemisphere) or from October until March (Southern
+hem.). The index takes into consideration daily maximum and average temperature, 
+and slightly modifies the calculated total using the latitude of the location.
+
+WI index (Amerine and Winkler, 1944), also known as growing degree days (GDD) 
+classifies regions based on the accumulation of heat summation units by adding up 
+hours above 10ºC during the growing season.
+
+BEDD index (Gladstones, 1992) is another variant on calculating heat summation 
+which incorporates upper and lower temperature thresholds (accounts for heat 
+accumulation between 10 and 19ºC) and a day length correction similar to HI.
+
+CI index (Tonietto, 1999) takes into account the minimum temperature during 
+grape maturation, which is normally the average minimum air temperature in 
+September/March (Northern or Southern hemispheres, respectively).
+\end{Details}
+%
+\begin{Value}
+data frame with the values of the indices. It contains the columns
+Year, CI, GST, BEDD, HI, WI
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Amerine MA and Winkler AJ. 1944. Composition and quality of musts and wines
+of California grapes. Hilgardia 15: 493-675.
+
+Gladstones J. 1992. Viticulture and environment. Winetitles, Adelaide, Australia 
+
+Hall A., Jones GV. 2009. Effect of potential atmospheric warming on 
+temperature-based indices describing Australian winegrape growing conditions.
+Aust J Grape Wine Res 15. 97-119.
+
+Huglin P. 1978. Noveau mode d'evaluation des possibilites héliothermiques
+d'un milieu viticole. In: Proceedings of the Symposium International sur
+l'ecologie de la Vigne. Ministére de l'Agriculture et de l'Industrie 
+Alimentaire, Contança pp 89-98.
+
+Tonietto J. 1999. Les macroclimats viticoles mondiaux et l'influence du
+mésoclimat sur la typicité de la Syrah et du Muscat de Hambourg dans le
+sud de la France: methodologie de carácterisation. Thése Doctorat. Ecole 
+Nationale Supérieure Agronomique, Montpellier, 233pp.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Select the appropiate columns from a larger dataset with date information
+# in Year, Month, Day format, and estimate indices on each year in the series.
+library(magrittr)
+library(dplyr)
+Weather <- Tudela_DW %>%
+   select(Year, Month, Day, Tmax, Tmin)
+latitude <- 42.13132
+Tudela_BTI <- bioclim_thermal(Weather, latitude)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{chill\_hours}{Calculation of chill hours from hourly temperature data (Weinberger model)}{chill.Rul.hours}
+%
+\begin{Description}\relax
+The function calculates chill hours using the Weinberger (1950),
+or 0-7.2ºC method. Sums chill hours over winter, with one chill
+hour accumulated for hourly temperatures between 0 and 7.2°C.
+This is a classic method but highly inefficient, particularly
+for warm regions and in climate change scenarios, as it disregards
+temperature ranges that are now known to contribute to the fulfilment
+of chilling requirements. For that reason, its use is not recommended,
+it is offered only for educational purposes (i.e. comparison of model
+performance) and compatibility with older bibliography.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+chill_hours(climdata, Start)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with hourly temperature data. It
+must contain the columns Year, Month, Day, DOY, Hour, Temp.
+
+\item[\code{Start}] parameter indicating the day of the year when chill
+accumulation is supposed to start.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the chill accumulated for all the seasons in the
+dataset. Seasons begin at the start date and end the day before the start
+date of the following year. It contains the columns Year, Month, Day, 
+DOY and Chill.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Weinberger JH, 1950. Chilling requirements of peach varieties. Proc Am Soc
+Hortic Sci 56, 122-128.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly temperatures
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+# Calculate chill as chill hours, starting on DOY 305
+Chill_h <- chill_hours(Tudela_HT,305)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{chill\_portions}{Calculation of chill portions from hourly temperature data (Dynamic model)}{chill.Rul.portions}
+%
+\begin{Description}\relax
+The function calculates chill portions according to the Dynamic model
+proposed by Fishman et al. (1987a,b), using the formulas extracted by
+Luedeling et al (2009) from functions produced by Erez and Fishman (1990), 
+available at the University of California, Agriculture and Natural Resources
+(UC ANR) website http://ucanr.edu/sites/fruittree/files/49319.xls. To date, 
+chill portions is the best existing model for most growing regions, so chill
+fulfilment should  be calculated preferably using this method, especially
+when transferring varieties from one region to another, or in studies on 
+climate change.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+chill_portions(climdata, Start)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with hourly temperature data. It
+must contain the columns Year, Month, Day, DOY, Temp.
+
+\item[\code{Start}] parameter indicating the day of the year when chill
+accumulation is supposed to start.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the chill accumulated for all the seasons in the
+dataset. Seasons begin at the start date and end the day before the start
+date of the following year.
+It contains the columns Year, Month, Day, DOY, Chill
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Erez A, Fishman S, Linsley-Noakes GC and Allan P, 1990. The dynamic model for
+rest completion in peach buds. Acta Horticulturae 276, 165-174.
+
+Fishman S, Erez A and Couvillon GA, 1987a. The temperature dependence of
+dormancy breaking in plants - computer simulation of processes studied under
+controlled temperatures. Journal of Theoretical Biology 126, 309-321.
+
+Fishman S, Erez A and Couvillon GA, 1987b. The temperature dependence of
+dormancy breaking in plants - mathematical analysis of a two-step model
+involving a cooperative transition. Journal of Theoretical Biology 124,
+473-483.
+
+Luedeling E, Zhang M, Luedeling V and Girvetz EH, 2009. Sensitivity of
+winter chill models for fruit and nut trees to climatic changes expected in
+California's Central Valley. Agriculture, Ecosystems and Environment 133,
+23-31.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly temperatures
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Weather <- Tudela_DW %>%
+   filter (Tudela_DW$Year<=2003)
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+# Calculate chill as chill portions, starting on DOY 305
+Chill_p <- chill_portions(Tudela_HT,305)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{chill\_units}{Calculation of chill units from hourly temperature data (Utah model)}{chill.Rul.units}
+%
+\begin{Description}\relax
+The function calculates chill units using the Utah model (Richardson
+et al, 1974). This model is characterized by differential weighting of
+temperature ranges, including negative weights for temperatures
+above 15.9°C. This model recognizes that different temperatures
+vary in effectiveness in accumulating chill as well as a negative
+influence of high temperatures on previously accumulated chill.
+Chill Units (Utah or Anderson model) perform better than chill hours
+for a wider range of climates, and it could be considered as the
+'reference' method nowadays, but it is ill-suited for warm or
+Mediterranean conditions. To date, Chill portions is the best
+existing model for most growing regions, so chill fulfilment
+should preferably be calculated using that method, especially
+when transferring varieties from one region to another, or in
+studies on climate change.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+chill_units(climdata, Start)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with hourly temperature data. It
+must contain the columns Year, Month, Day, DOY, Temp.
+
+\item[\code{Start}] parameter indicating the day of the year when chill
+accumulation is supposed to start.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the chill accumulated for all the seasons in the
+dataset. Seasons begin at the start date and end the day before the start
+date of the following year.
+It contains the columns Year, Month, Day, DOY, Chill
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Richardson EA, Seeley SD and Walker DR, 1974. A model for estimating the
+completion of rest for Redhaven and Elberta peach trees. HortScience 9,
+331-332.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly temperatures
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Weather <- Tudela_DW %>%
+   filter (Tudela_DW$Year<=2003)
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+# Calculate chill as chill units, starting on DOY 305
+Chill_u <- chill_units(Tudela_HT,305)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{color\_potential}{Evaluation of weather conditions for anthocyanin formation in apple skin}{color.Rul.potential}
+%
+\begin{Description}\relax
+This function estimates the number of days that can be 
+considered as highly favorable or unfavorable for anthocyanin 
+accumulation in the skin of red apple cultivars during a
+user defined pre-harvest period (30 days  by default). 
+A highly favorable day (Cool day) is considered when the daily 
+maximum temperature is below 26ºC, a highly unfavorable day (Hot day)
+when the minimum temperature is above 20ºC (Lin-Wang et al, 2011). It
+also calculates an empirical index in which daily thermal amplitude 
+is corrected to account for the effective range of temperatures for
+anthocyanin accumulation in the skin (TA\_cef). The index considers that
+daily temperatures above 26ºC are increasingly less favorable for 
+anthocyanin formation, and thus calculates a corrected maximum 
+temperature using a linear function up to 35ºC, where it is left 
+constant at a value of 16, so that the adjusted daily thermal amplitude 
+for Tmax>26ºC is smaller than the observed. 
+The average of maximum and minimum temperatures during the same 
+period is also provided. The function allows testing for several 
+harvest dates.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+color_potential(climdata, harvest, span = 30)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily maximum and minimum temperatures.
+Must contain the columns Year, Month, Day, Tmax, Tmin.
+
+\item[\code{harvest}] a vector with expected harvest days
+(expressed as day of the year)
+
+\item[\code{span}] the period (in days) before harvest that will be analyzed. By 
+default, this parameter is set in 30 days.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the number of highly favorable (Cool\_d) 
+and unfavorable (Hot\_d) days for apple red color, as well as the sums of
+the observed (TA\_obs) and effective (TA\_cef) daily thermal amplitudes.
+The average of the maximum (Tmax\_avg) and minimum (Tmin\_avg) 
+temperatures for each year (Year) in the series during the 
+30 days previous to each harvest date (Day\_h) is also provided.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Lin-Wang K, Micheletti D et al, 2011. High temperature reduces apple fruit
+colour via modulation of the anthocyanin regulatory complex. Plant, Cell
+and Environment 34, 1176-1190.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Select the appropiate columns from Tudela_DW example dataset, create
+# a vector or harvest dates and estimate the number favorable and 
+# unfavorable days on each year in the dataset.
+library(magrittr)
+library(dplyr)
+Weather <- Tudela_DW %>%
+   select(Year, Month, Day, Tmax, Tmin) %>% 
+   filter (Tudela_DW$Year<=2002)
+harvest <- c(225, 250, 275)
+Color_assess <- color_potential(Weather, harvest)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{coolness\_index}{Calculation of night coolness index}{coolness.Rul.index}
+%
+\begin{Description}\relax
+This function calculates a night coolness index based in the
+Cool Night index of Tonietto (1999). Instead of calculating 
+the mean of minimum temperatures in September/March (Northern
+or Southern hemispheres, respectively), this function allows 
+to define the harvest date and the number of days that will be
+analyzed (by default, 30 days), and calculates the mean of minimum
+temperatures in the in the specified period of days before harvest.
+The function allows testing for several harvest dates simultaneously.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+coolness_index(climdata, harvest, span = 30)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily maximum and minimum temperatures.
+Must contain the columns Year, Month, Day, Tmax, Tmin.
+
+\item[\code{harvest}] a vector with expected harvest days
+(expressed as day of the year)
+
+\item[\code{span}] the period (in days) before harvest that will be analyzed. By 
+default, this parameter is set in 30 days.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the values of the indices. It contains the
+columns Year, Harvest, Coolness
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Tonietto J. 1999. Les macroclimats viticoles mondiaux et l'influence du
+mésoclimat sur la typicité de la Syrah et du Muscat de Hambourg dans le
+sud de la France: methodologie de carácterisation. Thése Doctorat. Ecole 
+Nationale Supérieure Agronomique, Montpellier, 233pp.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Select the appropiate columns from the Tudela_DW example dataset,
+# create a vector or harvest dates and estimate the coolness index 
+# for the 30 days prior to harvest on each year in the dataset.
+library(magrittr)
+library(dplyr)
+Weather <- Tudela_DW %>%
+   select(Year, Month, Day, Tmax, Tmin) %>% 
+   filter (Tudela_DW$Year<=2002)
+harvest <- c(225, 250, 275)
+coolness <- coolness_index(Weather, harvest)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Dates\_BT}{Example phenological dates for Big Top nectarine in Tudela}{Dates.Rul.BT}
+%
+\begin{Description}\relax
+Estimated dates (as day of the year, DOY) for bloom, early fruit growth stages 
+and harvest for Big Top Nectarine in Tudela (2001-2010). Dates have been 
+estimated using the functions included in this package.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data("Dates_BT")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data frame with 10 observations on the following 6 variables.
+\begin{description}
+
+\item[\code{Year}] a numeric vector, the year of the observation
+\item[\code{sbloom}] a numeric vector, beggining of bloom as DOY
+\item[\code{ebloom}] a numeric vector, end of bloom as DOY
+\item[\code{Start\_ing}] a numeric vector, beggining of early growth stage as DOY
+\item[\code{End\_ing}] a numeric vector, end of early growth stage as DOY
+\item[\code{Harvest}] a numeric vector, harvest date as DOY
+
+\end{description}
+
+\end{Format}
+\inputencoding{utf8}
+\HeaderA{DTR}{Calculation of the diurnal temperature range (DTR)}{DTR}
+%
+\begin{Description}\relax
+This function calculates the mean diurnal temperature range (DTR) for
+a custom period. Mean DTR is obtained by subtracting the daily minimum
+temperature (Tmin) from daily maximum temperature (Tmax) and then
+averaged for the period defined by the user, provided as the initial
+(init) and end (end) date expressed as days of the year. The function
+requires the initial and end dates to be in the same year.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+DTR(climdata, init_d, end_d)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily maximum and minimum temperatures.
+Must contain the columns Year, Month, Day, Tmax, Tmin.
+
+\item[\code{init\_d}] the initial date (as day of the year) of the evaluation period
+
+\item[\code{end\_d}] the end date (as day of the year) of the evaluation period
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the value of DTR for each year in the series. 
+It contains the columns Year, First\_d, Last\_d, DTR
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Select the appropiate columns from the Tudela_DW example dataset,
+# and estimate the mean DTR for July on each year in the dataset.
+library(magrittr)
+library(dplyr)
+Weather <- Tudela_DW %>%
+   select(Year, Month, Day, Tmax, Tmin)
+DTR_July <- DTR(Weather, 182, 212)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{ET\_penman}{Calculation of daily potential evapotranspiration by Penman (1948) method}{ET.Rul.penman}
+%
+\begin{Description}\relax
+This function calculates the potential evapotranspiration (ETref) using daily 
+weather data and the Penman (1948) method
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ET_penman(climdata, lat, elev)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily weather data.
+Must contain the columns Year, Month, Day, Tmax, Tmin, RHmax, RHmin, Rad, u2med.
+
+\item[\code{lat}] the latitude of the site, in decimal degrees.
+
+\item[\code{elev}] the elevation of the site, in meters above sea level.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+This version of the function requires the user to supply in weather data daily
+values for temperature (Tmax and Tmin), relative humidity (RHmax and RHmin), 
+solar radiation (Rad in MJ m-2 day-1) and mean wind speed at 2m height 
+(u2med in m s-1).
+\end{Details}
+%
+\begin{Value}
+dataframe where Date, DOY and ET columns have been added to the ones
+in climadata data frame.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Penman HL 1948.Natural evaporation from open water, bare soil and grass.
+Proc. R. Soc. Lond. 193:120–145.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+ # Calculate ET by Penman method in the Tudela_DW example dataset
+data(Tudela_DW)
+library(magrittr)
+library(dplyr)
+elevation <- 314
+latitude <- 42.13132
+ET_Penman <- ET_penman(Tudela_DW, elevation, latitude) 
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{ET\_penman\_monteith}{Calculation of daily reference evapotranspiration by Penman-Monteith method}{ET.Rul.penman.Rul.monteith}
+%
+\begin{Description}\relax
+This function calculates the reference evapotranspiration (ETref) for short
+(ETos) and tall (ETrs) canopies using daily weather data. The method is based
+on the FAO56 guidelines (Allen et al, 1998) and on the standardized Penman Monteith 
+equation from the Environmental Water Resources Institute of the American 
+Society of Civil Engineers (Allen et al, 2005).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ET_penman_monteith(climdata, lat, elev)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily weather data.
+Required columns are Year, Month, Day, Tmax and Tmin. Optional columns are
+RHmax, RHmin, Rad and u2med.
+
+\item[\code{lat}] the latitude of the site, in decimal degrees.
+
+\item[\code{elev}] the elevation of the site, in meters above sea level.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Minimum data requirements to calculate ET are daily temperatures (maximum 
+and minimum temperatures, Tmax and Tmin), whereas relative humidity (RHmax and 
+RHmin), solar radiation (Rad, MJ m-2 day-1) and mean wind speed at 2m height
+(u2med,m s-1) are optional. If missing, the function integrates FAO56 estimations 
+for solar radiation and vapor pressure (air humidity) from daily 
+temperatures. If there is no information available on wind speed, the function 
+assumes a constant value of 2 m s-1.
+\end{Details}
+%
+\begin{Value}
+dataframe with Year, Month, Day, DOY, ETos and ETrs values.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Allen RG, Pereira LS, Raes D, Smith M. 1998. Crop evapotranspiration. Guidelines
+for computing crop water requirements. FAO Irrigation and drainage paper 56. Food 
+and Agriculture Organization of the United Nations
+
+Allen RG, Walter IA, Elliott RL, Howell TA, Itenfisu D, Jensen ME, Snyder RL 2005. 
+The ASCE standardized reference evapotranspiration equation. Reston, VA:American 
+Society of Civil Engineers. 59 p.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Calculate ET by Penman-Monteith method in the Tudela_DW example dataset
+library(magrittr)
+library(dplyr)
+elevation <- 314
+latitude <- 42.13132
+ET_PM <- ET_penman_monteith(Tudela_DW, latitude, elevation)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{GDD\_linear}{Calculates growing degree days (GDD) using a linear method}{GDD.Rul.linear}
+%
+\begin{Description}\relax
+The function calculates the daily heat unit accumulation (GDD)
+from daily temperature data with a linear method based on averaging
+the daily maximum and minimum temperatures (Arnold, 1960). GDD are
+calculated by subtracting the plant's lower base temperature (Tb) 
+from the average daily air temperature. The user can define an upper 
+temperature threshold (Tu) so that all temperatures above Tu will 
+have equal value in GDD summation.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+GDD_linear(Temp_Day, Tb, Tu = 999)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Temp\_Day}] a dataframe of daily temperatures. This data frame must
+have a column for Year, Month, Day, and daily minimum (Tmin) and
+maximum (Tmax) temperatures.
+
+\item[\code{Tb}] the base temperature required to calculate GDD.
+
+\item[\code{Tu}] an optional upper temperature threshold.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe consisting of the columns Year, Month, Day, Tmax, Tmin,
+Tmean and GDD.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Arnold,  C.Y.  1960.  Maximum-minimum temperatures as a basis for computing
+heat units. Proc.Amer. Soc. Hort. Sci. 76:682–692.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Calculate GDD in the example dataset using 4.5ºC as base temperature and no 
+# upper threshold.
+library(magrittr)
+library(dplyr)
+GDD <- GDD_linear(Tudela_DW,4.5)
+# Calculate GDD in the example dataset using 4.5ºC as base temperature and an 
+# upper threshold at 25ºC.
+GDD <- GDD_linear(Tudela_DW,4.5,25)
+
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{GDH\_asymcur}{Calculates growing degree hours (GDH) using ASYMCUR method}{GDH.Rul.asymcur}
+%
+\begin{Description}\relax
+The function calculates the daily heat unit accumulation (GDH)
+from hourly temperature data, using the ASYMCUR model
+proposed by Anderson et al (1986). The model is a refinement
+of the linear model proposed by Anderson and Seeley (1992) defined
+by a base, optimum and critical temperature. Heat accumulation
+begins when temperatures are above a minimum (base temperature,
+Tb), and growth increases with temperature up to a
+point (optimum temperature, Topt) at which there is no longer
+an increase. The critical temperature (Tcrit) is the temperature
+above which growth ceases. The difference of ASYMCUR model with 
+the linear by Anderson and Seeley (1992)is that the former uses 
+an asymmetric curvilinear relationship to model GDH accumulation. 
+The function allows the user to define Tb, Topt and Tcrit, and uses
+as default the values set by Anderson et al (1986) for fruit trees:
+Tb=4ºC, Topt=25ºC and Tcrit=36ºC.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+GDH_asymcur(Hourdata, Tb = 4, Topt = 25, Tcrit = 36)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Hourdata}] a dataframe of hourly temperatures. This data frame
+must have a column for Year, Month, Day, DOY (day of year), Hour,
+Temp (hourly temperature).
+
+\item[\code{Tb}] the base temperatures to calculate GDH
+
+\item[\code{Topt}] the optimal temperatures to calculate GDH
+
+\item[\code{Tcrit}] the critical temperature
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with daily data. It contains the columns Date,
+Year, Month, Day, DOY (day of the year), and GDH
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Anderson JL, Richardson EA and Kesner CD, 1986. Validation of chill
+unit and flower bud phenology models for 'Montmorency' sour cherry.
+Acta Horticulturae 184, 71-75.
+Anderson JL and Seeley SD, 1992. Modelling strategy in pomology:
+Development of the Utah models. Acta Horticulturae 313, 297-306.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly temperatures for the example dataset
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Weather <- Tudela_DW %>%
+   filter (Tudela_DW$Year==2003)
+Tudela_HT <- hourly_temps(Weather,42.13132)
+# Calculate GDH using default threshold temperatures
+GDH_default <- GDH_asymcur(Tudela_HT)
+# Calculate GDH using as custom set temperature thresholds
+# Tb=4.5, Topt=22 and Tcrit=32
+GDH_custom <- GDH_asymcur(Tudela_HT, 4.5, 22, 32)
+
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{GDH\_linear}{Calculates growing degree hours (GDH) using a linear method}{GDH.Rul.linear}
+%
+\begin{Description}\relax
+The function calculates the daily heat unit accumulation (GDH)
+from hourly temperature data, using a standard linear model or the
+linear model proposed by Anderson and Seeley (1992). The standard
+model is defined by a base temperature, and the Anderson and Seeley 
+(1992) includes also optimum and critical temperatures. In both
+variants, heat accumulation begins when temperatures are above a 
+minimum (base temperature, Tb), and growth increases linearly with 
+temperature. In the Anderson and Seeley (1992) variant, growth no
+longer increases once the optimum temperature (Topt) is reached, 
+meaning that GDH above it are constant. The critical temperature 
+(Tcrit) is the temperature above which growth ceases (i.e. GDH=0). 
+The function allows the user to define Tb, Topt and Tcrit, and uses
+as default the values set by Anderson et al (1986) for fruit trees: 
+Tb=4ºC, Topt=25ºC and Tcrit=36ºC. In the standard linear model with
+upper thresholds, use Topt = 999 and Tcrit = 999.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+GDH_linear(Hourdata, Tb = 4, Topt = 25, Tcrit = 36)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Hourdata}] a dataframe of hourly temperatures. This data frame
+must have a column for Year, Month, Day, DOY (day of year),Hour, and
+Temp (hourly temperature).
+
+\item[\code{Tb}] the base temperatures to calculate GDH
+
+\item[\code{Topt}] an optional optimal temperatures to calculate GDH
+
+\item[\code{Tcrit}] an optional critical temperature
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with daily data. It contains the columns Date,
+Year, Month, Day, DOY (day of the year), and GDH
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Anderson JL and Seeley SD, 1992. Modelling strategy in pomology:
+Development of the Utah models. Acta Horticulturae 313, 297-306.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly temperatures for the example dataset
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Weather <- Tudela_DW %>%
+   filter (Tudela_DW$Year==2003)
+Tudela_HT <- hourly_temps(Weather,42.13132)
+# Calculate GDH using default threshold temperatures
+GDH_default <- GDH_linear(Tudela_HT)
+# Calculate GDH using an optimal temperature threshold with 
+# no critical threshold
+GDH_custom <- GDH_linear(Tudela_HT, 4.5, 22, 999)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{hourly\_RH}{Estimation of the hourly relative humidity on a daily series}{hourly.Rul.RH}
+%
+\begin{Description}\relax
+This function estimates the hourly relative humidity (RH),
+using daily temperature and humidity data. Hourly humidity is
+estimated with the formula proposed by Waichler and Wigmosta (2003)
+which require maximum and minimum values of daily temperature
+and relative humidity.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+hourly_RH(climdata, lat)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily temperatures and RH for
+each day in a series. Must contain the columns Year, Month, Day,
+Tmax, Tmin, RHmax (daily maximum relative humidity) and RHmin
+(minimum daily relative humidity).
+
+\item[\code{lat}] the latitude of the site, in decimal degrees.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with columns Date, Year, Month, Day, DOY,
+Hour, Temp and RH
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Waichler SR and Wigmosta MS, 2003. Development of hourly meteorological
+values from daily data and significance to hydrological modeling at H.J.
+Andrews experimental forest. Journal of Hydrometeorology 4, 251-263.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly relative humidity
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Weather <- Tudela_DW %>%
+   filter (Tudela_DW$Year==2003)
+Tudela_HRH <- hourly_RH(Weather, 42.13132)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{hourly\_temps}{Estimation of hourly temperatures from daily data}{hourly.Rul.temps}
+%
+\begin{Description}\relax
+This function generates hourly temperatures from daily maximum and
+minimum values, using the method proposed by Linvill (1990), which also
+requires sunset and sunrise calculation for each day in the series.
+Sunset and sunrise hours for a location are internally estimated using 
+the function solar\_times from the latitude and the day of the year (DOY)
+using the equations by Spencer (1971) and Almorox et al. (2005).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+hourly_temps(climdata, latitude)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a data frame containing the columns Year, Month, Day,
+Tmax and Tmin. Data must not contain any gap.
+
+\item[\code{latitude}] the latitude of the site, in decimal degrees.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a dataframe containing the columns Date, Year, Month, Day, DOY,
+Hour, Sunrise (hour of sunrise), Sunset (hour of sunset), Daylength and
+Temp (hourly temperature).
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Almorox J, Hontoria C and Benito M, 2005. Statistical validation of
+daylength definitions for estimation of global solar radiation in Toledo,
+Spain. Energy Conversion and Management 46, 1465-1471.
+
+Linvill DE, 1990. Calculating chilling hours and chill units from daily
+maximum and minimum temperature observations. HortScience 25, 14-16.
+
+Spencer JW, 1971. Fourier series representation of the position of the Sun.
+Search 2, 172.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly temperatures
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{hourly\_windspeed}{Estimation of the hourly wind speed from daily mean data}{hourly.Rul.windspeed}
+%
+\begin{Description}\relax
+This function estimates the hourly wind speed from a
+dataset with mean daily wind speeds. Hourly wind speeds
+from daily values are computed using the formulas proposed
+by Guo et al (2016), using mean daily values (u2med, required)
+and maximum ones (u2max, optional). If only mean wind values
+are available, the function uses a modified version of the 
+Guo formula, so that the maximum values are obtained in 
+daytime hours.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+hourly_windspeed(climdata)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily wind speed data.
+Required columns are Year, Month, Day and u2med. u2max
+is an optional data column.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the columns Date, Year, Month, Day, DOY,
+Hour and u2 (hourly wind speed, m s-1).
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind
+statistics to hourly wind data for wind erosion modelling. In: Bian F.,
+Xie Y. (eds) Geo-Informatics in Resource Management and Sustainable
+Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
+vol 569. Springer, Berlin, Heidelberg
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Generate hourly wind speed for the example dataset
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Tudela_Hu2 <- hourly_windspeed(Tudela_DW)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{moderate\_wind}{Estimation of the daily hours with moderate wind from daily weather data}{moderate.Rul.wind}
+%
+\begin{Description}\relax
+This function estimates the daily hours with wind speed equal or
+above than 'moderate breeze' wind (5.5 m s-1 in the Beaufort scale)
+from a dataset with daily wind speeds. Hourly wind speeds
+from daily values are computed using the formulas proposed
+by Guo et al (2016), using mean daily values (u2med, required)
+and maximum ones (u2max, optional). If only mean wind values
+are available, the function uses a modified version of the 
+Guo formula, so that the maximum values are obtained in 
+daytime hours.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+moderate_wind(climdata)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily wind speed data.
+Required columns are Year, Month, Day and u2med. u2max
+is an optional data column.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the columns Date, Year, Month, Day, DOY,
+and h\_wind (hours with wind speed equal or above 5.5 m/s).
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind
+statistics to hourly wind data for wind erosion modelling. In: Bian F.,
+Xie Y. (eds) Geo-Informatics in Resource Management and Sustainable
+Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
+vol 569. Springer, Berlin, Heidelberg
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Estimate daily hours with wind speed above moderate speeds for the example
+# dataset
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Tudela_Mu2 <- moderate_wind(Tudela_DW)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{phenology\_sequential}{Prediction of phenological stages using a sequential model}{phenology.Rul.sequential}
+%
+\begin{Description}\relax
+The function predicts phenological phases for a climate series
+from daily chill and heat requirements and daily chill and forcing heat 
+data. The sequential model used in the function considers that chilling 
+and heat have independent effects. It consists of an accumulation of chill 
+up to the plant requirement, followed by heat up to forcing requirement, 
+with no overlap between both phases. The function is independent of the
+method used to calculate chill and forcing heat, so that chill can
+be supplied as chill hours, chill units or chill portions (recommended, 
+particularly for warm climates or in climate change studies), forcing heat 
+accumulation can be supplied either as GDD or GDH. The function allows
+predicting several stages (or the same for different cultivars), by supplying
+a dataframe in which each row contains chill and heat requirements for a
+phenological stage.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+phenology_sequential(GDH_day, Reqs, Start_chill)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GDH\_day}] a dataframe with daily chilling and forcing accumulation.
+It must contain the columns Year, Month, Day, DOY, Chill, GD.
+
+\item[\code{Reqs}] a dataframe in which each row contains the chilling and forcing
+heat requirements of one phenological stage. It must contain the columns 
+Creq (for chilling) and Freq (for forcing heat).
+
+\item[\code{Start\_chill}] parameter indicating the day of the year when chill
+accumulation is supposed to start.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the predicted dates of chilling requirement fulfillment
+and date of occurrence of each phenological stage defined in Reqs. Columns are
+Creq and Freq (chilling and forcing heat requirements for the phenological stage),
+Season, Creq\_Year and Creq\_DOY (year and day of the year in which chill 
+requirements are fulfilled), Freq\_Year and Freq\_DOY (year and day of the year
+of occurrence the phenological stage).
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+data(Tudela_DW)
+data(Bigtop_reqs)
+library(magrittr)
+library(dplyr)
+library(lubridate)
+# Select the first two seasons in Tudela_DW example dataset
+Tudela_Sel <- Tudela_DW %>% filter (Tudela_DW$Year<=2002)
+# Generate hourly temperatures from the example dataset
+Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
+# Calculate chill as chill portions, starting on DOY 305
+Chill <- chill_portions(Tudela_HT,305)
+# Calculate forcing heat as growing degree hours (GDH) with the linear model,
+# using base temperature 4.7 C and no upper thresholds
+GDH <- GDH_linear(Tudela_HT,4.7,999,999)
+# Combine Chill and GDH values in a dataframe with a format compatible with
+# the function phenology_sequential
+Tudela_CH <- merge(Chill,GDH) %>%
+  select(Date, Year, Month, Day, DOY, Chill,GDH) %>%
+    arrange(Date) %>%
+    rename(GD=GDH)
+# Obtain the predicted dates using the example dataset with requirements
+Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{phenology\_thermal\_time}{Prediction of phenological stages using a thermal time model}{phenology.Rul.thermal.Rul.time}
+%
+\begin{Description}\relax
+The function predicts phenological phases for a climate series
+using a certain starting date and forcing heat requirements data.
+The thermal time model used in the function considers that
+only heat accumulated from a set date to a given sum explain the
+date of occurrence of the phenological stage (i.e, it assumes that
+dormancy release occurs before that date). The function is independent
+of the method used to calculate forcing heat, so that forcing heat can
+be supplied either as GDD or GDH. The function allows predicting several
+stages (or the same for different cultivars), by supplying
+a dataframe in which each row contains the day for starting forcing
+and heat requirements for a phenological stage.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+phenology_thermal_time(GD_day, Reqs)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GD\_day}] a dataframe with daily forcing accumulation. It
+must contain the columns Year, Month, Day, DOY, GD.
+
+\item[\code{Reqs}] a dataframe in which each row contains the start date
+for forcing and the heat requirements of one phenological stage. 
+It must contain the columns Dreq (the start date) and Freq (the forcing 
+heat requirements).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+dataframe with the predicted dates of occurrence of each phenological 
+stage defined in Reqs. Columns are Dreq and Freq (start date and forcing heat 
+requirements for the phenological stage), Season, Dreq\_Year and Dreq\_DOY 
+(year and day of the year in which forcing begins), Freq\_Year and Freq\_DOY 
+(year and day of the year of occurrence the phenological stage).
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Calculate GDD values from a climate dataset with daily temperature data,
+# using a base temperature of 0 C and format it to be compatible with 
+# phenology_thermal_time
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Tudela_GDD <- GDD_linear(Tudela_DW,0) %>% rename(GD=GDD)
+# Create a dataframe with start dates and forcing requirements for
+# bloom and veraison in the GFV model for 'Chardonnay' (Parker et al, 
+# 2013, Agric Forest Meteorol 180:249-264) in the format required for 
+# the function
+Dreq <- c(60,60) 
+Freq <- c(1217,2547)
+Chardonnay_reqs <- as.data.frame(cbind(Dreq,Freq))
+# Obtain the predicted dates 
+Phenology_Chardonnay <- phenology_thermal_time(Tudela_GDD,Chardonnay_reqs)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{pollination\_weather}{Evaluation of weather conditions for pollination on a daily series}{pollination.Rul.weather}
+%
+\begin{Description}\relax
+This function estimates the number of days with conditions
+favorable, unfavorable and moderately favorable for insect
+pollination of fruit trees during the flowering period using
+daily weather data.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+pollination_weather(climdata, fendata, lat)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily maximum and minimum temperatures,
+wind speed and precipitation. Required columns are Year, Month, Day,
+Tmax, Tmin, u2med (daily mean wind speed) and Prec (precipitation).
+u2max (daily maximum wind speed) is optional.
+
+\item[\code{fendata}] a dataframe with julian day of the beginning (sbloom)
+and end (ebloom) of the flowering season. Must contain the columns
+Year, sbloom and ebloom in that order.
+
+\item[\code{lat}] the latitude of the site, in decimal degrees, used to estimate 
+hourly temperatures.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Days are classified considering the classification proposed by
+Williams and Sims (1977), by accounting the number of favorable
+hours for pollination within a day. One hour is considered favorable
+if the temperature is above 12.5 C, the speed of the wind below
+4.5 m s-1 and no rainfall occurs (Williams and Sims, 1977; Ramirez and
+Davenport, 2013). Hourly wind speeds from daily values are computed
+using the formulas proposed by Guo et al (2016), using mean daily
+values (u2med, required) and maximum ones (u2max, optional). If 
+only mean wind values are available, the function uses a modified
+version of the Guo formula, so that the maximum values are obtained in 
+daytime hours. No hourly downscaling of rainfall is performed, the 
+function allow daily rainfall below 2.0 mm when estimating if a day
+is favorable for pollination or not.
+\end{Details}
+%
+\begin{Value}
+a data frame with the columns Year, Sbloom (bloom start, DOY)
+, Ebloom (end of bloom, DOY), Bloom\_length (in days), Fav\_d (number of
+favorable days), Modfav\_d (number of moderately favorable days) and
+Unfav\_d (number of unfavorable days).
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind
+statistics to hourly wind data for wind erosion modelling. In: Bian F.,
+Xie Y. (eds) Geo-Informatics in Resource Management and Sustainable
+Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
+vol 569. Springer, Berlin, Heidelberg
+
+Ramirez F and Davenport TL, 2013. Apple pollination: A review. Scientia
+Horticulturae 162, 188-203.
+
+Williams RR, Sims FP, 1977. The importance of weather and variability
+in flowering time when deciding pollination schemes for Cox's Orange
+Pippin. Experimental Horticulture 29, 15-26.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Estimate weather conditions during blooming season using the example
+# datasets included in the package
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Bloom_BT <- Dates_BT %>% select(Year, sbloom, ebloom) %>% filter(Dates_BT$Year<=2002)
+Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{russet}{Estimation of the russet risk for apple and pear fruits}{russet}
+%
+\begin{Description}\relax
+This function assesses the risk of russet in fruit skins. The
+risk is defined by the number of hours with the relative humidity (RH)
+above a threshold during a given period. For reference, in 'Conference' 
+pear the risk is defined by the number of hours with RH> 75\% from 
+12 to 30 days after full bloom (Alegre, 2013). In 'Golden' apple, 
+the risk is defined by the number of hours with RH> 55\% from 
+30 to 34 days after full bloom (Barcelo-Vidal et al., 2013). 
+The function requires hourly temperatures and humidity, 
+if only daily data is available, the function hourly\_RH can be 
+used to estimate them.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+russet(climdata, fendata, RH_crit, init_d, end_d)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with hourly temperature and RH
+data. Required columns are Date, Year, Month, Day, DOY (julian day),
+Hour and RH.
+
+\item[\code{fendata}] a dataframe with julian day of occurrence of the full
+bloom (F2) phenological stage.
+Must contain the columns Year and Fday in that order.
+
+\item[\code{RH\_crit}] the relative humidity threshold
+
+\item[\code{init\_d}] the initial date (as days after full bloom) of the sensitive period
+
+\item[\code{end\_d}] the end date (as days after full bloom) of the sensitive period
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+data frame with the number of risk hours (Russet\_hours)
+in the sensitive period for each year in the series.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Alegre S. 2013. Tecnicas de cultivo. In. VII Foro INIA "adaptacion a 
+cambio climatico en la produccion fruticola de hueso y pepita". Madrid, 
+Spain, pp 1-18
+Barcelo-Vidal C, Bonany J, Martin-Fernandez JA and Carbo J. 2013. 
+Modelling of weather parameters to predict russet on 'Golden Delicious'
+apple. J. Hort. Sci. Biotech. 88: 624-630.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Select the appropiate columns from the example dataset
+# Dates_BT and rename column names to make the file compatible
+# with the function
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Bloom <- Dates_BT %>%
+   select(Year, sbloom) %>%
+   rename(Fday=sbloom) %>%
+   filter(Year==2003)
+# Obtain estimated hourly RH from the example dataset Tudela_DW
+Weather <- Tudela_DW %>%
+        filter (Tudela_DW$Year==2003)
+RH_h <- hourly_RH(Weather, 42.13132)
+# Estimate the number of russet-inducing days for a RH>55\% 
+# between 30 to 34 days after full bloom for each season
+Russet_Risk <-russet(RH_h,Bloom,55,30,34)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{solar\_times}{Estimation of the sunrise and sunset hour}{solar.Rul.times}
+%
+\begin{Description}\relax
+This function estimates the sunrise and sunset hour
+for a location, characterized by latitude, and the
+day of the year (DOY). The function uses the equations by
+Spencer (1971) and Almorox et al. (2005).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+solar_times(latitude, DOY)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{latitude}] the latitude of the site, in decimal degrees.
+
+\item[\code{DOY}] numeric value or vector specifying the
+day of the year for which calculations should be done.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+list with Sunrise and Sunset times and Daylength.
+\end{Value}
+%
+\begin{Note}\relax
+Code adapted from the function \code{\LinkA{daylength}{daylength}}, 
+of the \Rhref{https://CRAN.R-project.org/package=chillR}{chillR} Package
+\end{Note}
+%
+\begin{References}\relax
+Almorox J, Hontoria C and Benito M, 2005. Statistical validation of
+daylength definitions for estimation of global solar radiation in Toledo,
+Spain. Energy Conversion and Management 46(9-10), 1465-1471
+
+Luedeling E, 2018. chillR: Statistical Methods for Phenology Analysis in 
+Temperate Fruit Trees. R package version 0.70.12. \url{https://CRAN.R-project.org/package=chillR}
+
+Spencer JW, 1971. Fourier series representation of the position of the Sun.
+Search 2(5), 172.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Create a vector with 365 days in sequence and calculate sunrise and
+# sunset hours for that year in a site placed a 45.5 N
+Days <- seq(1:365)
+Sunrise_Sunset <- solar_times(41.5,Days)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{spring\_frost}{Calculates the risk of spring frosts for a climate series}{spring.Rul.frost}
+%
+\begin{Description}\relax
+The function evaluates the number of early and spring frosts and
+the expected frost damage on each season within a climate data 
+series. Frost damage is assumed to be multiplicative, directly
+related to the minimum temperature and unrelated to the duration
+of the frost. The function is an enhanced version of the 
+Damage Estimator Excel application program (DEST.xls) created by 
+de Melo-Abreu and Snyder and bundled with FAO Environment and
+Natural Resources Series 10 manual (Snyder and de Melo-Abreu, 2005). 
+The function compares daily minimum temperature (Tmin) with the 
+critical temperatures (Tcrit) for that day. Daily Tcrit are 
+linearly interpolated from a user-provided dataframe with the day 
+of occurrence of the stages on each season and a vector of critical 
+temperatures (the lethal temperatures for 10\% (LT\_10) and 90\% (LT\_90)
+of the organs) for each phenological stage. The main difference of 
+spring\_frost with DEST.xls is that the latter uses the same dates of 
+phenological occurrence for all the years evaluated (up to 50 years of
+data), while spring\_frost is able to use the expected dates of occurrence 
+for each year from historical records or estimations produced by the 
+functions phenology\_thermal\_time or phenology\_sequential, included in 
+this package. There is no limit for the number of years evaluated.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+spring_frost(tempdata, fendata, tcrit, lastday = 181)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{tempdata}] a dataframe with daily minimum temperatures for each
+year in a series. Must contain the columns Year, julian day of year (DOY) and
+the minimum daily temperature (Tmin).
+
+\item[\code{fendata}] a dataframe with julian day of occurrence of the phenological
+stages that can be produced by phenology\_thermal\_time or phenology\_sequential 
+functions. Must contain the columns Year, and Pheno\_date.
+
+\item[\code{tcrit}] a dataframe with columns LT\_10 and LT\_90,  critical temperatures 
+for all the  phenological stages indicated in fendata.
+
+\item[\code{lastday}] the last day (day of the year) to evaluate. By default, 
+lastday = 181 (June 30th).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+The last day in the year for the evaluation can be defined by the user, 
+and it is set by default set at DOY 181, to avoid computing autumn 
+and winter frosts.
+
+The function currently works only with phenological dates occurring
+within the same year.
+\end{Details}
+%
+\begin{Value}
+a list with two data frames. The df Days\_frost has the columns Year, DOY, 
+Tmin, Tcrit and Day\_Frost (indicates a day of frost with a 1 if Tmin<=Tcrit). 
+The df Damage\_frosts indicates the total number of frost days and the expected 
+damage (as \% of organs) for every year in the series. It has the columns 
+Year, Frost\_d, Damage.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Snyder RL, de Melo-Abreu JP. 2005. Frost Protection: fundamentals, practice and 
+economics (2 volumes). FAO Environment and Natural Resources Service Series, 
+No. 10 - FAO, Rome.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+# Generate hourly temperatures from the first season from
+# the example dataset Tudela_DW
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Tudela_Sel <- Tudela_DW %>% filter (Tudela_DW$Year<=2001)
+Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
+# Calculate chill as chill portions, starting on DOY 305
+Chill <- chill_portions(Tudela_HT,305)
+# Calculate forcing heat as growing degree hours (GDH) with the linear model,
+# using base temperature 4.7 C and no upper thresholds
+GDH <- GDH_linear(Tudela_HT,4.7,999,999)
+# Combine Chill and GDH values in a dataframe with a format compatible with
+# the function phenology_sequential
+Tudela_CH <- merge(Chill,GDH) %>%
+   select(Date, Year, Month, Day, DOY, Chill,GDH) %>%
+   arrange(Date) %>%
+   rename(GD=GDH)
+# Obtain the predicted dates using the example dataset with the requirements 
+# indicated in the Bigtop_reqs example dataset and create a dataframe with a
+# format compatible with the function spring_frost
+Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305) %>% 
+   select(Freq_Year,Freq_DOY) %>%
+   rename(Year=Freq_Year,Pheno_date=Freq_DOY)
+# Create a dataframe with daily minimum temperatures with the 
+# format required by spring_frost
+Tmin_Tudela <- Tudela_Sel %>% 
+  mutate(Date=make_date(Year,Month,Day), DOY=yday(Date)) %>%
+  select(Year, DOY, Tmin) 
+# Predict the number and accumulated damage of the spring frosts using the
+# critical values contained in the example dataset Tcrits_peach and extract
+# the dataframe with the total results for each year
+Frost_BT <- spring_frost(Tmin_Tudela, Phenology_BT, Tcrits_peach, 181)
+Frost_results <- as.data.frame(Frost_BT[['Damage_frosts']]) 
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{sunburn}{Evaluation of weather conditions for sunburn in apple fruit surface}{sunburn}
+%
+\begin{Description}\relax
+This function estimates the number of days in which apple fruit
+surface temperature (FST) exceeds the thresholds indicated by
+Rackso and Schrader (2012) for two types of sunburn damages.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+sunburn(climdata, first_d, last_d)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily maximum and minimum temperatures.
+Must contain the columns Year, Month, Day, Tmax, Tmin.
+
+\item[\code{first\_d}] Numeric, it is the first date, indicated as day of the year
+(DOY), in the assessment.
+
+\item[\code{last\_d}] a vector with the last(s) dates for the assessment (as DOY).
+Examples could be harvest dates for several cultivars.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Sunburn necrosis (SN), the most severe type of sunburn, with a dark
+brown or black necrotic spot on the exposed fruit surface is considered
+to appear when FST reaches 52ºC. Sunburn browning (SB) is the most 
+prevalent type of sunburn on attached sun-exposed apples (acclimated to
+high light). The threshold temperature for SB is set in 46ºC, and 
+corresponds to the most sensitive apple cultivars (like Cameo or 
+Honeycrisp). 
+
+FST is estimated from daily maximum air temperature using the expression
+proposed by Schrader et al (2003).
+\end{Details}
+%
+\begin{Value}
+data frame with the number of days within the assessed period(s).
+Contains the columns Year, Harvest (values from last\_d), SB\_browning
+and SB\_necrosis.
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Rackso J and Schrader LE, 2012. Sunburn of apple fruit: Historical
+background, recent advances and future perspectives. Critical Reviews
+in Plant Sciences 31, 455-504.
+
+Schrader L, Zhang J and Sun J, 2003. Environmental stresses that cause
+sunburn of apple. Acta Horticulturae 618, 397-405.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Create one vector with start date (i.e. hand thinning) and a vector 
+# with harvest dates to test sunburn risk for several cultivars using.
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Thinning_d <- 135
+Harvest_d <- c(225,245,260)
+Sunburn_risk <- sunburn(Tudela_DW,Thinning_d, Harvest_d)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{Tcrits\_peach}{Critical frost temperatures for peach flower buds}{Tcrits.Rul.peach}
+%
+\begin{Description}\relax
+Critical frost damage temperatures for peach flower buds for the phenological
+stages between 'bud swelling' (B, 51 in Baggliolini and BBCH scales, 
+respectively) and 'ovary surrounded by dying sepal crown' (I, 72). For use in 
+combination with the example datasets Tudela\_DW and Bigtop\_reqs.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+data("Tcrits_peach")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data frame with 7 observations on the following 2 variables.
+\begin{description}
+
+\item[\code{LT\_10}] a numeric vector, frost temperature causing 10\% kill
+\item[\code{LT\_90}] a numeric vector, frost temperature causing 90\% kill
+
+\end{description}
+
+\end{Format}
+%
+\begin{Details}\relax
+The 10\% kill and 90\% kill imply that 30 minutes at the indicated temperature
+is expected to cause 10\% and 90\% kill of the flower buds during the phenological
+stage. The dataset contains the critical temperatures for the same stages in the
+example dataset Bigtop\_reqs. 
+\end{Details}
+%
+\begin{Source}\relax
+Miranda C, Santesteban LG, Royo JB. 2005. Variability in the relationship between
+frost temperature and injury level for some cultivated Prunus species. HortScience
+40:357-361.
+\end{Source}
+\inputencoding{utf8}
+\HeaderA{Tudela\_DW}{Daily weather data from Tudela, Spain}{Tudela.Rul.DW}
+%
+\begin{Description}\relax
+Daily weather data (2000-2010) from Tudela, Spain, recorded at the Tudela-Montes de Cierzo
+automatic weather station by Gobierno de Navarra.
+\end{Description}
+%
+\begin{Format}
+A data frame with 4018 observations on the following 11 variables.
+\begin{description}
+
+\item[\code{Year}] a numeric vector, the observation year
+\item[\code{Month}] a numeric vector, the observation month
+\item[\code{Day}] a numeric vector, the observation day
+\item[\code{Tmax}] a numeric vector, daily maximum temperature in Celsius
+\item[\code{Tmin}] a numeric vector, daily minimum temperature in Celsius
+\item[\code{RHmax}] a numeric vector, daily maximum relative humidity in \%
+\item[\code{RHmin}] a numeric vector, daily minimum relative humidity in \%
+\item[\code{Prec}] a numeric vector, daily rainfall in mm
+\item[\code{u2med}] a numeric vector, daily mean wind speed in m s-1
+\item[\code{u2max}] a numeric vector, daily maximum wind speed in m s-1
+\item[\code{Rad}] a numeric vector, daily solar radiation in MJ m-2 day-1
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}\relax
+http://meteo.navarra.es/estaciones/descargardatos\_estacion.cfm?IDEstacion=36
+\end{Source}
+\inputencoding{utf8}
+\HeaderA{wind\_scab}{Estimation of the risk for wind scab on fruit skin}{wind.Rul.scab}
+%
+\begin{Description}\relax
+The function estimates the risk of wind-induced abrasion injuries
+(wind scab) on fruit skin during the sensitive periods of the 
+species. This function estimates as risky the daily hours with 
+'moderate breeze' wind (equal or above 5.5 m s-1 in the Beaufort 
+scale) or stronger, estimated from a dataset with daily wind 
+speeds.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+wind_scab(climdata, fendata)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{climdata}] a dataframe with daily wind speed data.
+Required columns are Year, Month, Day, u2med. u2max is
+optional.
+
+\item[\code{fendata}] a dataframe which can contain early fruit growth and
+harvest dates. Start of initial growth (Start\_ing) and end of initial growth
+(End\_ing) dates are used to assess for early wind-induced abrasion risk and
+harvest dates (Harvest) are used for late (pre-harvest) abrasion risks.
+Must contain the column Year, and can contain either Start\_ing and End\_ing
+or Harvest columns, or the three of them.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Hourly wind speeds from daily values are computed using the 
+formulas proposed by (Guo et al, 2016), using mean daily 
+values (u2med, required) and maximum ones (u2max, optional). 
+If only mean wind values are available, the function uses a
+modified version of the Guo formula, so that the maximum 
+values are obtained in daytime hours.
+
+Sensitive periods for wind scab in plums or nectarines
+correspond to the early stages of fruit growth, usually the
+first three weeks after full bloom (Michailides et al 1992, 
+Michailides and Morgan 1992), mainly due to persistent leaf
+brushing on fruit skin between the stages '8-mm fruit' and 
+'20-mm fruit'. A second sensitive period for cherries, plums, 
+peaches and nectarines is pre-harvest (30 days prior to that), 
+due to persistent friction against branches. The function 
+allows to set both periods or only one of them.
+\end{Details}
+%
+\begin{Value}
+data frame with the columns Year, Day\_s, Day\_e, WA\_efg (accumulated
+hours with u2>5.5 m s-1 on early fruit growth stage), Day\_h, WA\_bh
+(accumulated hours with u2>5.5 m s-1 on the month before harvest).
+\end{Value}
+%
+\begin{Author}\relax
+Carlos Miranda, \email{carlos.miranda@unavarra.es}
+\end{Author}
+%
+\begin{References}\relax
+Guo Z, Chang C, Wang R, 2016. A novel method to downscale daily wind
+statistics to hourly wind data for wind erosion modelling. In: Bian F.,
+Xie Y. (eds) Geo-Informatics in Resource Management and Sustainable
+Ecosystem. GRMSE 2015. Communications in Computer and Information Science,
+vol 569. Springer, Berlin, Heidelberg
+
+Michailides TJ, Morgan DP, Ramirez HT and Giacolini EL, 1992. Determination
+of the period when prunes are prone to development of russet scab and
+elucidation of the mechanism by which captan controls russet scab.
+California dried plum board research reports 1992, 157-175.
+
+Michailides TJ and Morgan DP, 1992. Development of wind scab and
+predisposition of french prune fruits to preharvest and postharvest
+fungal decay by wind scab and russet scab.California dried plum board
+research reports 1992, 149-156.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+# Select the appropiate columns from the example Dates_BT dataset
+# and estimate wind scab risk for Big Top nectarine in Tudela using
+# the example weather dataset Tudela_DW
+library(magrittr)
+library(dplyr)
+library(lubridate)
+Bloom <- Dates_BT %>%
+   select(Year, sbloom) %>%
+   rename(Fday=sbloom) %>%
+   filter(Year==2003)
+
+Growth_BT <- Dates_BT %>% select(Year, Start_ing, End_ing, Harvest) %>% 
+   filter(Year==2003)
+Weather <- Tudela_DW %>%
+   filter (Tudela_DW$Year==2003)
+WindRisk_BT <- wind_scab(Weather, Growth_BT)
+
+\end{ExampleCode}
+\end{Examples}
+\printindex{}
+\end{document}

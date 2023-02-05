@@ -31,7 +31,9 @@ and relative humidity.
 library(magrittr)
 library(dplyr)
 library(lubridate)
-Tudela_HRH <- hourly_RH(Tudela_DW, 42.13132)
+Weather <- Tudela_DW \%>\%
+   filter (Tudela_DW$Year==2003)
+Tudela_HRH <- hourly_RH(Weather, 42.13132)
 
 }
 \references{
