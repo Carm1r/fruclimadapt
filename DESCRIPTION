@@ -22,7 +22,7 @@ Description: Climate is a critical component limiting growing range of plant spe
     in fruits (e.g. Snyder and de Melo-Abreu (2005, ISBN:92-5-105328-6) and vi)
     estimate plant water requirements (Allen et al (1998, ISBN:92-5-104219-5)). 
 Depends: R (>= 3.5.0) 
-Imports: data.table, tidyverse, zoo, lubridate
+Imports: data.table, magrittr, dplyr, zoo, lubridate
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -36,7 +36,7 @@
 #' @export chill_hours
 #' @import magrittr dplyr 
 #' @importFrom lubridate make_date
-#' @importFrom data.table rleid
+#' @importFrom data.table rleid setDT
 
 #'
 chill_hours <- function(climdata, Start){

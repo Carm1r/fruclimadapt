@@ -1,4 +1,4 @@
-globalVariables(c("%>%","BEDD_day","Chill","Cool","Cool_d","Cool_n","DOY","DTR",
+globalVariables(c("%>%",":=","BEDD_day","Chill","Cool","Cool_d","Cool_n","DOY","DTR",
                          "DTR_adj","Dam","Date","Datetime","Day","Daylength","Days",
                          "ET_m","ET_os","E_s","FST","Fav_d","GD","GDD","GDD_day","GDH",
                          "H_day","Hot","Hot_d","Hour","HourC","Inter_E","JPm","K","LT_0",
