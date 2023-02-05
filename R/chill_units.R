@@ -40,8 +40,9 @@
 #' Chill_u <- chill_units(Tudela_HT,305)
 #' 
 #' @export chill_units
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
+#' @importFrom data.table setDT rleid
 
 chill_units <- function(climdata, Start){
 

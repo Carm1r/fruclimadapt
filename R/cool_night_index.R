@@ -37,8 +37,8 @@
 #' coolness <- coolness_index(Weather, harvest)
 #'
 #' @export coolness_index
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 coolness_index <- function(climdata, harvest, span=30)
 {

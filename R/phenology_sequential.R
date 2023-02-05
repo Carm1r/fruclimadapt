@@ -54,7 +54,7 @@
 #' Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
 #' 
 #' @export phenology_sequential
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
 
 phenology_sequential <- function(GDH_day,Reqs,Start_chill){

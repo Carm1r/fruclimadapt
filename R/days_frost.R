@@ -26,8 +26,9 @@
 #' @keywords internal
 #' 
 #' @export days_frost
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
+#' @importFrom zoo zoo na.approx coredata
 
 days_frost <- function(mintemps, fendates, lastday = 181){
   mintemps <- mintemps %>% filter(mintemps$DOY<=lastday)

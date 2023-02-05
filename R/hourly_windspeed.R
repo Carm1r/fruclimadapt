@@ -34,8 +34,8 @@
 #' Tudela_Hu2 <- hourly_windspeed(Tudela_DW)
 #'
 #' @export hourly_windspeed
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date make_datetime date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date make_datetime date as_datetime year month day yday hour
 
 hourly_windspeed <- function(climdata)
 {

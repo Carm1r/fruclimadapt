@@ -68,8 +68,8 @@
 #' Tudela_BTI <- bioclim_thermal(Weather, latitude)
 #'
 #' @export bioclim_thermal
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 #' 
 
 bioclim_thermal <- function(climdata, lat)

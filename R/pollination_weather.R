@@ -59,9 +59,8 @@
 #' Pol_weather_BT <- pollination_weather(Tudela_DW,Bloom_BT,42.13132)
 #' 
 #' @export pollination_weather
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date make_datetime
-#' @importFrom dplyr right_join
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date make_datetime year month day hour yday
 
 pollination_weather <- function(climdata, fendata, lat)
 {

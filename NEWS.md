@@ -1,6 +1,7 @@
 # fruclimadapt 0.4.5
 ## Bug fixes 
 * Fixed a conflicting argument in right_join() used in pollination_weather().
+* fruclimadapt now imports only the data.table and zoo functions required to work, instead of the entire package
 
 # fruclimadapt 0.4.4
 ## New features

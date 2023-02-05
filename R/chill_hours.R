@@ -34,8 +34,10 @@
 #' Chill_h <- chill_hours(Tudela_HT,305)
 #' 
 #' @export chill_hours
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
+#' @importFrom data.table rleid
+
 #'
 chill_hours <- function(climdata, Start){
 

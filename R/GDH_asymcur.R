@@ -47,8 +47,8 @@
 #' 
 #'
 #' @export GDH_asymcur
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday year month day
 
 GDH_asymcur <- function(Hourdata,Tb = 4 ,Topt = 25 ,Tcrit = 36)
   {

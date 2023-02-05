@@ -45,8 +45,8 @@
 #' Sunburn_risk <- sunburn(Tudela_DW,Thinning_d, Harvest_d)
 #' 
 #' @export sunburn
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 
 sunburn <- function(climdata,first_d, last_d)

@@ -29,8 +29,8 @@
 #' ET_Penman <- ET_penman(Tudela_DW, elevation, latitude) 
 #'
 #' @export ET_penman
-#' @import data.table tidyverse zoo
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 #'
 
 ET_penman <- function(climdata, lat, elev){

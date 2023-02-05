@@ -43,8 +43,8 @@
 #' GDH_custom <- GDH_linear(Tudela_HT, 4.5, 22, 999)
 #' 
 #' @export GDH_linear
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date year month day yday
 
 GDH_linear <- function(Hourdata,Tb=4,Topt=25,Tcrit=36)
 {

@@ -40,8 +40,8 @@
 #' ET_PM <- ET_penman_monteith(Tudela_DW, latitude, elevation)
 #'
 #' @export ET_penman_monteith
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 #'
 
 ET_penman_monteith <- function(climdata, lat, elev){

@@ -30,7 +30,7 @@
 #' Sunrise_Sunset <- solar_times(41.5,Days)
 #' 
 #' @export solar_times
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
 
 solar_times <- function(latitude,DOY){

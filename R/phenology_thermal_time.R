@@ -44,7 +44,7 @@
 #' Phenology_Chardonnay <- phenology_thermal_time(Tudela_GDD,Chardonnay_reqs)
 #' 
 #' @export phenology_thermal_time
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
 
 phenology_thermal_time <- function(GD_day,Reqs){

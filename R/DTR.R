@@ -24,8 +24,8 @@
 #' DTR_July <- DTR(Weather, 182, 212)
 #'
 #' @export DTR
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 DTR <- function(climdata, init_d, end_d)
 {

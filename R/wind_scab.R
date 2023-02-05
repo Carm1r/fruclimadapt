@@ -66,8 +66,8 @@
 #' WindRisk_BT <- wind_scab(Tudela_DW, Growth_BT)
 #' 
 #' @export wind_scab
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date make_datetime
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date make_datetime as_datetime date year month day yday hour
 
 wind_scab <- function(climdata,fendata)
 {

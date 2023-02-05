@@ -49,8 +49,8 @@
 #' Russet_Risk <-russet(RH_h,Bloom,55,30,34)
 #' 
 #' @export russet
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date year month day yday
 
 russet <- function(climdata, fendata, RH_crit, init_d, end_d)
 {

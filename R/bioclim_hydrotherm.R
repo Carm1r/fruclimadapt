@@ -68,9 +68,8 @@
 #' Tudela_BHI <- bioclim_hydrotherm(Weather, latitude, elevation)
 #'
 #' @export bioclim_hydrotherm
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
-#' 
 #' 
 bioclim_hydrotherm <- function(climdata, lat, elev)
 {

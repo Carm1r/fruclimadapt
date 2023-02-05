@@ -36,8 +36,8 @@
 #' Tudela_Mu2 <- moderate_wind(Tudela_DW)
 #' 
 #' @export moderate_wind
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date make_datetime
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date make_datetime date year month day yday hour as_datetime
 
 moderate_wind <- function(climdata)
 {

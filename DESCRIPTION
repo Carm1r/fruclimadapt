@@ -15,7 +15,7 @@ Description: Climate is a critical component limiting growing range of plant spe
     trees. Procedures in the package allow to i) downscale daily meteorological variables
     to hourly values (Forster et al (2016) <doi:10.5194/gmd-9-2315-2016>),
     ii) estimate chilling and forcing heat accumulation (Miranda et al (2019)
-    <https://ec.europa.eu/eip/agriculture/sites/agri-eip/files/fg30_mp5_phenology_critical_temperatures.pdf>),
+    <https://ec.europa.eu/eip/agriculture/sites/default/files/fg30_mp5_phenology_critical_temperatures.pdf>),
     iii) estimate plant phenology (Schwartz (2012) <doi:10.1007/978-94-007-6925-0>), iv) 
     calculate bioclimatic indices to evaluate fruit tree and grapevine adaptation (e.g. Badr 
     et al (2017) <doi:10.3354/cr01532>), v) estimate the incidence of weather-related disorders 
@@ -26,4 +26,4 @@ Imports: data.table, tidyverse, zoo, lubridate
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3

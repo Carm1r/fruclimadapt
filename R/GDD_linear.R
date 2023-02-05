@@ -34,8 +34,8 @@
 #' 
 #'
 #' @export GDD_linear
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 GDD_linear <- function(Temp_Day,Tb,Tu=999)
 {

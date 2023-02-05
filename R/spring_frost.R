@@ -85,7 +85,7 @@
 #' Frost_results <- as.data.frame(Frost_BT[['Damage_frosts']]) 
 #' 
 #' @export spring_frost
-#' @import data.table tidyverse zoo 
+#' @import magrittr dplyr 
 #' @importFrom lubridate make_date
 
 spring_frost <- function(tempdata,fendata,tcrit, lastday = 181){

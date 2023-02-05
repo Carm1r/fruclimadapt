@@ -34,8 +34,8 @@
 #' Tudela_HT <- hourly_temps(Tudela_DW,42.13132)
 #' 
 #' @export hourly_temps
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date make_datetime date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date make_datetime date yday year month day hour as_datetime
 
 hourly_temps <- function(climdata,latitude)
 {

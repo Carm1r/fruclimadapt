@@ -51,8 +51,8 @@
 #' Color_assess <- color_potential(Weather, harvest)
 #'
 #' @export color_potential
-#' @import data.table tidyverse zoo 
-#' @importFrom lubridate make_date
+#' @import magrittr dplyr 
+#' @importFrom lubridate make_date yday
 
 color_potential <- function(climdata, harvest, span=30)
 {
