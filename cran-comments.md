@@ -1,8 +1,8 @@
 ## Resubmission
 This is a resubmission. In this version I have fixed some problems with dependencies. 
 * data.table and zoo are now called exclusively for the functions used
-* fixed a syntax error in a functionin in pollination_weather
-* examples with lower execution time have been included
+* fixed a syntax error in a functioncheck in pollination_weather
+* examples have been reworked to reduce execution time
 
 ## Test environments
 * local OS X install, R 4.2.2
@@ -13,7 +13,6 @@ This is a resubmission. In this version I have fixed some problems with dependen
 
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
-There were no NOTEs.
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package

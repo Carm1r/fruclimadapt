@@ -55,7 +55,7 @@
 #' library(magrittr)
 #' library(dplyr)
 #' library(lubridate)
-#' Tudela_Sel <- Tudela_DW %>% filter (Tudela_DW$Year<=2001)
+#' Tudela_Sel <- Tudela_DW %>% filter(Tudela_DW$Year<=2002)
 #' Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
 #' # Calculate chill as chill portions, starting on DOY 305
 #' Chill <- chill_portions(Tudela_HT,305)
@@ -73,10 +73,11 @@
 #' # format compatible with the function spring_frost
 #' Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305) %>% 
 #'    select(Freq_Year,Freq_DOY) %>%
-#'    rename(Year=Freq_Year,Pheno_date=Freq_DOY)
+#'    rename(Year=Freq_Year,Pheno_date=Freq_DOY) %>%
+#'    filter (Year==2002)
 #' # Create a dataframe with daily minimum temperatures with the 
 #' # format required by spring_frost
-#' Tmin_Tudela <- Tudela_Sel %>% 
+#' Tmin_Tudela <- Tudela_Sel %>% filter(Year==2002) %>%
 #'   mutate(Date=make_date(Year,Month,Day), DOY=yday(Date)) %>%
 #'   select(Year, DOY, Tmin) 
 #' # Predict the number and accumulated damage of the spring frosts using the

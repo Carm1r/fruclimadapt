@@ -37,7 +37,8 @@
 #' library(dplyr)
 #' library(lubridate)
 #' # Select the first two seasons in Tudela_DW example dataset
-#' Tudela_Sel <- Tudela_DW %>% filter (Tudela_DW$Year<=2002)
+#' Tudela_Sel <- Tudela_DW %>% 
+#'        filter (Tudela_DW$Year<=2002)
 #' # Generate hourly temperatures from the example dataset
 #' Tudela_HT <- hourly_temps(Tudela_Sel,42.13132)
 #' # Calculate chill as chill portions, starting on DOY 305
@@ -49,7 +50,6 @@
 #' # the function phenology_sequential
 #' Tudela_CH <- merge(Chill,GDH) %>%
 #'   select(Date, Year, Month, Day, DOY, Chill,GDH) %>%
-#'     arrange(Date) %>%
 #'     rename(GD=GDH)
 #' # Obtain the predicted dates using the example dataset with requirements
 #' Phenology_BT <- phenology_sequential(Tudela_CH, Bigtop_reqs, 305)
