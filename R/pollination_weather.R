@@ -61,7 +61,6 @@
 #' @export pollination_weather
 #' @import data.table tidyverse zoo 
 #' @importFrom lubridate make_date make_datetime
-#' @importFrom dplyr right_join
 
 pollination_weather <- function(climdata, fendata, lat)
 {
