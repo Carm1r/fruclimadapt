@@ -1,3 +1,7 @@
+# fruclimadapt 0.4.6
+## Bug fixes 
+* bioclim_hydrotherm now manages properly data from Southern Hemisphere
+
 # fruclimadapt 0.4.5
 ## Bug fixes 
 * Fixed a conflicting argument in right_join() used in pollination_weather().

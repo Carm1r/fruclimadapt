@@ -93,37 +93,33 @@ bioclim_hydrotherm <- function(climdata, lat, elev)
     group_by(Year, Month) %>%
     summarise(ET_m = sum(ET_os), 
               Prec_m= sum(Prec), 
-              Tmean_m = mean(Tmean)) %>%
+              Tmean_m = mean(Tmean), .groups='drop') %>%
     mutate(TxP = Prec_m * Tmean_m)
   
   seasons <- unique(climdata.ETm$Year)
-
+  
   indices_cn <- c("Year","DI","BBLI")
   indices.df <-data.frame(matrix(ncol=3, nrow=0, byrow=FALSE))
   colnames(indices.df) <- indices_cn
-
+  
   for (sea in 1:length(seasons)){
     Anno <- as.numeric(seasons[sea])
     if (start_m==10){
+      Col_aux <- data.frame(N=N_s,K=k_DI,Wo=Wo_m)
       climdata_fil <- climdata.ETm %>% filter(
-        (Year == Anno-1 & Month >= start_m) |
-          (Year == Anno & Month <=end_d)) %>% 
-        mutate(N=N_s, 
-               K=k_DI, 
-               Wo=Wo_m)
+        (Year == Anno & Month >= start_m) |
+          (Year == Anno+1 & Month <=end_d)) 
+      climdata_fil <- cbind(climdata_fil,Col_aux)
     } else {
+      Col_aux <- data.frame(N=N_n,K=k_DI,Wo=Wo_m)
       climdata_fil <- climdata.ETm %>% filter(
         (Year == Anno & 
            Month>= start_m &
-           Month<= end_d)) %>%
-        mutate(N=N_n,
-               K=k_DI, 
-               Wo=Wo_m)
+           Month<= end_d)) 
+      climdata_fil <- cbind(climdata_fil,Col_aux)
     }
     Branas.sea <- climdata_fil %>% 
-      filter (if (end_d==3) 
-        {climdata_fil$Month!=3} else
-          {climdata_fil$Month<=8} )%>%
+      slice(1:(n()-1))%>%
       summarise(BBLI=sum(TxP)) %>%
       select("BBLI") %>%
       unlist(use.names=FALSE) 
@@ -139,10 +135,10 @@ bioclim_hydrotherm <- function(climdata, lat, elev)
       unlist(use.names=FALSE)
     
     new.row.df <- data.frame(Anno) %>%
-        cbind(DI.sea,Branas.sea)
+      cbind(DI.sea,Branas.sea)
     
     indices.df <-rbind(indices.df,new.row.df)
-    }
+  }
   indices.df <- indices.df %>% rename(Year=Anno, DI=DI.sea, Branas=Branas.sea)
   return(indices.df) 
-  }
+}
